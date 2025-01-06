@@ -85,7 +85,7 @@ def enable_AP():
                 conn.send('HTTP/1.1 200 OK\r\n')
                 conn.send('Content-Type: text/html\r\n')
                 conn.send('\r\n')
-                conn.send("<html><body><h2>Data Received Successfully!</h2></body></html>")
+                conn.send("<html><body><h2>Data Received Successfully! Reset the module.</h2></body></html>")
                 conn.close()
 
             except Exception as e:

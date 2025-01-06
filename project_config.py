@@ -52,46 +52,71 @@ def enable_project_selector():
 
     while True:
         # Socket accept()
-        conn, addr = s.accept()
-        print("Got connection from %s" % str(addr))
-
-        # Socket receive()
-        request = conn.recv(1024)
-        print("")
-        print("")
-        
-
-        # Socket send()
-        request = str(request)
-        data=str(request)
-        print("Content %s" % request[8:20])
-        if request[8:20]=="selectedItem":
-            text=data[21:23]
-            set_parameter("PROJECT",text)
-    #         .split(" ", 1)
-            print(text)
-            led.value(1)
-            time.sleep(1)
-            led.value(0)
-            print("Success")
-
-
-     
-        
-        
-        
         try:
-            
-            response = web_page()
-            conn.send('HTTP/1.1 200 OK\n')
-            conn.send('Content-Type: text/html\n')
-            conn.send('Connection: close\n\n')
-            conn.sendall(response)
-        except:
-          print("An exception occurred")
+            conn, addr = s.accept()
+            print("Got connection from %s" % str(addr))
+
+            # Socket receive()
+            request = conn.recv(1024)
+            print("")
+            print("")
             
 
-        conn.close()
+            # Socket send()
+            request = str(request)
+            params = {}
+            if "?" in request:
+                query_string = request.split("GET /")[1].split(" HTTP")[0]
+                
+                if "?" in query_string:
+                    query_string = query_string.split("?")[1]
+                    pairs = query_string.split("&")
+                    for pair in pairs:
+                        key, value = pair.split("=")
+                        params[key] = value
+                
+                print("a")
+                if "selectedItem" in params:
+                    print("b")
+                    data=params["selectedItem"]
+                    print("c")
+                    data=data.replace("+", " ")
+                    print('Content- '+ data )
+                    set_parameter("PROJECT",data)
+            #         print("Content %s" % request[8:20])
+    #                 if request[8:20]=="selectedItem":
+    #                     text=data[21:23]
+    #                     set_parameter("PROJECT",text)
+    #             #         .split(" ", 1)
+    #                     print(text)
+                    led.value(1)
+                    time.sleep(1)
+                    led.value(0)
+                    print("Success")
+                    response=successPage(data)
+                    conn.send(response)
+                    conn.close()
+            
+            else:
+                try:
+                    response = web_page()
+                    conn.send('HTTP/1.1 200 OK\n')
+                    conn.send('Content-Type: text/html\n')
+#             conn.send('Connection: close\n\n')
+                    conn.send(response)
+                    conn.close()
+                except Exception as e:
+                  print(f"An error occurred: {e}")
+        #           conn.close()
+        except Exception as e:
+          print(f"An error occurred: {e}")
+#           conn.close()
+          
+        
+        
+#             
+
+        
 
 
 
