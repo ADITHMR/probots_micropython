@@ -7,13 +7,13 @@ import time
 from esp_as_AP import *
 from pin_mapping import *
 from project_config import *
-from projects import *
 from display import *
 from ir_decode import *
 from ir_rx.nec import NEC_8
 from ir_rx.print_error import print_error
+from runProject import *
 
-enable_project_selector()
+
 if boot_sw1.value()==False and boot_sw2.value()==False:
     enable_AP()
 elif  boot_sw1.value()==False and boot_sw2.value()==True:
@@ -31,11 +31,12 @@ ir.error_function(print_error)
     
 
     
-proj=get_parameter("PROJECT")
+proj=get_parameter("PROJECT")  #Get selected project name from file
 print(proj)
-disp_seq_str(['p'+str(proj)],1)
+disp_scroll_str(str(proj))
+
 while True:
     try:
-        runPproject(int(proj))
+        runProject(str(proj))
     except KeyboardInterrupt:
         ir.close()

@@ -31,9 +31,11 @@ def enable_project_selector():
         while not sta.isconnected():
             pass
         print('Network config:', sta.ifconfig())
-        disp_seq_str(["DONE"],2)
+        disp_seq_str(["DONE"],1)
        
         disp_scroll_str('IP Address '+sta.ifconfig()[0].replace('.','-'))
+        ip_last_byte=sta.ifconfig()[0].split('.')[3]
+        disp_seq_str([str(ip_last_byte)],1)
        
         
 
@@ -96,6 +98,8 @@ def enable_project_selector():
                     response=successPage(data)
                     conn.send(response)
                     conn.close()
+                    time.sleep(1)
+                    machine.reset()
             
             else:
                 try:
@@ -107,9 +111,11 @@ def enable_project_selector():
                     conn.close()
                 except Exception as e:
                   print(f"An error occurred: {e}")
+                  disp_seq_str(["ERR"],1)
         #           conn.close()
         except Exception as e:
           print(f"An error occurred: {e}")
+          disp_seq_str(["ERR"],1)
 #           conn.close()
           
         

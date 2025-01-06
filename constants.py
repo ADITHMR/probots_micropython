@@ -1,15 +1,15 @@
-project_topic_list = ["Fun with LED Lights",
-                      "Sensor-controlled street light",
-                      "Self-opening gate",
-                      "Student headcount Tracke",
-                      "Automatic fire detection system",
-                      "Temperature measurement device",
-                      "Digital distance measurement",
-                      "Touchless dustbin",
-                      "Touch operated fan",
-                      "Smart fan",
-                      "Automated Solar tracking system",
-                      "Line follower robot"
+project_topic_list = ["01 Fun with LED Lights",
+                      "02 Sensor-controlled street light",
+                      "03 Self-opening gate",
+                      "04 Student headcount Tracker",
+                      "05 Automatic fire detection system",
+                      "06 Temperature measurement device",
+                      "07 Digital distance measurement",
+                      "08 Touchless dustbin",
+                      "09 Touch operated fan",
+                      "10 Smart fan",
+                      "11 Automated Solar tracking system",
+                      "12 Line follower robot"
                       ]
                       
                       

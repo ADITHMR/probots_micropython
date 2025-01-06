@@ -16,5 +16,5 @@ def disp_seq_str(data,delay):
         sleep(delay)
 
 def disp_scroll_str(data):
-    disp.scroll(data, delay=200)
-disp_scroll_str("PROBOT v1")
+    disp.scroll(data, delay=150)
+# disp_scroll_str("PROBOT v1")
