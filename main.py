@@ -6,14 +6,15 @@ import machine
 import time
 from esp_as_AP import *
 from pin_mapping import *
-from project_config import *
+from webServer import *
 from display import *
 from ir_decode import *
 from ir_rx.nec import NEC_8
 from ir_rx.print_error import print_error
 from runProject import *
 
-
+# Run the web server
+runWebServer()
 if boot_sw1.value()==False and boot_sw2.value()==False:
     enable_AP()
 elif  boot_sw1.value()==False and boot_sw2.value()==True:

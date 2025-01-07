@@ -7,8 +7,7 @@
 
 from esp_as_AP import *
 from pin_mapping import *
-from project_config import *
-
+from  projectList import  *
 
 if boot_sw1.value()==False and boot_sw2.value()==False:
     enable_AP()

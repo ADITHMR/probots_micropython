@@ -1,5 +1,6 @@
 from file_mgr import *
 from web_page import *
+from display import *
 import socket
 import network
 import time
@@ -13,14 +14,21 @@ def connect_wifi():
     WIFI_PASSWORD=str(get_parameter("PASSWORD"))
     
     ############################################
+    
     wlan = network.WLAN(network.STA_IF)
     wlan.active(True)
     wlan.connect(WIFI_SSID, WIFI_PASSWORD)
     print('Connecting to WiFi...')
+    disp_scroll_str("CONNecting")
     while not wlan.isconnected():
         time.sleep(1)
     print('WiFi connected')
+    disp_seq_str(["DONE"],1)
     print('IP Address:', wlan.ifconfig()[0])
+    
+    disp_scroll_str('IP Address '+wlan.ifconfig()[0].replace('.','-'))
+    ip_last_byte=wlan.ifconfig()[0].split('.')[3]
+    disp_seq_str([str(ip_last_byte)],1)
 
 # Handle HTTP requests
 def handle_request(client):
@@ -28,7 +36,7 @@ def handle_request(client):
     try:
         print("level-1")
         # Set the socket timeout
-        client.settimeout(2)  # Timeout in seconds
+        client.settimeout(3)  # Timeout in seconds
         print("level-2")
         # Receive the request (non-blocking)
 #         request = await asyncio.sleep(0)  # Mimic a non-blocking call
@@ -80,8 +88,8 @@ def handle_request(client):
             # Ensure that the client connection is closed
             print("Closing client connection")
             client.close()
-            time.sleep(200)
             if  restart == 1:
+                time.sleep(1)
                 machine.reset()
             
                 
@@ -129,9 +137,6 @@ def save_data(str_data):
             data=data.replace("+", " ")
             print('Content- '+ data )
             set_parameter("PROJECT",data)
-            led.value(1)
-            time.sleep(1)
-            led.value(0)
             print("Success")
             return data
     except Exception as e:
@@ -139,6 +144,5 @@ def save_data(str_data):
         return 0
                             
 
-
-# Run the main function
 runWebServer()
+
