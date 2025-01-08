@@ -18,7 +18,7 @@ runWebServer()
 if boot_sw1.value()==False and boot_sw2.value()==False:
     enable_AP()
 elif  boot_sw1.value()==False and boot_sw2.value()==True:
-    enable_project_selector()
+    runWebServer()
     
 
 

@@ -67,7 +67,7 @@ def handle_request(client):
             else:
                 response=errorPage()
 #             client.send(response)
-        else:
+        elif'GET / HTTP' in request_str:
             response = web_page()
 #             client.send(response)
         print("level-6")
@@ -144,5 +144,5 @@ def save_data(str_data):
         return 0
                             
 
-runWebServer()
+# runWebServer()
 
