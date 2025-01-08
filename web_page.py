@@ -31,7 +31,7 @@ def web_page():
     <div class="container">  
         <div class="container mt-5">
             <h2 class="mb-4">Probots</h2>
-            <form  method="GET">
+            <form  method="POST">
                 <div class="mb-3">
                     <label for="exampleDropdown" class="form-label">Powered By : Prosol Technologies.</label>
                     {html_dropdown}
