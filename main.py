@@ -14,7 +14,7 @@ from ir_rx.print_error import print_error
 from runProject import *
 
 # Run the web server
-runWebServer()
+# runWebServer()
 if boot_sw1.value()==False and boot_sw2.value()==False:
     enable_AP()
 elif  boot_sw1.value()==False and boot_sw2.value()==True:
@@ -34,7 +34,7 @@ ir.error_function(print_error)
     
 proj=get_parameter("PROJECT")  #Get selected project name from file
 print(proj)
-disp_scroll_str(str(proj))
+# disp_scroll_str(str(proj))
 
 while True:
     try:
