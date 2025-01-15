@@ -86,6 +86,12 @@ def handle_request(client):
 # #             client.send(response)
         elif'GET / HTTP' in request_str:
             response = web_page()
+            try:
+                with open("project.html", 'w') as f:  # Open the file in write mode ('w')
+                    f.write(response)  # Write content to the file
+                    print(f"Content successfully written to file")
+            except Exception as e:
+                print(f"Error writing to file: {e}")
 #             client.send(response)
      
         # Send the response (non-blocking)

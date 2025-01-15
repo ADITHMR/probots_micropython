@@ -14,7 +14,7 @@ from ir_rx.print_error import print_error
 from runProject import *
 
 # Run the web server
-# runWebServer()
+runWebServer()
 if boot_sw1.value()==False and boot_sw2.value()==False:
     enable_AP()
 elif  boot_sw1.value()==False and boot_sw2.value()==True:
