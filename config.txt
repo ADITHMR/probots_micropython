@@ -1,1 +1,5 @@
+<<<<<<< Updated upstream
 {"SSID": "Ponnus", "PROJECT": "01 Fun with LED Lights", "PASSWORD": "Ariyilla"}
+=======
+{"SSID": "Brocode", "PROJECT": "01 Fun with LED Lights'", "PASSWORD": "Geekywolf@123"}
+>>>>>>> Stashed changes

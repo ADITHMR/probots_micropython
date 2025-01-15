@@ -13,6 +13,11 @@ from ir_rx.nec import NEC_8
 from ir_rx.print_error import print_error
 from runProject import *
 
+<<<<<<< Updated upstream
+=======
+# Run the web server
+# runWebServer()
+>>>>>>> Stashed changes
 
 if boot_sw1.value()==False and boot_sw2.value()==False:
     enable_AP()
@@ -32,11 +37,13 @@ ir.error_function(print_error)
 
     
 proj=get_parameter("PROJECT")  #Get selected project name from file
+
 print(proj)
 disp_scroll_str(str(proj))
 
 while True:
     try:
-        runProject(str(proj))
+#         print ("level 0")
+        runProject(proj)
     except KeyboardInterrupt:
         ir.close()

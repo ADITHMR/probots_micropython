@@ -1,8 +1,16 @@
+from file_mgr import *
+from Neopixel import *
+
 # User callback for IR receiver
 def callback(data, addr, ctrl):
+    proj=get_parameter("PROJECT")
+    
     if data < 0:  # NEC protocol sends repeat codes.
         pass
     else:
+        if proj =="01 Fun with LED Lights":
+            LED(data)
+            
         print(decodeKeyValue(data))
 
 # Decode the received data and return the corresponding key name

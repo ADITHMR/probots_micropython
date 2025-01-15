@@ -1,9 +1,7 @@
 from pin_mapping import *
+from Neopixel import *
 import time
 
 def fun_with_led():
-    while True:
-        led.on();
-        time.sleep(1)
-        led.off()
-        time.sleep(1)
+    print("LEVEL 1")
+    LED(7)
