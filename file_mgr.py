@@ -22,7 +22,8 @@ def get_parameter(parameter):
         with open('config.txt', 'r') as f:
             data= json.load(f)
             if parameter in data:
-                return  (data[parameter])
+                result=data[parameter].replace("'","")
+                return  (result)
                 
             else:
                 return "Error 404: No Such Parameter Found"

@@ -1,11 +1,14 @@
 from pin_mapping import *
 import time
 from projects.funWithLed import  * #Import all project files here
-
+from display import *
 
 def runProject(project_name):
+    proj=f"P{project_name[:2]}"
+    disp_seq_str([proj],1)
        
     if(project_name=="01 Fun with LED Lights"):
+        
         fun_with_led()
     elif(project_name=="02 Sensor-controlled street light"):
         led.on();

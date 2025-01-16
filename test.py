@@ -1,46 +1,22 @@
-import machine
-import neopixel
+import _thread
 import time
 
-pin = machine.Pin(2)
+# A simple function that simulates a task running in a thread
+def task_1():
+    while True:
+        print("Task 1 is running")
+        time.sleep(1)
 
-np = neopixel.NeoPixel(pin, 5)
+def task_2():
+    while True:
+        print("Task 2 is running")
+        time.sleep(1.5)
 
-def demo(np):
-    n = np.n
+# Create two threads
+_thread.start_new_thread(task_1, ())
+_thread.start_new_thread(task_2, ())
 
-#     # cycle
-#     for i in range(4 * n):
-#         for j in range(n):
-#             np[j] = (0, 0, 0)
-#         np[i % n] = (255, 255, 255)
-#         np.write()
-#         time.sleep_ms(500)
-
-    # bounce
-    for i in range(4 * n):
-        for j in range(n):
-            np[j] = (200, 100, 150)
-            if (i / n) % 2 == 0:
-              np[i % n] = (0, 0, 0)
-            else:
-                x=n -1 - (i % n)
-                np[x] = (0, 0, 0)
-            np.write()
-            time.sleep_ms(100)
-
-#     # fade in/out
-#     for i in range(0, 4 * 256, 8):
-#         for j in range(n):
-#             if (i // 256) % 2 == 0:
-#                 val = i & 0xff
-#             else:
-#                 val = 255 - (i & 0xff)
-#             np[j] = (val, 0, 0)
-#         np.write()
-
-    # clear
-    for i in range(n):
-        np[i] = (0, 0, 0)
-    np.write()
-demo(np)
+# Main loop that keeps the program running
+while True:
+    print("Main thread is running")
+    time.sleep(2)
