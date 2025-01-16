@@ -1,7 +1,8 @@
 from pin_mapping import *
 import time
-from projects.funWithLed import  * #Import all project files here
-from projects.auto_street_light import  * #Import all project files here
+from projects.funWithLed_file import  * #Import all project files here
+from projects.auto_street_light_file import  * #Import all project files here
+from projects.student_counter_file import  *
 from display import *
 from oled import *
 
@@ -12,21 +13,23 @@ def runProject(project_name):
     disp_seq_str([proj],1)
     
     if(project_name=="01 Fun with LED Lights"):
-        fun_with_led()
+        fun_with_led_fun()
         
     elif(project_name=="02 Sensor-controlled street light"):
-        Sensor_controlled_streetlight()
+        auto_street_light_fun()
         
     elif(project_name=="03 Self-opening gate"):
         led.on();
         time.sleep(.1)
         led.off()
         time.sleep(.1)
+        
     elif(project_name=="04 Student headcount Tracker"):
-        led.on();
-        time.sleep(.1)
-        led.off()
-        time.sleep(.1)
+        oled_two_data("Count","0")
+        disp_seq_str(["0"],0)
+        while True:
+            student_counter_fun() 
+        
     elif(project_name=="05 Automatic fire detection system"):
         led.on();
         time.sleep(.1)

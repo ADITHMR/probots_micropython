@@ -35,5 +35,11 @@ def oled_log(data):
         
 
 
-        
-  
+def oled_two_data(head,value):
+    oled.fill(0)
+    oled.show()
+    oled.write_text(head,1,1,2)
+    oled.show()
+    oled.write_text(value,30,35,3)
+    oled.show()
+    
