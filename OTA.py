@@ -9,7 +9,7 @@ PASSWORD = 'Ariyilla'
 
 # List of files on GitHub (raw URLs)
 FILES = [
-    "https://raw.githubusercontent.com/ADITHMR/probots_micropython/main/main.py",
+    "https://raw.githubusercontent.com/ADITHMR/probots_micropython/refs/heads/device_branch/main.py",
     
 ]
 
