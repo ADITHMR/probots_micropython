@@ -18,10 +18,16 @@ import ubinascii
 import gc
 gc.collect()
 
+from oled import *
+
 
 REPLACE_FOR_SPACE="@@!##"
 def enable_AP():
+    oled_log('Access point')
+    oled_log('Please wait...')
     disp_scroll_str('Access point')
+    
+    
     sleep(1)
     
     
@@ -33,11 +39,16 @@ def enable_AP():
     ap.active(True)
     ap.config(essid=ssid, password=password)
     ap.ifconfig(('192.168.1.1', '255.255.255.0', '192.168.1.1', '192.168.1.1'))
+    
     disp_scroll_str('IP Address -192-168-1-1')
+    
     sleep(1)
     while ap.active() == False:
       pass
     disp_scroll_str('Conn Success')
+    oled_log('Connect to "Prosol AP"')
+    
+    oled_log('IP->192.168.1.1')
     print('Connection successful')
     print(ap.ifconfig())
 
@@ -78,6 +89,7 @@ def enable_AP():
                 print("Received SSID:", ssid)
                 print("Received Password:", password)
                 
+                oled_log('Saved SSID and PASS')
                 set_parameter("SSID",ssid)
                 set_parameter("PASSWORD",password)
                 

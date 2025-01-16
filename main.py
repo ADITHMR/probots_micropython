@@ -16,15 +16,15 @@ import _thread
 
 # Run the web server
 # runWebServer()
-if boot_sw1.value()==False and boot_sw2.value()==False:
+if TOUCH1.value()==True and TOUCH2.value()==True:
     enable_AP()
-elif  boot_sw1.value()==False and boot_sw2.value()==True:
+elif  TOUCH1.value()==True and TOUCH2.value()==False:
     runWebServer()
     
 
 
 
-pin_ir = Pin(14, Pin.IN) # IR receiver
+
 ir = NEC_8(pin_ir, callback) # Instantiate the NEC_8 receiver
 # Show debug information
 ir.error_function(print_error)

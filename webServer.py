@@ -6,6 +6,7 @@ import socket
 import network
 import time
 import machine
+from oled import *
 
 # Connect to WiFi
 def connect_wifi():
@@ -20,14 +21,21 @@ def connect_wifi():
     wlan.active(True)
     wlan.connect(WIFI_SSID, WIFI_PASSWORD)
     print('Connecting to WiFi...')
+    oled_log("Conn to WiFi...")
     disp_scroll_str("CONNecting")
+    
     while not wlan.isconnected():
         time.sleep(1)
     print('WiFi connected')
+    oled_log("WiFi connected")
     disp_seq_str(["DONE"],1)
     print('IP Address:', wlan.ifconfig()[0])
+    oled_log("IP->")
+    oled_log(wlan.ifconfig()[0])
+    
     
     disp_scroll_str('IP Address '+wlan.ifconfig()[0].replace('.','-'))
+    
     ip_last_byte=wlan.ifconfig()[0].split('.')[3]
     disp_seq_str([str(ip_last_byte)],1)
 

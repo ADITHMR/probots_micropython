@@ -1,9 +1,7 @@
-from pin_mapping import *
-import time
+from imports import *
 
 def fun_with_led():
+    
     while True:
-        led.on();
-        time.sleep(1)
-        led.off()
-        time.sleep(1)
+        print(f"data={get_IR_data()}")
+        LED(get_IR_data())

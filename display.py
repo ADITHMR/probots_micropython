@@ -11,9 +11,11 @@ def disp_seq_num(data,delay):
 def disp_seq_str(data,delay):
     for d in data:
         disp.show("    ")
-        sleep(.5)
-        disp.show(d)
-        sleep(delay)
+        
+#         sleep(.1)
+        disp.show(d) 
+        if delay!=0:
+            sleep(delay)
 
 def disp_scroll_str(data):
     disp.scroll(data, delay=150)

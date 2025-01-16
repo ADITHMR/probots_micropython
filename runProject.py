@@ -1,20 +1,22 @@
 from pin_mapping import *
 import time
 from projects.funWithLed import  * #Import all project files here
+from projects.auto_street_light import  * #Import all project files here
 from display import *
+from oled import *
 
 def runProject(project_name):
+    
     proj=f"P{project_name[:2]}"
+    oled_log('"'+project_name+'"')
     disp_seq_str([proj],1)
-       
+    
     if(project_name=="01 Fun with LED Lights"):
-        
         fun_with_led()
+        
     elif(project_name=="02 Sensor-controlled street light"):
-        led.on();
-        time.sleep(.1)
-        led.off()
-        time.sleep(.1)
+        Sensor_controlled_streetlight()
+        
     elif(project_name=="03 Self-opening gate"):
         led.on();
         time.sleep(.1)
