@@ -13,6 +13,7 @@
              "ir_decode.py",
              "main.py",
              "oled.py",
+             "ota_update.py",
              "pin_mapping.py",
              "project.html",
              "projectList.py",
@@ -53,11 +54,5 @@
              "student_counter_file.py"
         ],
          "folder": "//projects"
-    },
-     {
-        "files": [
-            "main.py"
-        ],
-         "folder": "//updates"
     }
 ]
