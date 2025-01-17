@@ -1,1 +1,1 @@
-{"SSID": "Ponnus", "PROJECT": "04 Student headcount Tracker'", "PASSWORD": "Ariyilla","token":"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"}
+{"SSID": "Ponnus", "PROJECT": "04 Student headcount Tracker'", "PASSWORD": "Ariyilla"}
