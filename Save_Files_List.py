@@ -76,10 +76,11 @@ directory_path = '/'
 
 # Get the list of folder and file names
 folder_file_list = list_files_and_folders(directory_path)
+folder_file_list.append(folder_file_list.pop(0))
 json_data = json_dumps_pretty(folder_file_list)
 # Pretty-print the result (since MicroPython doesn't support indent in json.dumps)
 
 
 # Save the JSON output to a file
-output_filename = 'output.txt'  # Adjust the path as needed (without .json)
+output_filename = 'files_list.txt'  # Adjust the path as needed (without .json)
 save_json_to_file(json_data, output_filename)

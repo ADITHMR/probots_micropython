@@ -1,34 +1,6 @@
 [
     {
         "files": [
-            "OTA.py",
-             "Save_Files_List.py",
-             "boot.py",
-             "buzzer.py",
-             "config.txt",
-             "display.py",
-             "esp_as_AP.py",
-             "file_mgr.py",
-             "imports.py",
-             "ir_decode.py",
-             "main.py",
-             "oled.py",
-             "ota_update.py",
-             "pin_mapping.py",
-             "project.html",
-             "projectList.py",
-             "runProject.py",
-             "test.py",
-             "tm1637.py",
-             "utils.py",
-             "webServer.py",
-             "web_page.py",
-             "web_page_AP.py"
-        ],
-         "folder": "/"
-    },
-     {
-        "files": [
             "__init__.py",
              "acquire.py",
              "mce.py",
@@ -54,5 +26,33 @@
              "student_counter_file.py"
         ],
          "folder": "//projects"
+    },
+     {
+        "files": [
+            "Save_Files_List.py",
+             "boot.py",
+             "buzzer.py",
+             "config.txt",
+             "display.py",
+             "esp_as_AP.py",
+             "file_mgr.py",
+             "imports.py",
+             "ir_decode.py",
+             "main.py",
+             "oled.py",
+             "ota_update.py",
+             "output.txt",
+             "pin_mapping.py",
+             "project.html",
+             "projectList.py",
+             "runProject.py",
+             "test.py",
+             "tm1637.py",
+             "utils.py",
+             "webServer.py",
+             "web_page.py",
+             "web_page_AP.py"
+        ],
+         "folder": "/"
     }
 ]
