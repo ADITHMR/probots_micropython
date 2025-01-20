@@ -23,9 +23,12 @@ def student_counter_fun():
             if sensor2  ==True:
                 print("LDR2 detected object!")
                 counter += 1
+                two_beep()
                 print(f"Head Count: {counter}")
-                oled_two_data("Count",str(counter))
+                oled_two_data(2,3,"Count",str(counter))
                 disp_seq_str([str(counter)],0)
+                while sensor2  ==True:
+                    pass
                 return
         print("Timeout: Second LDR did not detect object in time.")
     if sensor2 ==True:
@@ -42,9 +45,12 @@ def student_counter_fun():
                 print("LDR2 detected object!")
                 if counter>0:
                     counter -= 1
+                    one_beep()
                 print(f"Head Count: {counter}")
-                oled_two_data("Count",str(counter))
+                oled_two_data(2,3,"Count",str(counter))
                 disp_seq_str([str(counter)],0)
+                while sensor1  ==False:
+                    pass
                 return
         print("Timeout: Second LDR did not detect object in time.")
    

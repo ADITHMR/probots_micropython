@@ -22,7 +22,7 @@ BUZZER.on()
 IR_LDR1=Pin(39,Pin.IN,Pin.PULL_UP)
 IR_LDR2=Pin(36,Pin.IN,Pin.PULL_UP)
 
-
+servo1=Pin(33, Pin.OUT)
 
 pin_ir = Pin(25, Pin.IN) # IR receiver
 
