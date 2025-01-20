@@ -8,7 +8,10 @@
 import machine
 import neopixel
 import time
-length=7
+import random
+#import colourwheel
+#import colour
+num_pixels=length=7
 Red=0
 Green=0
 Blue=0
@@ -30,7 +33,6 @@ def F_ON(Red,Green,Blue):
         np[i]=(Red,Green,Blue)
     np.write()
 def mode1():
-    print("LEVEL 3")
     for i in range(255):
         if((i%3)==0):
             a=1
@@ -184,45 +186,158 @@ def mode7():
                 time.sleep(.1)
             clear1()
             time.sleep(.05)
+def mode8(): #random
+    wait=0.1
+    print(length)
+    for i in range(length):        
+        if random.randint(0, 10) > 8:  # 20% chance of twinkling
+            color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
+            np[i] = color
+        else:
+            np[i] = (0, 0, 0)  # Turn off some LEDs
+    np.write()
+    time.sleep(wait)
+def mode9():  #wave
+    wait=0.05
+    for j in range(num_pixels * 2):
+        for i in range(num_pixels):
+            if (i + j) % num_pixels == 0:
+                np[i] = (255, 0, 0)  # green color
+            else:
+                np[i] = (0, 0, 0)  # Turn off the LED
+        np.write()
+        time.sleep(wait)
+def mode10():
+    wait=0.1
+    for i in range(num_pixels):
+        np[i] = (255, 255, 255)  # White light
+        np.write()
+        time.sleep(wait)
+        np[i] = (0, 0, 0)  # Turn off the light
+
+    for i in range(num_pixels - 1, -1, -1):
+        np[i] = (255, 255, 255)
+        np.write()
+        time.sleep(wait)
+        np[i] = (0, 0, 0)
+import random
+
+def mode11():#fire_effect
+    wait=0.05
+    for i in range(num_pixels):
+        red = random.randint(0, 255)
+        green = random.randint(0, red)  # Green is always less than or equal to red
+        blue = random.randint(0, green)  # Blue is always less than or equal to green
+        np[i] = (blue,red,green)  # Simulate fire color
+    np.write()
+    time.sleep(wait)
+def mode12(): # pulse
+    wait=0.01
+    for brightness in range(0, 255, 5):  # Increasing brightness
+        for i in range(num_pixels):
+            np[i] = (brightness, 0, 0)  # Red color with variable brightness
+        np.write()
+        time.sleep(wait)
+    for brightness in range(255, 0, -5):  # Decreasing brightness
+        for i in range(num_pixels):
+            np[i] = (brightness, 0, 0)  # Red color with variable brightness
+        np.write()
+        time.sleep(wait)
+def mode13(): #rainbow_chase
+    wait=0.1
+    for j in range(256):  # Number of color shifts (one full rainbow)
+        for i in range(num_pixels):
+            color = wheel((i + j) & 255)  # Shift color based on position
+            np[i] = color
+        np.write()
+        time.sleep(wait)
+def mode14():#full_color_fade
+    print("Fade in colors")
+    wait=0.2
+    for j in range(256):
+        for i in range(num_pixels):
+            np[i] = (j, 0, 0)  # Red fades in
+        np.write()
+        time.sleep(wait)
         
+        for i in range(num_pixels):
+            np[i] = (0, j, 0)  # Green fades in
+        np.write()
+        time.sleep(wait)
+        
+        for i in range(num_pixels):
+            np[i] = (0, 0, j)  # Blue fades in
+        np.write()
+        time.sleep(wait)
+      
+    print("colors")
+    for j in range(255, -1, -1):
+        for i in range(num_pixels):
+            np[i] = (j, 0, 0)  # Red fades out
+        np.write()
+        time.sleep(wait)
+        
+        for i in range(num_pixels):
+            np[i] = (0, j, 0)  # Green fades out
+        np.write()
+        time.sleep(wait)
+        
+        for i in range(num_pixels):
+            np[i] = (0, 0, j)  # Blue fades out
+        np.write()
+        time.sleep(wait)
+def wheel(pos):
+    """
+    Generate color from a position on the color wheel.
+    :param pos: Integer position from 0 to 255 (representing 360 degrees on the color wheel)
+    :return: (r, g, b) tuple for the RGB color
+    """
+    if pos < 85:
+        return (pos * 3, 255 - pos * 3, 0)
+    elif pos < 170:
+        pos -= 85
+        return (255 - pos * 3, 0, pos * 3)
+    else:
+        pos -= 170
+        return (0, pos * 3, 255 - pos * 3)
+
 def LED(mode):
+    print(mode)
     if(mode==0):
-        while True:
-            mode0()
+        mode0()
     elif(mode==1):
-        while True:
-            print("LEVEL 2")
-            mode1()
+        mode1()
     elif(mode==2):
-        while True:
-            mode2()
+        mode2()
     elif(mode==3):
-        while True:
-            mode3()
+        mode3()
     elif(mode==4):
-        while True:
-            mode4()
+        mode4()
     elif(mode==5):
-        while True:
-            mode5()
+        mode5()
     elif(mode==6):
-        while True:
-            mode6()
+        mode6()
     elif(mode==7):
-        while True:
-            mode7()
+        mode7()
     elif(mode==8):
-        while True:
-            mode8()
+        mode8()
     elif(mode==9):
-        while True:
-            mode9()
-# while True:
-#     print("clear")
-#     clear1()
-#     #time.sleep(0.1) 
-#     print("mode0")
-#     LED(0)
-#     #time.sleep(0.1)
-#     #clear1()
+        mode9()
+    elif(mode==10):
+        mode10()
+    elif(mode==11):
+        mode11()
+    elif(mode==12):
+        mode12()
+    elif(mode==13):
+        mode13()
+    elif(mode==14):
+        mode14()
+while True:
+    print("clear")
+    clear1()
+    #time.sleep(0.1)
+    LED(13)
+    #time.sleep(0.1)
+    #clear1()
     
