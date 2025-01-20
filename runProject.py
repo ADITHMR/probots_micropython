@@ -4,6 +4,8 @@ from projects.funWithLed_file import  * #Import all project files here
 from projects.auto_street_light_file import  * #Import all project files here
 from projects.student_counter_file import  *
 from projects.Temp_measurement_lm35_file import  *
+from projects.automatic_door_file import  *
+
 from display import *
 from oled import *
 
@@ -20,10 +22,7 @@ def runProject(project_name):
         auto_street_light_fun()
         
     elif(project_name=="03 Self-opening gate"):
-        led.on();
-        time.sleep(.1)
-        led.off()
-        time.sleep(.1)
+        automatic_door_fun()
         
     elif(project_name=="04 Student headcount Tracker"):
         oled_two_data(2,3,"Count","0")

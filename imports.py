@@ -18,7 +18,7 @@ from webServer import *
 from display import *
 from oled import *
 from buzzer import *
-
+from led_strip import *
 
 from runProject import *
 
