@@ -21,7 +21,8 @@
     },
      {
         "files": [
-            "auto_street_light_file.py",
+            "Temp_measurement_lm35_file.py",
+             "auto_street_light_file.py",
              "funWithLed_file.py",
              "student_counter_file.py"
         ],
@@ -41,7 +42,6 @@
              "main.py",
              "oled.py",
              "ota_update.py",
-             "output.txt",
              "pin_mapping.py",
              "project.html",
              "projectList.py",

@@ -3,6 +3,7 @@ import time
 from projects.funWithLed_file import  * #Import all project files here
 from projects.auto_street_light_file import  * #Import all project files here
 from projects.student_counter_file import  *
+from projects.Temp_measurement_lm35_file import  *
 from display import *
 from oled import *
 
@@ -25,7 +26,7 @@ def runProject(project_name):
         time.sleep(.1)
         
     elif(project_name=="04 Student headcount Tracker"):
-        oled_two_data("Count","0")
+        oled_two_data(2,3,"Count","0")
         disp_seq_str(["0"],0)
         while True:
             student_counter_fun() 
@@ -36,10 +37,7 @@ def runProject(project_name):
         led.off()
         time.sleep(.1)
     elif(project_name=="06 Temperature measurement device"):
-        led.on();
-        time.sleep(.1)
-        led.off()
-        time.sleep(.1)
+        Temp_measurement_lm35_fun()
     elif(project_name=="07 Digital distance measurement"):
         led.on();
         time.sleep(.1)
