@@ -8,6 +8,9 @@ import time
 import machine
 from oled import *
 
+wifi_connection_timeout = 10  # Timeout after 10 seconds
+wifi_conn_start_time = time.time()
+wifi_connected=0
 # Connect to WiFi
 def connect_wifi():
     ##################################################
@@ -25,7 +28,16 @@ def connect_wifi():
     disp_scroll_str("CONNecting")
     
     while not wlan.isconnected():
+        oled_two_data(1,2,"Conn to WiFi",str(wifi_connection_timeout-(time.time() - wifi_conn_start_time)))
+        # Check if the connection is taking too long
+        if (time.time() - wifi_conn_start_time) > wifi_connection_timeout:
+            print("Connection timed out")
+            
+            wifi_connected=0
+            return
+            break
         time.sleep(1)
+    wifi_connected=1
     print('WiFi connected')
     oled_log("WiFi connected")
     disp_seq_str(["DONE"],1)
@@ -150,7 +162,7 @@ def start_server():
 
 # Main function to connect to WiFi and start the server
 def runWebServer():
-    connect_wifi()  # Connect to WiFi
+    
     start_server()  # Start the server
 
 def save_data(str_data,req_type):

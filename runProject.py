@@ -5,6 +5,9 @@ from projects.auto_street_light_file import  * #Import all project files here
 from projects.student_counter_file import  *
 from projects.Temp_measurement_lm35_file import  *
 from projects.automatic_door_file import  *
+from projects.dig_dist_measurement_file import  *
+from projects.automatic_fire_detection_file import *
+import _thread
 
 from display import *
 from oled import *
@@ -31,17 +34,14 @@ def runProject(project_name):
             student_counter_fun() 
         
     elif(project_name=="05 Automatic fire detection system"):
-        led.on();
-        time.sleep(.1)
-        led.off()
-        time.sleep(.1)
+        _thread.start_new_thread(automatic_fire_detection_fun, ())
+        
     elif(project_name=="06 Temperature measurement device"):
-        Temp_measurement_lm35_fun()
+        _thread.start_new_thread(Temp_measurement_lm35_fun, ())
+        
     elif(project_name=="07 Digital distance measurement"):
-        led.on();
-        time.sleep(.1)
-        led.off()
-        time.sleep(.1)
+        dig_dist_measurement_fun()
+        
     elif(project_name=="08 Touchless dustbin"):
         led.on();
         time.sleep(.1)
