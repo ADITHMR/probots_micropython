@@ -4,9 +4,9 @@
 
 import machine
 import time
-from esp_as_AP import *
+from local_host.esp_as_AP import *
 from pin_mapping import *
-from webServer import *
+from local_host.webServer import *
 from display import *
 from ir_decode import *
 from ir_rx.nec import NEC_8

@@ -1,4 +1,4 @@
-from web_page_AP import *
+from local_host.web_page_AP import *
 from file_mgr import *
 from utils import *
 from time import sleep

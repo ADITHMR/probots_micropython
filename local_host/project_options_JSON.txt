@@ -1,0 +1,16 @@
+{
+    "01 Fun with LED Lights": [
+      {
+        "type": "project",
+        "name": "01 Fun with LED Lights",
+        
+      }
+      {
+        "type": "select",
+        "name": "led_num",
+        "label": "Number of LEDs",
+        "options": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"],
+        "required": true
+      }
+    ]
+}

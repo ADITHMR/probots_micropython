@@ -6,15 +6,8 @@ from  projectList import  *
 
 # Generate HTML for the dropdown
 html_dropdown =  """<select id="mydropdown" name="selectedItem" class="form-select" required>"""
-#         <option value="" disabled selected>Select the Project</option>"""
-
 for proj in project_topic_list:
     html_dropdown += f"<option value=\"{proj}\">{proj}</option>\n"
-#     <li><a class=\"dropdown-item\" onclick=\"changeButtonText('{proj}')\">{proj}</a></li>\n"
-#     html_dropdown += f"<li><a class=\"dropdown-item\" href=\"\" onclick=\"changeButtonText('{proj}')\">{i} {proj}</a></li>\n"
-    
-#      <li><a class="dropdown-item" href="#" onclick="changeButtonText('Apple')">1 Apple</a></li>
-   
 html_dropdown+="</select>"    
             
 
