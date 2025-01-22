@@ -26,5 +26,6 @@ from runProject import *
 import ure  # MicroPython version of regular expressions
 import socket
 import network
-
+import sys
+import traceback
 

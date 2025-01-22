@@ -63,7 +63,7 @@ def successProjectPage(data):
                             <div class="container"><h1>Project Selection Successful!</h1>
                             <p>You selected: {data}</p>
                             
-                            <a href="/reset">Click here to restart the device.</a>
+                            <a>Restart the device.</a>
                         </div>
                           </body>
                         </html>

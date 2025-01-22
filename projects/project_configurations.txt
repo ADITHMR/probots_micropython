@@ -1,1 +1,1 @@
-{"01 Fun with LED Lights": {"project": "01 Fun with LED Lights", "led_num": "4"}}
+{"01 Fun with LED Lights": {"project": "01 Fun with LED Lights", "led_num": "1"}}

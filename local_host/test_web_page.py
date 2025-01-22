@@ -15,6 +15,8 @@ wifi_connected = False
 wifi_connection_timeout = 10  # Timeout after 10 seconds
 wifi_conn_start_time = time.time()
 
+
+restart=0
 # Connect to WiFi
 def connect_wifi():
     global wifi_connected  # Ensure we're using the global variable
@@ -63,10 +65,15 @@ def handle_request(client):
         request_str = str(data)
         
         # Handle different routes
-        response = handle_route(request_str)
+        response = handle_route(request_str,client)
         
         if response:
             client.send(response)
+            print("response sent")
+            if restart==1:
+                time.sleep(.5)
+                print("resetting")
+                machine.reset()
     
     except OSError as e:
         if e.errno == 113:  # ECONNABORTED
@@ -80,6 +87,7 @@ def handle_request(client):
     finally:
         try:
             client.close()
+            print("client close")
             if restart:
                 time.sleep(1)
                 machine.reset()
@@ -87,20 +95,27 @@ def handle_request(client):
             print("Error closing client connection:", e)
             traceback.print_exc()
 
-def handle_route(request_str):
+def handle_route(request_str,client):
     if '/hello' in request_str:
         return "HTTP/1.1 200 OK\n\nStatus: Hello There!"
     elif '/reset' in request_str:
         return restartSuccessPage()
     elif 'GET /?project' in request_str:
         datas = get_params(request_str)
-        print(datas)
+#         print(datas)
         update_project_config(datas)
-        return "HTTP/1.1 200 OK\n\nProject updated."
+        
+        return successProjectPage(datas['project'].replace("+", " "))
     elif 'selectedItem=' in request_str and 'POST' in request_str:
         return handle_post_selected_item(request_str)
     elif 'GET / HTTP' in request_str:
         return handle_homepage_request()
+    elif '/reset' in request_str:
+            # Redirect to /newpage
+            response = restartSuccessPage()
+            client.send(response)
+            mcahine.restart()
+            return response
     else:
         return errorPage()
 
@@ -144,6 +159,7 @@ def start_server():
             client, addr = s.accept()
             print('Client connected from', addr)
             handle_request(client)
+            
         except Exception as e:
             print("Error accepting connection:", e)
 
@@ -154,3 +170,39 @@ def runWebServer():
 
 runWebServer()
 
+
+
+
+def successProjectPage(data):
+    success_page=website_style+f"""
+                          <body>
+                            <div class="container"><h1>Project Selection Successful!</h1>
+                            <p>You selected: {data}</p>
+                            
+                            <a>Restart the device.</a>
+                        </div>
+                          </body>
+                        </html>
+                       """
+    return success_page
+def errorPage():
+    error_page=website_style+f"""
+                          <body>
+                            <div class="container"><h1>ERROR!</h1>
+                
+                            
+                            <a href="/reset">Click here to restart the device.</a>
+                        </div>
+                          </body>
+                        </html>
+                       """
+    return error_page
+def restartSuccessPage():
+    error_page=website_style+f"""
+                          <body>
+                            <div class="container"><h1>Restarted Successfully!</h1>
+                        </div>
+                          </body>
+                        </html>
+                       """
+    return error_page

@@ -1,5 +1,5 @@
 import json
-
+from imports import *
 def update_project_config(conf_list):
     try:
         # Read the current configurations from the file
@@ -19,6 +19,7 @@ def update_project_config(conf_list):
         for conf, value in conf_list.items():
             if conf == 'project':
                 value = value.replace("+", " ")  # Ensure project name is correctly formatted
+                set_parameter("PROJECT",value)
             project_data[conf] = value
         
         # Update the main data dictionary with the updated project data
