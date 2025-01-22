@@ -39,6 +39,10 @@ print(proj)
 
 # while True:
 try:
-    _thread.start_new_thread(runProject, (proj,))     
+    connect_wifi()  # Connect to WiFi
+    _thread.start_new_thread(runWebServer, ())
+    _thread.start_new_thread(runProject, (proj,))
+    
+    
 except KeyboardInterrupt:
     ir.close()

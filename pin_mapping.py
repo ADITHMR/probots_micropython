@@ -26,6 +26,8 @@ servo1=Pin(33, Pin.OUT)
 
 pin_ir = Pin(25, Pin.IN) # IR receiver
 
+FIRE_SENSOR_PIN=35
+
 oled=0
 
 

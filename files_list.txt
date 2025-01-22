@@ -24,6 +24,8 @@
             "Temp_measurement_lm35_file.py",
              "auto_street_light_file.py",
              "automatic_door_file.py",
+             "automatic_fire_detection_file.py",
+             "dig_dist_measurement_file.py",
              "funWithLed_file.py",
              "student_counter_file.py"
         ],
@@ -31,7 +33,8 @@
     },
      {
         "files": [
-            "Save_Files_List.py",
+            "Neopixel.py",
+             "Save_Files_List.py",
              "boot.py",
              "buzzer.py",
              "config.txt",
@@ -49,7 +52,9 @@
              "project.html",
              "projectList.py",
              "runProject.py",
+             "test page.py",
              "test.py",
+             "test_list.py",
              "tm1637.py",
              "utils.py",
              "webServer.py",
