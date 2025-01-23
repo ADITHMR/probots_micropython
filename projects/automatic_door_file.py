@@ -3,8 +3,9 @@ import time
 from imports import *
 # Set up the GPIO pins
 
-sensor_1_pin = TOUCH1
-sensor_2_pin = TOUCH2
+sensor_1_pin = IR_LDR1
+sensor_2_pin = IR_LDR2
+
 
 
 # Function to initialize the PWM for the servo
@@ -53,12 +54,14 @@ def automatic_door_fun():
     close_gate()
     while True:
         # Check if either sensor detects an object to open the gate
-        if (sensor_1_pin.value() == 1 or sensor_2_pin.value() == 1) and not gate_open:
+        if (sensor_1_pin.value() == 0 or sensor_2_pin.value() == 0) and not gate_open:
             print("Entry detected! Opening the gate.")
             init_servo()  # Initialize the PWM before moving the servo
             open_gate()
             gate_open = True  # Mark the gate as open
             last_open_time = time.time()  # Store the current time when the gate opened
+            while (sensor_1_pin.value() == 0 or sensor_2_pin.value() == 0):
+                pass
             time.sleep(1)  # Add a small delay to avoid multiple triggers
 
         # If the gate is open, check for timeout or exit
@@ -79,16 +82,18 @@ def automatic_door_fun():
                 time.sleep(1)  # Add a small delay to avoid multiple triggers
 
             # Check if the other sensor detects an object to close the gate
-            elif (sensor_1_pin.value() == 1 and sensor_2_pin.value() == 0):  # If Sensor 1 detects and Sensor 2 does not
+            elif (sensor_1_pin.value() == 0 and sensor_2_pin.value() == 1):  # If Sensor 1 detects and Sensor 2 does not
                 print("Exit detected! Closing the gate.")
                 close_gate()
                 gate_open = False  # Mark the gate as closed
                 time.sleep(1)  # Add a small delay to avoid multiple triggers
 
-            elif (sensor_2_pin.value() == 1 and sensor_1_pin.value() == 0):  # If Sensor 2 detects and Sensor 1 does not
+            elif (sensor_2_pin.value() == 0 and sensor_1_pin.value() == 1):  # If Sensor 2 detects and Sensor 1 does not
                 print("Exit detected! Closing the gate.")
                 close_gate()
                 gate_open = False  # Mark the gate as closed
                 time.sleep(1)  # Add a small delay to avoid multiple triggers
 
         time.sleep(0.1)  # Polling interval to reduce CPU load
+
+automatic_door_fun()
