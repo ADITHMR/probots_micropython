@@ -125,7 +125,7 @@ def handle_post_selected_item(request_str):
         selected_option = match.group(1).replace("'", "").replace("+", " ")
         with open('local_host/project_options_JSON.txt', 'r') as f:
             data = json.load(f)
-        
+        print(f"selected project-------->{selected_option}")
         if selected_option in data:
             with open('local_host/project_page.html', 'r') as f:
                 html_content = f.read()
@@ -138,12 +138,12 @@ def handle_post_selected_item(request_str):
 
 def handle_homepage_request():
     response = web_page()
-    try:
-        with open("project.html", 'w') as f:
-            f.write(response)
-        print(f"Content successfully written to file")
-    except Exception as e:
-        print(f"Error writing to file: {e}")
+#     try:
+#         with open("project.html", 'w') as f:
+#             f.write(response)
+#         print(f"Content successfully written to file")
+#     except Exception as e:
+#         print(f"Error writing to file: {e}")
     return response
 
 # Start the web server

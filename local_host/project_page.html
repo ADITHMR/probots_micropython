@@ -120,6 +120,7 @@
             radioInput.setAttribute('name', input.name);
             radioInput.setAttribute('value', option);
             radioInput.required = input.required;
+            if (input.defaultValue && option === input.defaultValue) radioInput.checked = true;
 
             const radioLabel = document.createElement('label');
             radioLabel.classList.add('form-check-label');
@@ -142,6 +143,7 @@
             opt.value = option;
             opt.textContent = option;
             select.appendChild(opt);
+            if (input.defaultValue && option === input.defaultValue) opt.selected = true;
           });
 
           div.appendChild(select);
@@ -152,6 +154,7 @@
           checkbox.setAttribute('id', input.name);
           checkbox.setAttribute('name', input.name);
           checkbox.required = input.required;
+          if (input.defaultValue) checkbox.checked = input.defaultValue;
 
           const checkboxLabel = document.createElement('label');
           checkboxLabel.classList.add('form-check-label');
@@ -181,6 +184,7 @@
           if (input.max) inputField.setAttribute('max', input.max);
           if (input.step) inputField.setAttribute('step', input.step);
           if (input.value) inputField.setAttribute('value', input.value);
+          if (input.defaultValue) inputField.value = input.defaultValue;
           inputField.required = input.required;
 
           div.appendChild(inputField);

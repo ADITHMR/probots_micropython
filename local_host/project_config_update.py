@@ -1,4 +1,5 @@
 import json
+import ujson
 from imports import *
 def update_project_config(conf_list):
     try:
@@ -27,6 +28,7 @@ def update_project_config(conf_list):
         
         # Write the updated data back to the file
         with open('projects/project_configurations.txt', 'w') as f:
+#             formatted_json =ujson.dumps(data, indent=4)
             json.dump(data, f)
         
         print(f"Configuration for project '{project_name}' has been updated successfully.")

@@ -1,10 +1,1 @@
-{
-    "01 Fun with LED Lights": {
-        "project": "01 Fun with LED Lights",
-        "led_num": "5"
-    }
-    "02 Sensor-controlled street light": {
-        "project": "02 Sensor-controlled street light",
-        "led_num": "5"
-    }
-}
+{"01 Fun with LED Lights": {"project": "01 Fun with LED Lights", "led_num": "9", "strip_led_pin": "33"}, "02 Sensor-controlled street light": {"sensor2_active_state": "Active+High", "sensor1_active_state": "Active+Low", "project": "02 Sensor-controlled street light", "sensor1_pin": "12", "sensor2_pin": "15"}}
