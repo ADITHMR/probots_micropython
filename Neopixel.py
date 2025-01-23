@@ -25,11 +25,7 @@ print(1)
 a=1
 b=c=0
 def clear():
-<<<<<<< Updated upstream
     for i in range(num_pixels):
-=======
-    for i in range(length):
->>>>>>> Stashed changes
         np[i]=(0,0,0,0)
     np.write()
 def F_ON(Red,Green,Blue):
@@ -126,7 +122,6 @@ def mode4():
         Green=color[i+1]
         Blue=color[i+2]
         i=i+3
-<<<<<<< Updated upstream
         for k in range(num_pixels):
             clear()
             ON(k,Red,Green,Blue)
@@ -134,15 +129,6 @@ def mode4():
         for k in range(num_pixels):
             clear()
             ON(num_pixels-k-1,Red,Green,Blue)
-=======
-        for k in range(length):
-            clear()
-            ON(k,Red,Green,Blue)
-            time.sleep(.1)
-        for k in range(length):
-            clear()
-            ON(length-k-1,Red,Green,Blue)
->>>>>>> Stashed changes
             time.sleep(.1)
 def mode5():
     color=255,0,0,0,255,0,0,0,255,255,255,0,0,255,255,255,255,255
@@ -171,25 +157,15 @@ def mode6():
         Green=color[i+1]
         Blue=color[i+2]
         i=i+3
-<<<<<<< Updated upstream
         for k in range(num_pixels):
-=======
-        for k in range(length):
->>>>>>> Stashed changes
             clear()
             ON(k,Red,Green,Blue)
             if(k+1<num_pixels):
                 ON(k+1,Red,Green,Blue)   
             time.sleep(.2)
-<<<<<<< Updated upstream
         for k in range(num_pixels):
             clear()
             ON(num_pixels-k-1,Red,Green,Blue)
-=======
-        for k in range(length):
-            clear()
-            ON(length-k-1,Red,Green,Blue)
->>>>>>> Stashed changes
             if(k>0):
                 ON(k-1,Red,Green,Blue) 
             time.sleep(.2)
@@ -204,11 +180,7 @@ def mode7():
         Blue=color[i+2]            
         i=i+3
         for z in range(10):
-<<<<<<< Updated upstream
             for k in range(num_pixels):
-=======
-            for k in range(length):
->>>>>>> Stashed changes
                 clear()
                 ON(k,Red,Green,Blue)
                 time.sleep(.1)
