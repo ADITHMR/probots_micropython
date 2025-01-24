@@ -1,0 +1,20 @@
+{
+    "03 Self-opening gate": {
+        "sensor2_active_state": "Active High",
+        "sensor1_active_state": "Active High",
+        "project": "03 Self-opening gate",
+        "sensor1_pin": "39",
+        "servo_pin": "33",
+        "sensor2_pin": "36"
+    },
+    "02 Sensor-controlled street light": {
+        "sensor_active_state": "Active High",
+        "project": "02 Sensor-controlled street light",
+        "sensor_pin": "39"
+    },
+    "01 Fun with LED Lights": {
+        "project": "01 Fun with LED Lights",
+        "led_num": "2",
+        "strip_led_pin": "5"
+    }
+}

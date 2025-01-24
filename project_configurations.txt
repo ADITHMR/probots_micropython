@@ -1,0 +1,1 @@
+{"02 Sensor-controlled street light": {"sensor2_active_state": "Active+Low", "sensor1_active_state": "Active+HIGH", "project": "02 Sensor-controlled street light", "sensor1_pin": "13", "sensor2_pin": "14"}, "01 Fun with LED Lights": {"project": "01 Fun with LED Lights", "led_num": "9", "strip_led_pin": "33"}} 

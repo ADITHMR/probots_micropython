@@ -1,0 +1,1 @@
+{"SSID": "Ponnus", "PROJECT": "02 Sensor-controlled street light", "PASSWORD": "Ariyilla"}

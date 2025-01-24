@@ -8,15 +8,9 @@ from imports import *
 
 
 def auto_street_light_fun():
-    project_configs=get_project_config_data("02 Sensor-controlled street light")  
-    sensor=set_pin_in(project_configs["sensor_pin"])
-    sensor_trig=get_trig_state(project_configs["sensor_active_state"])
-    print(f"{project_configs}")
-    
-    del project_configs
     last=0
-    while True: 
-        if sensor.value() ==sensor_trig:
+    while True:
+        if IR_LDR1.value() ==False:
             if last==0:
                 all_set_color(255,255,255)
                 disp_seq_str(["MOON"],0)
@@ -32,6 +26,4 @@ def auto_street_light_fun():
                 oled_three_data(2,2,2,"Street","Light","OFF")
                 last=0
                 one_beep()
-        time.sleep(.5)
-     
-
+        
