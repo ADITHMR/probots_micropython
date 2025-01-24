@@ -15,8 +15,8 @@ wifi_connected = False
 wifi_connection_timeout = 10  # Timeout after 10 seconds
 wifi_conn_start_time = time.time()
 
-restart = 0
 
+restart=0
 # Connect to WiFi
 def connect_wifi():
     global wifi_connected  # Ensure we're using the global variable
@@ -65,13 +65,15 @@ def handle_request(client):
         request_str = str(data)
         
         # Handle different routes
-        response = handle_route(request_str, client)
+        response = handle_route(request_str,client)
         
         if response:
             client.send(response)
-            del html_content
             print("response sent")
-            
+            if restart==1:
+                time.sleep(.5)
+                print("resetting")
+                machine.reset()
     
     except OSError as e:
         if e.errno == 113:  # ECONNABORTED
@@ -86,24 +88,25 @@ def handle_request(client):
         try:
             client.close()
             print("client close")
-            
+            if restart:
+                time.sleep(1)
+                machine.reset()
         except Exception as e:
             print("Error closing client connection:", e)
             traceback.print_exc()
 
-
-def handle_route(request_str, client):
+def handle_route(request_str,client):
     if '/hello' in request_str:
         return "HTTP/1.1 200 OK\n\nStatus: Hello There!"
     elif '/reset' in request_str:
         return restartSuccessPage()
     elif 'GET /?project' in request_str:
         datas = get_params(request_str)
+#         print(datas)
         update_project_config(datas)
         
         return successProjectPage(datas['project'].replace("+", " "))
     elif 'selectedItem=' in request_str and 'POST' in request_str:
-        
         return handle_post_selected_item(request_str)
     elif 'GET / HTTP' in request_str:
         return handle_homepage_request()
@@ -111,11 +114,10 @@ def handle_route(request_str, client):
             # Redirect to /newpage
             response = restartSuccessPage()
             client.send(response)
-            machine.reset()
+            mcahine.restart()
             return response
     else:
         return errorPage()
-
 
 def handle_post_selected_item(request_str):
     match = ure.search(r'selectedItem=([^&]+)', request_str)
@@ -134,57 +136,37 @@ def handle_post_selected_item(request_str):
             return errorPage()
     return None
 
-
 def handle_homepage_request():
     response = web_page()
+#     try:
+#         with open("project.html", 'w') as f:
+#             f.write(response)
+#         print(f"Content successfully written to file")
+#     except Exception as e:
+#         print(f"Error writing to file: {e}")
     return response
-
 
 # Start the web server
 def start_server():
-    wlan = network.WLAN(network.STA_IF)
-    ip_address = wlan.ifconfig()[0]
-    
-    # If the IP is still unknown, print an error and return
-    if ip_address == '0.0.0.0':
-        print("Error: Unable to get IP address.")
-        return
-    
-    addr = socket.getaddrinfo(ip_address, 80)[0][-1]
+    addr = socket.getaddrinfo('0.0.0.0', 80)[0][-1]
     s = socket.socket()
-    
-    try:
-        s.bind(addr)
-        s.listen(1)
-        print('Listening on', addr)
+    s.bind(addr)
+    s.listen(1)
+    print('Listening on', addr)
 
-        while True:
-            try:
-                client, addr = s.accept()
-                print('Client connected from', addr)
-                handle_request(client)
-            
-            except Exception as e:
-                print("Error accepting connection:", e)
-
-    except OSError as e:
-        print("Error binding socket:", e)
-        print("Trying with a different port...")
-        addr = (ip_address, 8080)  # Try binding to port 8080 if port 80 is in use
-        s.bind(addr)
-        s.listen(1)
-        print('Listening on', addr)
-        while True:
+    while True:
+        try:
             client, addr = s.accept()
             print('Client connected from', addr)
             handle_request(client)
-
+            
+        except Exception as e:
+            print("Error accepting connection:", e)
 
 # Main function to connect to WiFi and start the server
 def runWebServer():
     connect_wifi()  # Connect to WiFi
     start_server()  # Start the server
-
 
 runWebServer()
 

@@ -34,13 +34,14 @@ ir.error_function(print_error)
 
     
 proj=str(get_parameter("PROJECT"))  #Get selected project name from file
-print(proj)
+print(f"project_name-->{proj}")
 # disp_scroll_str(str(proj))
 
 # while True:
 try:
     connect_wifi()  # Connect to WiFi
     _thread.start_new_thread(runWebServer, ())
+#     runProject(proj)
     _thread.start_new_thread(runProject, (proj,))
     
     
