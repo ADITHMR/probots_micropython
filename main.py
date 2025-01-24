@@ -18,8 +18,8 @@ import _thread
 # runWebServer()
 if TOUCH1.value()==True and TOUCH2.value()==True:
     enable_AP()
-elif  TOUCH1.value()==True and TOUCH2.value()==False:
-    runWebServer()
+# elif  TOUCH1.value()==True and TOUCH2.value()==False:
+#     runWebServer()
     
 
 
@@ -38,11 +38,18 @@ print(f"project_name-->{proj}")
 # disp_scroll_str(str(proj))
 
 # while True:
+
+
+
 try:
+   
     connect_wifi()  # Connect to WiFi
-    _thread.start_new_thread(runWebServer, ())
-#     runProject(proj)
     _thread.start_new_thread(runProject, (proj,))
+#     start_server()
+    _thread.start_new_thread(start_server, ())
+#     _thread.start_new_thread(runProject, (proj,))
+#     runProject(proj)
+#     runProject(proj)
     
     
 except KeyboardInterrupt:

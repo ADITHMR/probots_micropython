@@ -39,36 +39,19 @@
         },
         {
             "type": "select",
-            "name": "sensor1_pin",
-            "label": "Sensor-1 Pin",
+            "name": "sensor_pin",
+            "label": "Sensor Pin",
             "options": ["2","4","5","12","13","14","15","16","17","18","19","23","26","32","34","35","36","39"],
             "required": "true",
             "defaultValue": "39"
         },
         {
-            "type": "select",
-            "name": "sensor2_pin",
-            "label": "Sensor-1 Pin",
-            "options": ["2","4","5","12","13","14","15","16","17","18","19","23","26","32","34","35","36","39"],
-            "required": "true",
-            "defaultValue": "36"
-        },
-        {
         "type": "radio",
-        "name": "sensor1_active_state",
-        "label": "Sensor-1 Output Type",
-        "options": ["Active Low", "Active HIGH"],
-        "required": "true",
-        "defaultValue":"Active Low"
-      },
-      {
-        "type": "radio",
-        "name": "sensor2_active_state",
-        "label": "Sensor-2 Output Type",
+        "name": "sensor_active_state", 
+        "label": "Sensor Output Type",
         "options": ["Active Low", "Active High"],
         "required": "true",
-        "defaultValue":"Active Low"
+        "defaultValue":"Active High"
       }
-        
         ]
 }

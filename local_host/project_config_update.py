@@ -18,10 +18,13 @@ def update_project_config(conf_list):
         
         # Update project configuration with new values
         for conf, value in conf_list.items():
+            value = value.replace("+", " ")
             if conf == 'project':
                 value = value.replace("+", " ")  # Ensure project name is correctly formatted
                 set_parameter("PROJECT",value)
+            value = value.replace("+", " ")
             project_data[conf] = value
+            
         
         # Update the main data dictionary with the updated project data
         data[project_name] = project_data
