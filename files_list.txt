@@ -51,7 +51,6 @@
      {
         "files": [
             "config.txt",
-             "do not delete.txt",
              "project_configurations.txt"
         ],
          "folder": "//samples"
@@ -69,7 +68,6 @@
              "config.txt",
              "dig_dist_measurement_file.py",
              "display.py",
-             "do not delete.txt",
              "do_not_delete.txt",
              "esp_as_AP.py",
              "file_mgr.py",
