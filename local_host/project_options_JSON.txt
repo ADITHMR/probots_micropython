@@ -8,18 +8,7 @@
             "type": "select",
             "name": "led_num",
             "label": "No. of LEDs",
-            "options": [
-                "1",
-                "2",
-                "3",
-                "4",
-                "5",
-                "6",
-                "7",
-                "8",
-                "9",
-                "10"
-            ],
+            "options": ["1","2","3","4","5","6","7","8","9","10"],
             "required": "true",
             "defaultValue": "5"
         },
@@ -27,7 +16,7 @@
             "type": "select",
             "name": "strip_led_pin",
             "label": "Led Pin",
-            "options": ["2","4","5","12","13","14","15","16","17","18","19","23","26","32","34","35","36","39"],
+            "options": ["2","4","5","12","13","14","15","16","17","18","19","23","26","32","33","34","35","36","39"],
             "required": "true",
             "defaultValue": "5"
         }
@@ -41,7 +30,7 @@
             "type": "select",
             "name": "sensor_pin",
             "label": "Sensor Pin",
-            "options": ["2","4","5","12","13","14","15","16","17","18","19","23","26","32","34","35","36","39"],
+            "options": ["2","4","5","12","13","14","15","16","17","18","19","23","26","32","33","34","35","36","39"],
             "required": "true",
             "defaultValue": "39"
         },
@@ -53,5 +42,53 @@
         "required": "true",
         "defaultValue":"Active High"
       }
-        ]
+        ],
+        "03 Self-opening gate": [
+        {
+            "type": "project",
+            "name": "03 Self-opening gate"
+        },
+        {
+            "type": "select",
+            "name": "sensor1_pin",
+            "label": "Sensor1 Pin",
+            "options": ["2","4","5","12","13","14","15","16","17","18","19","23","26","32","33","34","35","36","39"],
+            "required": "true",
+            "defaultValue": "39"
+        },
+        {
+        "type": "radio",
+        "name": "sensor1_active_state", 
+        "label": "Sensor-1 Output Type",
+        "options": ["Active Low", "Active High"],
+        "required": "true",
+        "defaultValue":"Active High"
+      },
+        {
+            "type": "select",
+            "name": "sensor2_pin",
+            "label": "Sensor-2 Pin",
+            "options": ["2","4","5","12","13","14","15","16","17","18","19","23","26","32","33","34","35","36","39"],
+            "required": "true",
+            "defaultValue": "36"
+        },
+        {
+        "type": "radio",
+        "name": "sensor2_active_state", 
+        "label": "Sensor-2 Output Type",
+        "options": ["Active Low", "Active High"],
+        "required": "true",
+        "defaultValue":"Active High"
+      },
+        {
+            "type": "select",
+            "name": "servo_pin",
+            "label": "Servo motor Pin",
+            "options": ["2","4","5","12","13","14","15","16","17","18","19","23","26","32","33","34","35","36","39"],
+            "required": "true",
+            "defaultValue": "33"
+        }
+    ]
+        
 }
+

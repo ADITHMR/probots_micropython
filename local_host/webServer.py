@@ -57,6 +57,13 @@ def connect_wifi():
 def handle_request(client):
     restart = False
     client.settimeout(10)
+   
+    gc.collect()
+    free_mem = gc.mem_free()
+    used_mem = gc.mem_alloc()
+    print(f"Used memory: {used_mem} bytes")
+    print(f"Free memory: {free_mem} bytes")
+    
     try:
 #         client.settimeout(3)  # Timeout in seconds
         data = client.recv(1024)  # Blocking call here but done synchronously
@@ -72,7 +79,12 @@ def handle_request(client):
         
         if response:
             client.send(response)
-            del html_content
+            if html_content is not None:  # Check if html_content exists before deletion
+                del html_content
+            del response
+            gc.collect()
+            
+                    
             print("response sent")
             
     
@@ -129,10 +141,10 @@ def handle_post_selected_item(request_str):
         print(f"selected project-------->{selected_option}")
         if selected_option in data:
             with open('local_host/project_page.html', 'r') as f:
-                html_content = f.read()
-            html_content = html_content.replace('{*config_list*}', json.dumps(data[selected_option]))
-            html_content = html_content.replace('{*heading*}', selected_option)
-            return html_content
+                response = f.read()
+            response = response.replace('{*config_list*}', json.dumps(data[selected_option]))
+            response = response.replace('{*heading*}', selected_option)
+            return response
         else:
             return errorPage()
     return None
