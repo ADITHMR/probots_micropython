@@ -1,9 +1,13 @@
 from imports import *
+from machine import PWM
 
-def buzzer_on():
-    BUZZER.off()
+buzzer = PWM(BUZZER, freq=1000, duty=512)  
+def buzzer_on(frequency=1000, duty_cycle=512):
+    buzzer.freq(frequency)    # Set the frequency of the buzzer
+    buzzer.duty(duty_cycle)   # Set the duty cycle (controls volume)
+    
 def buzzer_off():
-    BUZZER.on()   
+    buzzer.duty(0)  # Set the duty cycle to 0, turning the buzzer off
 
 def one_beep():
     buzzer_on()
