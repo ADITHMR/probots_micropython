@@ -127,6 +127,29 @@
         "defaultValue":"Active Low"
       }
        
+    ],
+    "05 Automatic fire detection system": [
+        {
+            "type": "project",
+            "name": "05 Automatic fire detection system"
+        },
+        {
+            "type": "select",
+            "name": "sensor_pin",
+            "label": "Fire Sensor Pin",
+            "options": ["2","4","5","12","13","14","15","16","17","18","19","23","26","32","33","34","35","36","39"],
+            "required": "true",
+            "defaultValue": "36"
+        },
+        {
+        "type": "radio",
+        "name": "sensor2_active_state", 
+        "label": "Fire Sensor Output Type    ",
+        "options": ["Active Low", "Active High"],
+        "required": "true",
+        "defaultValue":"Active Low"
+      }
+        
     ]
         
 }
