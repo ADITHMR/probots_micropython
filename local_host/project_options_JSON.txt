@@ -40,7 +40,7 @@
         "label": "Sensor Output Type",
         "options": ["Active Low", "Active High"],
         "required": "true",
-        "defaultValue":"Active High"
+        "defaultValue":"Active Low"
       }
         ],
         "03 Self-opening gate": [
@@ -62,7 +62,7 @@
         "label": "Sensor-1 Output Type",
         "options": ["Active Low", "Active High"],
         "required": "true",
-        "defaultValue":"Active High"
+        "defaultValue":"Active Low"
       },
         {
             "type": "select",
@@ -78,7 +78,7 @@
         "label": "Sensor-2 Output Type",
         "options": ["Active Low", "Active High"],
         "required": "true",
-        "defaultValue":"Active High"
+        "defaultValue":"Active Low"
       },
         {
             "type": "select",
@@ -108,7 +108,7 @@
         "label": "Sensor-1 Output Type",
         "options": ["Active Low", "Active High"],
         "required": "true",
-        "defaultValue":"Active High"
+        "defaultValue":"Active Low"
       },
         {
             "type": "select",
@@ -124,7 +124,7 @@
         "label": "Sensor-2 Output Type",
         "options": ["Active Low", "Active High"],
         "required": "true",
-        "defaultValue":"Active High"
+        "defaultValue":"Active Low"
       }
        
     ]
