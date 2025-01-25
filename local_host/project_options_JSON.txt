@@ -139,7 +139,7 @@
             "label": "Fire Sensor Pin",
             "options": ["2","4","5","12","13","14","15","16","17","18","19","23","26","32","33","34","35","36","39"],
             "required": "true",
-            "defaultValue": "36"
+            "defaultValue": "35"
         },
         {
         "type": "radio",
@@ -150,7 +150,43 @@
         "defaultValue":"Active Low"
       }
         
-    ]
+    ],
+    "06 Temperature measurement device": [
+        {
+            "type": "project",
+            "name": "06 Temperature measurement device"
+        },
+        {
+            "type": "select",
+            "name": "sensor_pin",
+            "label": "LM35 Sensor Pin",
+            "options": ["2","4","12","13","14","15","26","32","33","34","35","36","39"],
+            "required": "true",
+            "defaultValue": "34"
+        }
+        ],
+        "07 Digital distance measurement": [
+        {
+            "type": "project",
+            "name": "07 Digital distance measurement"
+        },
+        {
+            "type": "select",
+            "name": "trig_pin",
+            "label": "Trigger Pin",
+            "options": ["2","4","5","12","13","14","15","16","17","18","19","23","26","32","33","34","35"],
+            "required": "true",
+            "defaultValue": "16"
+        },
+        {
+            "type": "select",
+            "name": "echo_pin",
+            "label": "Echo Pin",
+            "options": ["2","4","5","12","13","14","15","16","17","18","19","23","26","32","33","34","35","36","39"],
+            "required": "true",
+            "defaultValue": "17"
+        }
+        ] 
         
 }
 

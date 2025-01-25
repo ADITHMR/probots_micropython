@@ -8,6 +8,7 @@ def buzzer_on(frequency=1000, duty_cycle=512):
     
 def buzzer_off():
     buzzer.duty(0)  # Set the duty cycle to 0, turning the buzzer off
+buzzer_off()
 
 def one_beep():
     buzzer_on()

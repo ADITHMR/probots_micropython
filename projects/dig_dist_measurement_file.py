@@ -2,12 +2,17 @@ import machine
 import time
 from imports import *
 
-# Pin configuration
-trigger_pin = machine.Pin(16, machine.Pin.OUT)  # Trigger pin (GPIO13)
-echo_pin = machine.Pin(17, machine.Pin.IN)     # Echo pin (GPIO12)
+
 
 # Function to measure distance
 def measure_distance():
+    
+   
+    
+    pulse_start=0
+    pulse_end=0
+    pulse_duration=0
+    
     # Send a 10us pulse to the Trigger pin to start the measurement
     trigger_pin.on()
     time.sleep_us(10)  # Delay for 10 microseconds
@@ -31,6 +36,12 @@ def measure_distance():
 
 # Main loop
 def dig_dist_measurement_fun():
+    
+    project_configs=get_project_config_data("07 Digital distance measurement")
+    global trigger_pin,echo_pin
+    trigger_pin=set_pin_out(project_configs["trig_pin"])
+    echo_pin=set_pin_in(project_configs["echo_pin"])
+    
     while True:
         dist = int(measure_distance())  # Measure the distance
         if dist>100:
