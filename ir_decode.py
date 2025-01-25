@@ -15,14 +15,14 @@ def callback(data, addr, ctrl):
         pass
     else:
         
-        
-        if decodeKeyValue(data)>-1 or decodeKeyValue(data)<10:
+        ir_data=decodeKeyValue(data)
+        if ir_data>-1 and ir_data<10:
             global IR_DATA
-            IR_DATA=decodeKeyValue(data)
+            IR_DATA=ir_data
             print(f"mode={get_IR_data()}")
             
-        oled_log(f"IR-> {decodeKeyValue(data)}")
-        print(decodeKeyValue(data))
+            oled_log(f"IR-> {decodeKeyValue(data)}")
+            print(decodeKeyValue(data))
         
             
            

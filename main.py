@@ -42,14 +42,12 @@ print(f"project_name-->{proj}")
 
 
 try:
+#     pass
    
     connect_wifi()  # Connect to WiFi
     _thread.start_new_thread(runProject, (proj,))
-#     start_server()
     _thread.start_new_thread(start_server, ())
-#     _thread.start_new_thread(runProject, (proj,))
-#     runProject(proj)
-#     runProject(proj)
+
     
     
 except KeyboardInterrupt:

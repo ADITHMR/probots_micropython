@@ -10,7 +10,7 @@ import ure
 import traceback
 from display import *
 import sys
-
+from ota_update import *
 
 # Global variable for WiFi connection status
 wifi_connected = False
@@ -73,6 +73,7 @@ def handle_request(client):
             return
         
         request_str = str(data)
+        print(request_str)
         
         # Handle different routes
         response = handle_route(request_str, client)
@@ -118,8 +119,9 @@ def handle_route(request_str, client):
         
         return successProjectPage(datas['project'].replace("+", " "))
     elif 'selectedItem=' in request_str and 'POST' in request_str:
-        
         return handle_post_selected_item(request_str)
+    elif 'POST /update HTTP' in request_str:
+        return handle_firmware_update()
     elif 'GET / HTTP' in request_str:
         return handle_homepage_request()
     elif '/reset' in request_str:
@@ -130,7 +132,12 @@ def handle_route(request_str, client):
             return response
     else:
         return errorPage()
-
+def handle_firmware_update():
+    response=None
+    with open('local_host/update_firmware.html', 'r') as f:
+                response = f.read()
+    return response
+    
 
 def handle_post_selected_item(request_str):
     match = ure.search(r'selectedItem=([^&]+)', request_str)

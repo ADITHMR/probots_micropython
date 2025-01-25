@@ -28,6 +28,7 @@
              "project_options_JSON.txt",
              "project_page.html",
              "test_web_page.py",
+             "update_firmware.html",
              "webServer.py",
              "web_page.py",
              "web_page_AP.py"
