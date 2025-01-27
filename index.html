@@ -20,125 +20,103 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 100vh;
-      flex-direction: column;
+      height: 100vh;
     }
 
     .container {
-        text-align: center;
-      display: flex;
-      justify-content: space-between; /* Align form and image side by side */
       background-color: #1e1e1e;
       border-radius: 10px;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
       padding: 20px;
-      width: 90%; /* Adjust the width of the container */
-      flex-wrap: wrap; /* Allow wrapping on small screens */
+      text-align: center;
+      max-width: 80%;
+      display: flex;
+      flex-direction: row; /* Make the container a row flexbox */
+      align-items: center;
+      justify-content: space-between;
     }
 
-    .form-container {
-      flex: 1; /* Allow the form to take up the remaining space */
-      margin-right: 20px; /* Add space between the form and image */
-    }
-
-    .form-container h2 {
+    h2 {
       color: #03a9f4;
     }
 
-    .form-container button {
+    button {
       font-size: 18px;
       padding: 12px 24px;
       margin: 5px;
     }
 
-    .form-container button.btn-success {
+    button.btn-success {
       background-color: #4caf50;
     }
 
-    .form-container button.btn-danger {
+    button.btn-danger {
       background-color: #f44336;
     }
 
-    .form-container button.btn-warning {
+    button.btn-warning {
       background-color: #ff9800;
     }
 
-    .form-container p {
+    p {
       font-size: 20px;
       color: #ccc;
     }
 
-    /* Responsive image */
-    #image {
-      max-width: 100%; /* Image width */
-      max-height: 60vh; /* Make image responsive to the height of the viewport */
-      height: auto;
-      border-radius: 10px;
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 50%; /* Make sure it takes up half the container's width */
     }
 
-    /* Footer styling */
-    footer {
-      margin-top: 20px;
-      padding: 20px;
-      text-align: center;
-      background-color: #1e1e1e;
+    .form-select,
+    .btn {
       width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      max-width: 300px;
     }
 
-    /* Media query for mobile screens */
-    @media (max-width: 768px) {
-      .container {
-        flex-direction: column; /* Stack form and image vertically on smaller screens */
-        align-items: center;
-      }
+    /* Align the image to the right side and ensure it's 100% of the parent width */
+    .image-container {
+      display: flex;
+      justify-content: flex-end; /* Align image to the right */
+      width: 50%; /* Ensure it takes the other half of the container */
+      margin-top: 20px; /* Add some spacing between the button and the image */
+    }
 
-      .form-container {
-        margin-right: 0; /* Remove space between form and image on small screens */
-        margin-bottom: 20px; /* Add some space below the form */
-      }
+    #image {
+      width: 100%; /* Make the image take the full width of its parent container */
+      height: auto; /* Keep aspect ratio intact */
     }
   </style>
 </head>
 
 <body>
   <div class="container">
-    <div class="form-container">
-      <h2 class="mb-4">Probots</h2>
-      <form method="POST">
+    <form id="projectForm" action="/submit" method="GET">
+      <div class="form-container">
+        <h2 class="mb-4">Probots</h2>
+
         <div class="mb-3">
           <label for="exampleDropdown" class="form-label">Powered By: Prosol Technologies.</label>
-
-          <!-- Dropdown for selecting project -->
-          {html_dropdown}
+          {*dropdown*}
         </div>
         <button type="submit" class="btn btn-primary">Next</button>
-      </form>
-    </div>
+      </div>
 
-    <!-- Image container on the right -->
-    <div class="image-container">
-      <img id="image" src="https://raw.githubusercontent.com/ADITHMR/probot_Images/refs/heads/main/01FunwithLEDLights.jpeg" alt="Selected Image">
-    </div>
-  </div> 
-
-  <!-- Footer Section -->
-  <footer>
-    <!-- Button that will trigger the firmware update POST request -->
-    <form method="POST" action="/update">
-      <!-- Hidden input to specify the action -->
-      <input type="hidden" name="action" value="update_firmware" />
-      <button type="submit" class="btn btn-warning">Update Firmware</button>
+      <!-- Image Container aligned to the right with 100% width for the image -->
+      <div class="image-container">
+        <img id="image" src="https://raw.githubusercontent.com/ADITHMR/probot_Images/refs/heads/main/01FunwithLEDLights.jpeg" alt="Selected Image">
+      </div>
     </form>
-  </footer>
+  </div>
 
   <script>
-    document.getElementById('mydropdown').addEventListener("change", function() {
+    document.getElementById('exampleDropdown').addEventListener("change", function() {
       var selectedValue = this.value;
-      var image_name = selectedValue.replace(/\s+/g, '');  // Remove spaces from selected value
-      var imgSrc = "https://raw.githubusercontent.com/ADITHMR/probot_Images/refs/heads/main/" + image_name + ".jpeg";
-      document.getElementById('image').src = imgSrc;  // Update the image source
+      var imageName = selectedValue.replace(/\s+/g, '');
+      var imgSrc = "https://raw.githubusercontent.com/ADITHMR/probot_Images/refs/heads/main/"+imageName+".jpeg";
+      document.getElementById('image').src = imgSrc;
     });
   </script>
 
