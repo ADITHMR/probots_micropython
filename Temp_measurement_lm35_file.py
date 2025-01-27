@@ -3,6 +3,7 @@ import time
 from imports import *
 
 # Create ADC object on GPIO34 (or any ADC-capable pin)
+
 adc = ADC(Pin(34))  # Use an appropriate GPIO pin
 adc.atten(ADC.ATTN_0DB)  # Set the attenuation to 0 dB for 0-1V range (you can use others depending on your needs)
 adc.width(ADC.WIDTH_12BIT)  # Set the resolution (12 bits is typical for ESP32)
@@ -21,6 +22,12 @@ def read_temperature():
 # Main loop
 def Temp_measurement_lm35_fun():
     
+    project_configs=get_project_config_data("06 Temperature measurement device")  
+    fire_sensor_pin=int(project_configs["sensor_pin"])
+    
+    adc = ADC(Pin(fire_sensor_pin))  # Use an appropriate GPIO pin
+    adc.atten(ADC.ATTN_0DB)  # Set the attenuation to 0 dB for 0-1V range (you can use others depending on your needs)
+    adc.width(ADC.WIDTH_12BIT)  # Set the resolution (12 bits is typical for ESP32)
     while True:
         temp = int(read_temperature())
         print("Temperature: {:.2f} °C".format(temp))
