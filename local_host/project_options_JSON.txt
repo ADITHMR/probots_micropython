@@ -37,7 +37,7 @@
             {
             "type": "radio",
             "name": "sensor_active_state", 
-            "label": "Sensor Output Type",
+            "label": "Sensor Output Type ",
             "options": ["Active Low", "Active High"],
             "required": "true",
             "defaultValue":"Active Low"
@@ -59,7 +59,7 @@
             {
             "type": "radio",
             "name": "sensor1_active_state", 
-            "label": "Sensor-1 Output Type",
+            "label": "Sensor-1 Output Type ",
             "options": ["Active Low", "Active High"],
             "required": "true",
             "defaultValue":"Active Low"
@@ -75,7 +75,7 @@
             {
             "type": "radio",
             "name": "sensor2_active_state", 
-            "label": "Sensor-2 Output Type",
+            "label": "Sensor-2 Output Type ",
             "options": ["Active Low", "Active High"],
             "required": "true",
             "defaultValue":"Active Low"
@@ -105,7 +105,7 @@
             {
             "type": "radio",
             "name": "sensor1_active_state", 
-            "label": "Sensor-1 Output Type",
+            "label": "Sensor-1 Output Type ",
             "options": ["Active Low", "Active High"],
             "required": "true",
             "defaultValue":"Active Low"
@@ -121,7 +121,7 @@
             {
             "type": "radio",
             "name": "sensor2_active_state", 
-            "label": "Sensor-2 Output Type",
+            "label": "Sensor-2 Output Type ",
             "options": ["Active Low", "Active High"],
             "required": "true",
             "defaultValue":"Active Low"
@@ -144,7 +144,7 @@
             {
             "type": "radio",
             "name": "sensor_active_state", 
-            "label": "Fire Sensor Output Type    ",
+            "label": "Fire Sensor Output Type ",
             "options": ["Active Low", "Active High"],
             "required": "true",
             "defaultValue":"Active Low"
@@ -203,7 +203,7 @@
             {
             "type": "radio",
             "name": "sensor_active_state", 
-            "label": "Fire Sensor Output Type    ",
+            "label": "Gas Sensor Output Type ",
             "options": ["Active Low", "Active High"],
             "required": "true",
             "defaultValue":"Active Low"

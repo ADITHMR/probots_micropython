@@ -37,5 +37,12 @@
         "project": "05 Automatic fire detection system",
         "sensor_active_state": "Active Low",
         "sensor_pin": "35"
+    },
+    "08 Automatic gas leak detecion": {
+        "project": "08 Automatic gas leak detecion",
+        "sensor_active_state": "Active Low",
+        "sensor_pin": "35",
+        "fan_pin_A":"18",
+        "fan_pin_B":"19"
     }
 }

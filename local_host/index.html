@@ -11,6 +11,7 @@
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
   <style>
+    /* Body and Global Styles */
     body {
       background-color: #070303;
       color: #ffffff;
@@ -18,37 +19,51 @@
       margin: 0;
       padding: 0;
       display: flex;
-      align-items: center;
+      align-items: flex-start; /* Align content at the top */
       justify-content: center;
       min-height: 100vh;
       flex-direction: column;
     }
 
+    /* Container Styles */
     .container {
-        text-align: center;
+      text-align: center;
       display: flex;
-      justify-content: space-between; /* Align form and image side by side */
+      justify-content: space-between;
+      align-items: center;
       background-color: #1e1e1e;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      width: 90%; /* Adjust the width of the container */
-      flex-wrap: wrap; /* Allow wrapping on small screens */
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+      padding: 30px;
+      width: 90%;
+      flex-wrap: wrap;
+      flex-grow: 1; /* Allow this container to grow and push footer down */
     }
 
+    /* Form Styles */
     .form-container {
-      flex: 1; /* Allow the form to take up the remaining space */
-      margin-right: 20px; /* Add space between the form and image */
+      flex: 1;
+      margin-right: 20px;
+      padding: 20px;
+      text-align: left;
     }
 
     .form-container h2 {
       color: #03a9f4;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
     }
 
     .form-container button {
       font-size: 18px;
       padding: 12px 24px;
-      margin: 5px;
+      margin: 10px;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    .form-container button:hover {
+      transform: scale(1.05);
     }
 
     .form-container button.btn-success {
@@ -64,19 +79,21 @@
     }
 
     .form-container p {
-      font-size: 20px;
+      font-size: 1.2rem;
       color: #ccc;
     }
 
-    /* Responsive image */
+  
+    /* Responsive Image Styles */
     #image {
-      max-width: 100%; /* Image width */
-      max-height: 60vh; /* Make image responsive to the height of the viewport */
-      height: auto;
+      max-width: 100%;
+      max-height: 100vh; /* Limit the height to the viewport height */
+      object-fit: contain; /* Ensures the image fits without distortion */
       border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
     }
 
-    /* Footer styling */
+    /* Footer Styling */
     footer {
       margin-top: 20px;
       padding: 20px;
@@ -84,19 +101,29 @@
       background-color: #1e1e1e;
       width: 100%;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    }
+
+    footer form button {
+      padding: 12px 24px;
+      border-radius: 5px;
+      font-size: 18px;
     }
 
     /* Media query for mobile screens */
     @media (max-width: 768px) {
       .container {
-        flex-direction: column; /* Stack form and image vertically on smaller screens */
+        flex-direction: column;
         align-items: center;
       }
 
       .form-container {
-        margin-right: 0; /* Remove space between form and image on small screens */
-        margin-bottom: 20px; /* Add some space below the form */
+        margin-right: 0;
+        margin-bottom: 20px;
+      }
+
+      footer {
+        margin-top: 30px;
       }
     }
   </style>
@@ -105,11 +132,10 @@
 <body>
   <div class="container">
     <div class="form-container">
-      <h2 class="mb-4">Probots</h2>
+      <h2 class="mb-4">ESP32 Control Panel</h2>
       <form method="POST">
         <div class="mb-3">
           <label for="exampleDropdown" class="form-label">Powered By: Prosol Technologies.</label>
-
           <!-- Dropdown for selecting project -->
           {html_dropdown}
         </div>
@@ -121,24 +147,23 @@
     <div class="image-container">
       <img id="image" src="https://raw.githubusercontent.com/ADITHMR/probot_Images/refs/heads/main/01FunwithLEDLights.jpeg" alt="Selected Image">
     </div>
-  </div> 
+  </div>
 
   <!-- Footer Section -->
   <footer>
     <!-- Button that will trigger the firmware update POST request -->
     <form method="POST" action="/update">
-      <!-- Hidden input to specify the action -->
       <input type="hidden" name="action" value="update_firmware" />
       <button type="submit" class="btn btn-warning">Update Firmware</button>
     </form>
   </footer>
 
   <script>
-    document.getElementById('mydropdown').addEventListener("change", function() {
+    document.getElementById('mydropdown').addEventListener("change", function () {
       var selectedValue = this.value;
-      var image_name = selectedValue.replace(/\s+/g, '');  // Remove spaces from selected value
+      var image_name = selectedValue.replace(/\s+/g, ''); // Remove spaces from selected value
       var imgSrc = "https://raw.githubusercontent.com/ADITHMR/probot_Images/refs/heads/main/" + image_name + ".jpeg";
-      document.getElementById('image').src = imgSrc;  // Update the image source
+      document.getElementById('image').src = imgSrc; // Update the image source
     });
   </script>
 

@@ -10,7 +10,7 @@ import ure
 import traceback
 from display import *
 import sys
-from ota_update import *
+# from ota_update import *
 
 # Global variable for WiFi connection status
 wifi_connected = False
@@ -211,40 +211,3 @@ def runWebServer():
 
 
 
-
-
-
-
-def successProjectPage(data):
-    success_page=website_style+f"""
-                          <body>
-                            <div class="container"><h1>Project Selection Successful!</h1>
-                            <p>You selected: {data}</p>
-                            
-                            <a>Restart the device.</a>
-                        </div>
-                          </body>
-                        </html>
-                       """
-    return success_page
-def errorPage():
-    error_page=website_style+f"""
-                          <body>
-                            <div class="container"><h1>ERROR!</h1>
-                
-                            
-                            <a href="/reset">Click here to restart the device.</a>
-                        </div>
-                          </body>
-                        </html>
-                       """
-    return error_page
-def restartSuccessPage():
-    error_page=website_style+f"""
-                          <body>
-                            <div class="container"><h1>Restarted Successfully!</h1>
-                        </div>
-                          </body>
-                        </html>
-                       """
-    return error_page

@@ -20,7 +20,7 @@ def runProject(project_name):
     disp_seq_str([proj],1)
     
     if(project_name=="01 Fun with LED Lights"):
-        fun_with_led_fun()
+        led_strip_fun()
         
     elif(project_name=="02 Sensor-controlled street light"):
         auto_street_light_fun()

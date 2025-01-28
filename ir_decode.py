@@ -16,7 +16,7 @@ def callback(data, addr, ctrl):
     else:
         
         ir_data=decodeKeyValue(data)
-        if ir_data>-1 and ir_data<10:
+        if ir_data>-1 and ir_data<19:
             global IR_DATA
             IR_DATA=ir_data
             print(f"mode={get_IR_data()}")
@@ -50,26 +50,26 @@ def decodeKeyValue(data):
     if data == 0x4A:
         return 9
     if data == 0x09:
-        return "EQ"
+        return 18#"EQ"
     if data == 0x15:
-        return "+"
+        return 16#"+"
     if data == 0x7:
-        return "+"
+        return 17#"+"
     if data == 0x0D:
         return "U/SD"
     if data == 0x19:
         return "CYCLE"
     if data == 0x44:
-        return "BACKWARD"
+        return 13#"BACKWARD"
     if data == 0x43:
-        return "PLAY/PAUSE"
+        return 15#"PLAY/PAUSE"
     if data == 0x40:
-        return "FORWARD"
+        return 14#"FORWARD"
     if data == 0x45:
-        return "CH-"
+        return 10#"CH-"
     if data == 0x47:
-        return "CH+"
+        return 12#"CH+"
     if data == 0x46:
-        return "CH"
+        return 11#"CH"
     return "ERROR"
 

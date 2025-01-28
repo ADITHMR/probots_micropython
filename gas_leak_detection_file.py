@@ -11,12 +11,12 @@ def gas_leak_detection_fun():
     motor_pin_B=set_pin_out(project_configs["fan_pin_B"])
     
     while True:
-        motor_pin_A.value(0)
-        motor_pin_B.value(0)
+        motor_pin_A..value(0)
+        motor_pin_B..value(0)
         while(gas_sensor.value()==gas_sensor_trig):
             oled_three_data(2,2,2,"CAUTION","Gas Leak","Detected")
             disp_seq_str(["FIRE"],0)
-            motor_pin_B.value(1)
+            motor_pin_B..value(1)
             buzzer_on()
             set_color_for(3,255, 0, 0)
             time.sleep(.6)
