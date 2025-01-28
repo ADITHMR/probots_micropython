@@ -69,7 +69,7 @@ def handle_request(client):
             print("Client closed the connection")
             return
 
-#         print('Request:', request_str)
+        print('Request:', request_str)
 
         # Handle different routes
         if '/hello' in request_str:
@@ -79,42 +79,20 @@ def handle_request(client):
             # Redirect to /newpage
             response = restartSuccessPage()
             restart=1
-        elif 'GET /?project_name' in request_str:
-            datas=get_params(request_str)
-            print(datas)
-            
-        elif 'selectedItem=' and 'POST' in request_str:
+        elif 'POST' in request_str:
             # Simple regex to find the selectedOption value
             match=0
             selected_option=0
             print("level-1")
             match = ure.search(r'selectedItem=([^&]+)', request_str)
-            
-            print(f"match={match.group(1)}")
+            print(f"match={match}")
             if match!=None:
-                selected_option = match.group(1).replace("'","")
-                selected_option = selected_option.replace("+"," ")
-#                 
-                with open('projects/project_configurations.txt', 'r') as f:
-                    data= json.load(f)
-                    print(data)
-                    if selected_option in data:
-                        print("**************got data*****************")
-                        with open('local_host/project_page.html', 'r') as f:
-                            html_content = f.read()
-                        html_content = html_content.replace('{*config_list*}', json.dumps(data[selected_option]))
-                        html_content=html_content.replace('{*heading*}',selected_option)
-                        response=html_content
-#                         print(response)
-                    else:
-                        response=errorPage()
-                
-                
-#             result=save_data(selected_option,"POST")
-#             if result!= 0:
-#                 response = successProjectPage(result)
-#             else:
-#                 response=errorPage()
+                selected_option = match.group(1)
+            result=save_data(selected_option,"POST")
+            if result!= 0:
+                response = successProjectPage(result)
+            else:
+                response=errorPage()
 
                 
             
@@ -212,7 +190,6 @@ def save_data(str_data,req_type):
         try:
             data=str_data
             data=data.replace("+", " ")
-            
             print('Content- '+ data )
             set_parameter("PROJECT",data)
             print("Success")
@@ -222,21 +199,5 @@ def save_data(str_data,req_type):
             return 0
                             
 
-def get_params(str_data):
-    params={}
-    try:
-        query_string = str_data.split("GET /")[1].split(" HTTP")[0]
-        if "?" in query_string:
-            query_string = query_string.split("?")[1]
-            pairs = query_string.split("&")
-            for pair in pairs:
-                key, value = pair.split("=")
-                params[key] = value
-            return params
-    except Exception as e:
-            print(f"An error occurred: {e}")
-            return 0
 
 
-connect_wifi()
-runWebServer()
