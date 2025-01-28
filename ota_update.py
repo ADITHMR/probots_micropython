@@ -3,10 +3,12 @@ import urequests
 import ujson
 import time
 import os
+import machine
 try:
     from oled import *
 except Exception as e:
         print("Error:", e)
+led = machine.Pin(2, machine.Pin.OUT)
 
 # Wi-Fi Connection Function
 def connect_wifi(ssid, password):
@@ -93,11 +95,17 @@ def ota_update():
 
     # Fetch the list of files to update from GitHub
     file_folders  = get_github_file_list(owner, repo, path)
+    file_count = 0
+
+# Loop through each folder entry in the data
+    for folder in file_folders:
+        # Add the number of files in the current folder
+        file_count += len(folder["files"])
 
     if not file_folders:
         print("No files to update.")
         return
-
+    finished_files=0
     for folder_data in file_folders:
         folder = folder_data["folder"]
         files = folder_data["files"]
@@ -105,6 +113,8 @@ def ota_update():
             # For each folder, get the list of files from GitHub and download them
         for filename in files:
             try:
+                
+                    
                 from oled import oled_log
                 oled_log(f"<< {filename}")
             except Exception as e:
@@ -117,7 +127,13 @@ def ota_update():
             else:
                 url+=folder.strip('/')+"/"+filename
             print(url)
-
+            
+            
+            led.value(not led.value())
             # Download each file and save it in the corresponding folder
             download_file(url, folder.strip('/'), filename)# Run the OTA update process
+            finished_files+=1
+            global progress
+            progress=int((finished_files / file_count) * 100) 
+            print(f"progress={progress}")
 ota_update()

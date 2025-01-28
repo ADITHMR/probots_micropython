@@ -1,5 +1,5 @@
 from file_mgr import *
-from web_page import *
+from local_host.web_page import *
 from display import *
 import ure  # MicroPython version of regular expressions
 import socket
