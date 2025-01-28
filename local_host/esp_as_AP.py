@@ -38,7 +38,7 @@ def enable_AP():
     ap = network.WLAN(network.AP_IF)
     ap.active(True)
     ap.config(essid=ssid, password=password)
-    ap.ifconfig(('192.168.1.1', '255.255.255.0', '192.168.1.1', '192.168.1.1'))
+    ap.ifconfig(('192.168.10.1', '255.255.255.0', '192.168.1.1', '192.168.1.1'))
     
     disp_scroll_str('IP Address -192-168-1-1')
     
