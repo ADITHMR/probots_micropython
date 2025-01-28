@@ -14,6 +14,7 @@
         "led_num": "5",
         "strip_led_pin": "5"
     },
+    
     "03 Self-opening gate": {
         "sensor2_active_state": "Active High",
         "sensor1_active_state": "Active High",
