@@ -136,4 +136,4 @@ def ota_update():
             global progress
             progress=int((finished_files / file_count) * 100) 
             print(f"progress={progress}")
-# ota_update()
+ota_update()

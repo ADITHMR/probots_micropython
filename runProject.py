@@ -7,6 +7,7 @@ from projects.Temp_measurement_lm35_file import  *
 from projects.automatic_door_file import  *
 from projects.dig_dist_measurement_file import  *
 from projects.automatic_fire_detection_file import *
+from projects.gas_leak_detection_file import *
 import _thread
 
 from display import *
@@ -41,6 +42,8 @@ def runProject(project_name):
         
     elif(project_name=="07 Digital distance measurement"):
         dig_dist_measurement_fun()
+    elif(project_name=="08 Automatic gas leak detecion"):
+        gas_leak_detection_fun()
         
     elif(project_name=="08 Touchless dustbin"):
         led.on();
