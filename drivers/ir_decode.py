@@ -1,5 +1,5 @@
-from file_mgr import  *
-from oled import *
+from process.file_mgr import  *
+from drivers.oled import *
 
 
 IR_DATA=0

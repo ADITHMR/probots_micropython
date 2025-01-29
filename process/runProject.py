@@ -10,8 +10,8 @@ from projects.automatic_fire_detection_file import *
 from projects.gas_leak_detection_file import *
 import _thread
 
-from display import *
-from oled import *
+from drivers.display import *
+from drivers.oled import *
 
 def runProject(project_name):
     

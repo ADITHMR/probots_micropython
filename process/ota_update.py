@@ -5,7 +5,7 @@ import time
 import os
 import machine
 try:
-    from oled import *
+    from drivers.oled import *
 except Exception as e:
         print("Error:", e)
 led = machine.Pin(2, machine.Pin.OUT)
@@ -115,7 +115,7 @@ def ota_update():
             try:
                 
                     
-                from oled import oled_log
+                from drivers.oled import oled_log
                 oled_log(f"<< {filename}")
             except Exception as e:
                 

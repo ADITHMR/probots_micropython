@@ -1,5 +1,6 @@
 
-from imports import *
+
+import neopixel
 
 num_pixels = 5
 np = neopixel.NeoPixel(LED_STRIP, num_pixels)

@@ -2,13 +2,13 @@
 
 import socket
 import network
-from oled import *
+from drivers.oled import *
 from local_host.project_config_update import *
-from file_mgr import *
+from process.file_mgr import *
 from local_host.web_page import *
 import ure
 import traceback
-from display import *
+from drivers.display import *
 import sys
 # from ota_update import *
 

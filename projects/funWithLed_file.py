@@ -5,7 +5,7 @@ import neopixel
 import time
 import random
 from imports import *
-from ir_decode import get_IR_data
+from drivers.ir_decode import get_IR_data
 
 # from ir_rx.nec import NEC_8
 # ir = NEC_8(pin_ir, callback) # Instantiate the NEC_8 receiver

@@ -7,11 +7,11 @@ import time
 from local_host.esp_as_AP import *
 from pin_mapping import *
 from local_host.webServer import *
-from display import *
-from ir_decode import *
+from drivers.display import *
+from drivers.ir_decode import *
 from ir_rx.nec import NEC_8
 from ir_rx.print_error import print_error
-from runProject import *
+from process.runProject import *
 import _thread
 
 

@@ -1,8 +1,8 @@
-from local_host.web_page_AP import *
-from file_mgr import *
-from utils import *
+from local_host.web_page_AP import web_page_AP
+from process.file_mgr import set_parameter
+from utils import url_decode
 from time import sleep
-from display import *
+from drivers.display import disp_scroll_str
 
 import json
 try:
@@ -18,7 +18,7 @@ import ubinascii
 import gc
 gc.collect()
 
-from oled import *
+from drivers.oled import *
 
 
 REPLACE_FOR_SPACE="@@!##"
@@ -26,12 +26,9 @@ def enable_AP():
     oled_log('Access point')
     oled_log('Please wait...')
     disp_scroll_str('Access point')
-    
-    
+
     sleep(1)
-    
-    
-    
+
     ssid = 'Prosol AP'
     password = '12341234'
 
@@ -123,4 +120,4 @@ def enable_AP():
 #           set_parameter("PASSWORD",str(password))
           
 
-   
+enable_AP()   
