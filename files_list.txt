@@ -1,8 +1,37 @@
 [
     {
         "files": [
-            "asdf",
-             "buzzer.py",
+            
+        ],
+         "folder": "//activity1"
+    },
+     {
+        "files": [
+            
+        ],
+         "folder": "//activity2"
+    },
+     {
+        "files": [
+            
+        ],
+         "folder": "//activity3"
+    },
+     {
+        "files": [
+            
+        ],
+         "folder": "//activity4"
+    },
+     {
+        "files": [
+            
+        ],
+         "folder": "//activity5"
+    },
+     {
+        "files": [
+            "buzzer.py",
              "display.py",
              "ir_decode.py",
              "led_strip.py",
