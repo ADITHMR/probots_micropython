@@ -10,6 +10,7 @@ import ure
 import traceback
 from drivers.display import *
 import sys
+import gc
 # from ota_update import *
 
 # Global variable for WiFi connection status
@@ -208,6 +209,5 @@ def start_server():
 def runWebServer():
     connect_wifi()  # Connect to WiFi
     start_server()  # Start the server
-
 
 

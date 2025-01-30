@@ -3,7 +3,6 @@ from process.file_mgr import set_parameter
 from utils import url_decode
 from time import sleep
 from drivers.display import disp_scroll_str
-
 import json
 try:
   import usocket as socket
@@ -119,5 +118,4 @@ def enable_AP():
 #           set_parameter("SSID",str(ssid))
 #           set_parameter("PASSWORD",str(password))
           
-
-enable_AP()   
+  

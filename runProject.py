@@ -1,6 +1,6 @@
 from pin_mapping import *
 import time
-from projects.funWithLed_file import  * #Import all project files here
+from projects.funWithLed_file import  led_strip_fun
 from projects.auto_street_light_file import  * #Import all project files here
 from projects.student_counter_file import  *
 from projects.Temp_measurement_lm35_file import  *
@@ -12,7 +12,6 @@ import _thread
 
 from drivers.display import *
 from drivers.oled import *
-
 def runProject(project_name):
     
     proj=f"P{project_name[:2]}"

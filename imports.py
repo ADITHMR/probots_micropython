@@ -21,7 +21,7 @@ from drivers.buzzer import *
 from drivers.led_strip import *
 from utils import *
 
-from process.runProject import *
+
 
 import ure  # MicroPython version of regular expressions
 import socket

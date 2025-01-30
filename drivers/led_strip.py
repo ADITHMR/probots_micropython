@@ -1,6 +1,7 @@
 
 
 import neopixel
+from pin_mapping import LED_STRIP
 
 num_pixels = 5
 np = neopixel.NeoPixel(LED_STRIP, num_pixels)
