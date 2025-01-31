@@ -1,10 +1,14 @@
+# ********************AutoGate: Self opening gate**********************
+
+
 from machine import Pin, PWM
 import time
 from process.file_mgr import get_project_config_data
 from pin_mapping import set_pin_in,get_trig_state
 from drivers.display import disp_seq_str
-from drivers.oled import oled_two_data
+from drivers.oled import oled_two_data,oled_three_data
 from drivers.led_strip import all_set_color
+from utils import get_activity_params
 
 
 
@@ -44,19 +48,20 @@ def stop_pwm():
     servo.deinit()  # Disable PWM on the servo pin
     print("PWM signal disabled")
 
-def automatic_door_fun():
-    project_configs = get_project_config_data("03 Self-opening gate")
+def run_activity(activity):
+    params=get_activity_params(activity)
+    
     
     # Initialize sensors and servo pin
-    sensor_1_pin = set_pin_in(project_configs["sensor1_pin"])
-    sensor_2_pin = set_pin_in(project_configs["sensor2_pin"])
+    sensor_1_pin = set_pin_in(params["sensor1_pin"])
+    sensor_2_pin = set_pin_in(params["sensor2_pin"])
     
-    sensor_1_state = get_trig_state(project_configs["sensor1_active_state"])
-    sensor_2_state = get_trig_state(project_configs["sensor2_active_state"])
+    sensor_1_state = get_trig_state(params["sensor1_active_state"])
+    sensor_2_state = get_trig_state(params["sensor2_active_state"])
     
     # Servo pin initialization
     global servo_pin  # Only if necessary, else handle it locally
-    servo_pin = int(project_configs["servo_pin"])
+    servo_pin = int(params["servo_pin"])
     init_servo()  # Initialize servo motor
 
     TIMEOUT_DURATION = 15  # Timeout duration in seconds
@@ -66,7 +71,7 @@ def automatic_door_fun():
     # Initial gate closure
     close_gate()
    
-    
+    print("starting 'AutoGate: Self opening gate' activity")
     while True:
         # Check if either sensor detects an object to open the gate
         if (sensor_1_pin.value() == sensor_1_state or sensor_2_pin.value() == sensor_2_state) and not gate_open:
@@ -119,4 +124,5 @@ def automatic_door_fun():
             elif sensor_1_pin.value() != sensor_1_state and sensor_2_pin.value() != sensor_2_state:
                 pass
         time.sleep(0.1)  # Polling interval to reduce CPU load
+
 

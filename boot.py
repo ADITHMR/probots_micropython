@@ -1,19 +1,20 @@
-# This file is executed on every boot (including wake-boot from deepsleep)
-# import esp
-# esp.osdebug(None)
-#import webrepl
-#webrepl.start()
 
+from local_host.esp_as_AP import enable_AP
+from pin_mapping import TOUCH1,TOUCH2
+from local_host.webServer import runWebServer
 
-#define MICROPY_REPL_INFO                 (0) // Disable REPL info
-import machine
-
-# Disable the REPL by controlling the serial port
-machine.Pin(0, machine.Pin.OUT)  # This can disable the REPL serial interface
-# sys.exit()  # Exit the REPL
-
-# if boot_sw1.value()==False and boot_sw2.value()==False:
-#     enable_AP()
-# elif  boot_sw1.value()==False and boot_sw2.value()==True:
-#     enable_project_selector()
+if TOUCH1.value()==True and TOUCH2.value()==True:
+    enable_AP()
+elif  TOUCH1.value()==True and TOUCH2.value()==False:
+    runWebServer()
     
+from process.save_html import save_html
+from process.fetch_projects import fetch_projects
+
+
+
+
+
+
+fetch_projects()
+save_html()

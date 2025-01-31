@@ -1,45 +1,42 @@
 import json
 import ujson
 from imports import *
+from  process.route_activity import route_activity
+from utils import url_decode
 def update_project_config(conf_list):
     try:
-        # Read the current configurations from the file
-        with open('projects/project_configurations.txt', 'r') as f:
-            data = json.load(f)
+#         proj_name=url_decode(route_activity(conf_list["project"]))
+        proj_name=url_decode(conf_list['project'])
+
+        activity_name=route_activity(proj_name)
+        print(activity_name)
+        path=f"{activity_name}/config.txt"
+        with open(path, 'r') as f:
+            conf_data = json.load(f)
+            
+        print(conf_data)
         
-        # Ensure the project exists in the data
-        project_name = conf_list['project'].replace("+", " ")
-        if project_name not in data:
-            print(f"Project '{project_name}' not found in the configuration file.")
-            return
         
-        # Get the project configuration
-        project_data = data[project_name]
-        
+    
         # Update project configuration with new values
         for conf, value in conf_list.items():
-            value = value.replace("+", " ")
+           
             if conf == 'project':
-                value = value.replace("+", " ")  # Ensure project name is correctly formatted
+                value = url_decode(value)  # Ensure project name is correctly formatted
                 set_parameter("PROJECT",value)
-            value = value.replace("+", " ")
-            project_data[conf] = value
-            
-        
-        # Update the main data dictionary with the updated project data
-        data[project_name] = project_data
+            value = url_decode(value)
+            conf_data["params"][conf] = value
+        print(conf_data)
+
         
         # Write the updated data back to the file
-        with open('projects/project_configurations.txt', 'w') as f:
-#             formatted_json =ujson.dumps(data, indent=4)
-            json.dump(data, f)
+        with open(path, 'w') as f:
+            json.dump(conf_data, f)
         
-        print(f"Configuration for project '{project_name}' has been updated successfully.")
+        print(f"Configuration for project '{proj_name}' has been updated successfully.")
     
-    except FileNotFoundError:
-        print("The configuration file does not exist.")
-    except json.JSONDecodeError:
-        print("Error decoding the JSON configuration file.")
+    
+    
     except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"An error occurred in 'update_project_config(conf_list)': {e}")
 

@@ -1,6 +1,6 @@
 import machine
 import time
-import tm1637
+import drivers.tm1637 as tm1637
 from machine import Pin,I2C
 
 

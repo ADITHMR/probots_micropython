@@ -1,5 +1,28 @@
+import json
 
 
+
+def get_activity_params(activity):
+    path=f"{activity}/config.txt"
+    with open(path, 'r') as f:
+         data = json.load(f)
+    params=data['params']
+    return (params)
+    
+def get_params(str_data):
+    params={}
+    try:
+        query_string = str_data.split("GET /")[1].split(" HTTP")[0]
+        if "?" in query_string:
+            query_string = query_string.split("?")[1]
+            pairs = query_string.split("&")
+            for pair in pairs:
+                key, value = pair.split("=")
+                params[key] = value
+            return params
+    except Exception as e:
+            print(f"An error occurred: {e}")
+            return 0
 def url_decode(encoded_str):
 
      # First, replace '+' with space to reverse URL encoding of spaces
@@ -40,18 +63,3 @@ def url_decode(encoded_str):
                              .replace('%7E', '~')
 
     return decoded_str
-
-def get_params(str_data):
-    params={}
-    try:
-        query_string = str_data.split("GET /")[1].split(" HTTP")[0]
-        if "?" in query_string:
-            query_string = query_string.split("?")[1]
-            pairs = query_string.split("&")
-            for pair in pairs:
-                key, value = pair.split("=")
-                params[key] = value
-            return params
-    except Exception as e:
-            print(f"An error occurred: {e}")
-            return 0

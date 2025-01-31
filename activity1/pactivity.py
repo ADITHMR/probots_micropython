@@ -1,3 +1,6 @@
+
+# *************Luminous Play: LED light magic**********************
+
 from machine import Pin
 from pin_mapping import *
 import machine
@@ -6,7 +9,8 @@ import time
 import random
 from imports import *
 from drivers.ir_decode import get_IR_data
-
+import os
+from utils import get_activity_params
 # from ir_rx.nec import NEC_8
 # ir = NEC_8(pin_ir, callback) # Instantiate the NEC_8 receiver
 
@@ -405,16 +409,20 @@ def fire_effect():
         np[i] = (r, g, b)
     
     Write()
-def led_strip_fun():
-    project_configs=get_project_config_data("01 Fun with LED Lights")
+def run_activity(activity):
+    
+    params=get_activity_params(activity)
+    
     global led_pin,num_pixels,np
-    led_pin=set_pin_out(project_configs["strip_led_pin"])
-    num_pixels=int(project_configs["led_num"])
+    led_pin=set_pin_out(params["strip_led_pin"])
+    num_pixels=int(params["led_num"])
+    
     np = neopixel.NeoPixel(led_pin,num_pixels)
+    print("starting 'Luminous Play: LED light magic' activity")
     while True:
         irdata=get_IR_data()
         LED(irdata)
         
 
-    
+
 

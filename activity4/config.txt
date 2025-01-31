@@ -1,0 +1,9 @@
+{
+"params": {
+        "sensor2_active_state": "Active High",
+        "sensor1_active_state": "Active High",
+        "sensor1_pin": "39",
+        "sensor2_pin": "36"
+    },
+    "project_name":"CountMaster: Student headcount Tracker",
+}

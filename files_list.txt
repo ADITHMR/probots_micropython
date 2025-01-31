@@ -1,6 +1,67 @@
 [
     {
         "files": [
+            "config.txt",
+             "pactivity.py",
+             "web_data.html"
+        ],
+         "folder": "//activity1"
+    },
+     {
+        "files": [
+            "config.txt",
+             "pactivity.py",
+             "web_data.html"
+        ],
+         "folder": "//activity2"
+    },
+     {
+        "files": [
+            "config.txt",
+             "pactivity.py",
+             "web_data.html"
+        ],
+         "folder": "//activity3"
+    },
+     {
+        "files": [
+            "config.txt",
+             "pactivity.py",
+             "web_data.html"
+        ],
+         "folder": "//activity4"
+    },
+     {
+        "files": [
+            "config.txt",
+             "pactivity.py",
+             "web_data.html"
+        ],
+         "folder": "//activity5"
+    },
+     {
+        "files": [
+            "buzzer.py",
+             "display.py",
+             "ir_decode.py",
+             "led_strip.py",
+             "oled.py",
+             "tm1637.py"
+        ],
+         "folder": "//drivers"
+    },
+     {
+        "files": [
+            "activity1.html",
+             "activity2.html",
+             "activity3.html",
+             "activity4.html",
+             "activity5.html"
+        ],
+         "folder": "//html"
+    },
+     {
+        "files": [
             "__init__.py",
              "acquire.py",
              "mce.py",
@@ -40,6 +101,19 @@
     },
      {
         "files": [
+            "Save_Files_List.py",
+             "fetch_projects.py",
+             "file_mgr.py",
+             "ota_update.py",
+             "route_activity.py",
+             "runProject.py",
+             "run_activity.py",
+             "save_html.py"
+        ],
+         "folder": "//process"
+    },
+     {
+        "files": [
             "Temp_measurement_lm35_file.py",
              "auto_street_light_file.py",
              "automatic_door_file.py",
@@ -48,7 +122,9 @@
              "do_not_delete.txt",
              "funWithLed_file.py",
              "gas_leak_detection_file.py",
+             "projectList.py",
              "project_configurations.txt",
+             "project_routing.json",
              "student_counter_file.py"
         ],
          "folder": "//projects"
@@ -62,50 +138,23 @@
     },
      {
         "files": [
-            "Neopixel.py",
-             "Save_Files_List.py",
-             "Temp_measurement_lm35_file.py",
-             "auto_street_light_file.py",
-             "automatic_door_file.py",
-             "automatic_fire_detection_file.py",
-             "boot.py",
-             "buzzer.py",
+            "fetch_project_data.py",
+             "get_project_page.py",
+             "project list temp.py",
+             "run_activity.py",
+             "save_html.py"
+        ],
+         "folder": "//test"
+    },
+     {
+        "files": [
+            "boot.py",
              "config.txt",
-             "dig_dist_measurement_file.py",
-             "display.py",
-             "do_not_delete.txt",
-             "esp_as_AP.py",
-             "file_mgr.py",
              "files_list.txt",
-             "funWithLed_file.py",
-             "gas_leak_detection_file.py",
              "imports.py",
-             "index.html",
-             "ir_decode.py",
-             "led_strip.py",
              "main.py",
-             "oled.py",
-             "ota_update.py",
              "pin_mapping.py",
-             "project.html",
-             "projectList.py",
-             "project_config_update.py",
-             "project_configurations.txt",
-             "project_options_JSON.txt",
-             "project_page.html",
-             "runProject.py",
-             "ssd1306.py",
-             "student_counter_file.py",
-             "temp.html",
-             "test.py",
-             "test_web_page.py",
-             "tm1637.py",
-             "traceback.py",
-             "update_firmware.html",
-             "utils.py",
-             "webServer.py",
-             "web_page.py",
-             "web_page_AP.py"
+             "utils.py"
         ],
          "folder": "/"
     }

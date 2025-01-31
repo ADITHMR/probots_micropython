@@ -7,18 +7,18 @@ import time
 from local_host.esp_as_AP import *
 from pin_mapping import *
 from local_host.webServer import *
-from display import *
-from ir_decode import *
+from drivers.display import *
+from drivers.ir_decode import *
 from ir_rx.nec import NEC_8
 from ir_rx.print_error import print_error
-from runProject import *
+from process.run_activity import run
 import _thread
 
 
-if TOUCH1.value()==True and TOUCH2.value()==True:
-    enable_AP()
-elif  TOUCH1.value()==True and TOUCH2.value()==False:
-   runWebServer()
+# if TOUCH1.value()==True and TOUCH2.value()==True:
+#     enable_AP()
+# elif  TOUCH1.value()==True and TOUCH2.value()==False:
+#     runWebServer()
     
 
 
@@ -42,7 +42,7 @@ print(f"project_name-->{proj}")
 
 try:
 
-    _thread.start_new_thread(runProject, (proj,))
+    _thread.start_new_thread(run, (proj,))
 
     
     

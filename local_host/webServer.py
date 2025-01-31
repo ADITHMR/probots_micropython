@@ -2,19 +2,24 @@
 
 import socket
 import network
-from oled import *
+from drivers.oled import *
 from local_host.project_config_update import *
-from file_mgr import *
+from process.file_mgr import *
 from local_host.web_page import *
 import ure
 import traceback
-from display import *
+from drivers.display import *
 import sys
+import gc
+from utils import url_decode
+from test.get_project_page import *
+from local_host.project_config_update import update_project_config
+from utils import url_decode
 # from ota_update import *
 
 # Global variable for WiFi connection status
 wifi_connected = False
-wifi_connection_timeout = 10  # Timeout after 10 seconds
+wifi_connection_timeout = 5  # Timeout after 10 seconds
 wifi_conn_start_time = time.time()
 
 restart = 0
@@ -115,9 +120,11 @@ def handle_route(request_str, client):
         return restartSuccessPage()
     elif 'GET /?project' in request_str:
         datas = get_params(request_str)
+#         print(datas)
         update_project_config(datas)
         
-        return successProjectPage(datas['project'].replace("+", " "))
+        
+        return successProjectPage(url_decode(datas['project']))
     elif 'selectedItem=' in request_str and 'POST' in request_str:
         return handle_post_selected_item(request_str)
     elif 'POST /update HTTP' in request_str:
@@ -143,18 +150,12 @@ def handle_post_selected_item(request_str):
     match = ure.search(r'selectedItem=([^&]+)', request_str)
     if match:
         selected_option = match.group(1).replace("'", "").replace("+", " ")
-        with open('local_host/project_options_JSON.txt', 'r') as f:
-            data = json.load(f)
-        print(f"selected project-------->{selected_option}")
-        if selected_option in data:
-            with open('local_host/project_page.html', 'r') as f:
-                response = f.read()
-            response = response.replace('{*config_list*}', json.dumps(data[selected_option]))
-            response = response.replace('{*heading*}', selected_option)
-            return response
-        else:
-            return errorPage()
-    return None
+        selected_option=url_decode(selected_option)
+        response=get_project_html(selected_option)
+        return response
+    else:
+        return errorPage()
+    
 
 
 def handle_homepage_request():
@@ -208,6 +209,6 @@ def start_server():
 def runWebServer():
     connect_wifi()  # Connect to WiFi
     start_server()  # Start the server
-
-
-
+# data={'project': 'Luminous+Play%3A+LED+light+magic', 'led_num': '5', 'strip_led_pin': '7'}
+# update_project_config(data)
+# runWebServer()
