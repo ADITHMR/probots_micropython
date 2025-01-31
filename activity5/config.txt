@@ -1,9 +1,1 @@
-{
-"params": {
-
-        "sensor_active_state": "Active Low",
-        "sensor_pin": "35"
-    },
-    "project_name":"FireGuard: Intelligent Fire Detection"
-
-}
+{"project_name": "FireGuard: Intelligent Fire Detection", "params": {"sensor_active_state": "Active Low", "project": "FireGuard: Intelligent Fire Detection", "sensor_pin": "19"}}

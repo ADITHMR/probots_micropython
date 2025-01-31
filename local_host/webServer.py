@@ -13,6 +13,8 @@ import sys
 import gc
 from utils import url_decode
 from test.get_project_page import *
+from local_host.project_config_update import update_project_config
+from utils import url_decode
 # from ota_update import *
 
 # Global variable for WiFi connection status
@@ -118,9 +120,11 @@ def handle_route(request_str, client):
         return restartSuccessPage()
     elif 'GET /?project' in request_str:
         datas = get_params(request_str)
+#         print(datas)
         update_project_config(datas)
         
-        return successProjectPage(datas['project'].replace("+", " "))
+        
+        return successProjectPage(url_decode(datas['project']))
     elif 'selectedItem=' in request_str and 'POST' in request_str:
         return handle_post_selected_item(request_str)
     elif 'POST /update HTTP' in request_str:
@@ -205,5 +209,6 @@ def start_server():
 def runWebServer():
     connect_wifi()  # Connect to WiFi
     start_server()  # Start the server
-
+# data={'project': 'Luminous+Play%3A+LED+light+magic', 'led_num': '5', 'strip_led_pin': '7'}
+# update_project_config(data)
 # runWebServer()
