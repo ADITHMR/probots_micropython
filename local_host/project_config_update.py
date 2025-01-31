@@ -1,8 +1,9 @@
 import json
 import ujson
-from imports import *
+# from imports import *
 from  process.route_activity import route_activity
 from utils import url_decode
+from process.file_mgr import set_parameter
 def update_project_config(conf_list):
     try:
 #         proj_name=url_decode(route_activity(conf_list["project"]))
@@ -24,8 +25,9 @@ def update_project_config(conf_list):
             if conf == 'project':
                 value = url_decode(value)  # Ensure project name is correctly formatted
                 set_parameter("PROJECT",value)
-            value = url_decode(value)
-            conf_data["params"][conf] = value
+            else:
+                value = url_decode(value)
+                conf_data["params"][conf] = value
         print(conf_data)
 
         

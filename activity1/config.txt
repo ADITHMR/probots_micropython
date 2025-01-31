@@ -1,8 +1,1 @@
-{
-    "project_name": "Luminous Play: LED light magic",
-    "params": {
-        "project": "Luminous Play: LED light magic",
-        "led_num": "5",
-        "strip_led_pin": "7"
-    }
-}
+{"project_name": "Luminous Play: LED light magic", "params": {"strip_led_pin": "5", "led_num": "5"}}

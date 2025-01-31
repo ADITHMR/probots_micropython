@@ -76,15 +76,19 @@
      {
         "files": [
             "neopixel.py",
+             "pkg_resources.py",
              "ssd1306.py",
-             "traceback.py"
+             "traceback.py",
+             "ulogging.py"
         ],
          "folder": "//lib"
     },
      {
         "files": [
-            "error404.html",
+            "connect_wifi.py",
+             "error404.html",
              "esp_as_AP.py",
+             "get_project_html.py",
              "index.html",
              "project_config_update.py",
              "project_options_JSON.txt",
@@ -98,6 +102,15 @@
              "web_page_AP.py"
         ],
          "folder": "//local_host"
+    },
+     {
+        "files": [
+            "__init__.py",
+             "example_webapp.py",
+             "example_webapp2.py",
+             "utils.py"
+        ],
+         "folder": "//picoweb"
     },
      {
         "files": [
@@ -140,9 +153,10 @@
         "files": [
             "fetch_project_data.py",
              "get_project_page.py",
-             "project list temp.py",
              "run_activity.py",
-             "save_html.py"
+             "save_html.py",
+             "web_server.py",
+             "webserver_old.py"
         ],
          "folder": "//test"
     },
@@ -153,6 +167,7 @@
              "files_list.txt",
              "imports.py",
              "main.py",
+             "ota_update.py",
              "pin_mapping.py",
              "utils.py"
         ],

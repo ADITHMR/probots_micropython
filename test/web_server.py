@@ -81,8 +81,4 @@ def submit(req, resp):
     yield from resp.awrite(successProjectPage(url_decode(data['project'])))
 
 # Start web server
-
-
-def runWebServer():
-    app.run(debug=True, host="0.0.0.0", port=80)
-# runWebServer()    
+app.run(debug=True, host="0.0.0.0", port=80)

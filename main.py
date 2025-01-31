@@ -43,6 +43,7 @@ print(f"project_name-->{proj}")
 try:
 
     _thread.start_new_thread(run, (proj,))
+    
 
     
     

@@ -1,1 +1,1 @@
-{"SSID": "ACT102739512896", "PROJECT": "FireGuard: Intelligent Fire Detection", "PASSWORD": "99832154"}
+{"SSID": "Ponnus", "PROJECT": "SentiLume: Intelligent street illumination", "PASSWORD": "Ariyilla"}
