@@ -1,31 +1,41 @@
 [
     {
         "files": [
-            
+            "config.txt",
+             "pactivity.py",
+             "web_data.html"
         ],
          "folder": "//activity1"
     },
      {
         "files": [
-            
+            "config.txt",
+             "pactivity.py",
+             "web_data.html"
         ],
          "folder": "//activity2"
     },
      {
         "files": [
-            
+            "config.txt",
+             "pactivity.py",
+             "web_data.html"
         ],
          "folder": "//activity3"
     },
      {
         "files": [
-            
+            "config.txt",
+             "pactivity.py",
+             "web_data.html"
         ],
          "folder": "//activity4"
     },
      {
         "files": [
-            
+            "config.txt",
+             "pactivity.py",
+             "web_data.html"
         ],
          "folder": "//activity5"
     },
@@ -39,6 +49,16 @@
              "tm1637.py"
         ],
          "folder": "//drivers"
+    },
+     {
+        "files": [
+            "activity1.html",
+             "activity2.html",
+             "activity3.html",
+             "activity4.html",
+             "activity5.html"
+        ],
+         "folder": "//html"
     },
      {
         "files": [
@@ -82,9 +102,13 @@
      {
         "files": [
             "Save_Files_List.py",
+             "fetch_projects.py",
              "file_mgr.py",
              "ota_update.py",
-             "runProject.py"
+             "route_activity.py",
+             "runProject.py",
+             "run_activity.py",
+             "save_html.py"
         ],
          "folder": "//process"
     },
@@ -100,6 +124,7 @@
              "gas_leak_detection_file.py",
              "projectList.py",
              "project_configurations.txt",
+             "project_routing.json",
              "student_counter_file.py"
         ],
          "folder": "//projects"
@@ -110,6 +135,16 @@
              "project_configurations.txt"
         ],
          "folder": "//samples"
+    },
+     {
+        "files": [
+            "fetch_project_data.py",
+             "get_project_page.py",
+             "project list temp.py",
+             "run_activity.py",
+             "save_html.py"
+        ],
+         "folder": "//test"
     },
      {
         "files": [
