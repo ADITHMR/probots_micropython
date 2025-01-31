@@ -1,6 +1,47 @@
 [
     {
         "files": [
+            
+        ],
+         "folder": "//activity1"
+    },
+     {
+        "files": [
+            
+        ],
+         "folder": "//activity2"
+    },
+     {
+        "files": [
+            
+        ],
+         "folder": "//activity3"
+    },
+     {
+        "files": [
+            
+        ],
+         "folder": "//activity4"
+    },
+     {
+        "files": [
+            
+        ],
+         "folder": "//activity5"
+    },
+     {
+        "files": [
+            "buzzer.py",
+             "display.py",
+             "ir_decode.py",
+             "led_strip.py",
+             "oled.py",
+             "tm1637.py"
+        ],
+         "folder": "//drivers"
+    },
+     {
+        "files": [
             "__init__.py",
              "acquire.py",
              "mce.py",
@@ -22,17 +63,30 @@
     },
      {
         "files": [
-            "esp_as_AP.py",
+            "error404.html",
+             "esp_as_AP.py",
              "index.html",
              "project_config_update.py",
              "project_options_JSON.txt",
              "project_page.html",
+             "project_sel_success.html",
+             "restart_success_page.html",
              "test_web_page.py",
+             "update_firmware.html",
              "webServer.py",
              "web_page.py",
              "web_page_AP.py"
         ],
          "folder": "//local_host"
+    },
+     {
+        "files": [
+            "Save_Files_List.py",
+             "file_mgr.py",
+             "ota_update.py",
+             "runProject.py"
+        ],
+         "folder": "//process"
     },
      {
         "files": [
@@ -43,6 +97,8 @@
              "dig_dist_measurement_file.py",
              "do_not_delete.txt",
              "funWithLed_file.py",
+             "gas_leak_detection_file.py",
+             "projectList.py",
              "project_configurations.txt",
              "student_counter_file.py"
         ],
@@ -51,54 +107,19 @@
      {
         "files": [
             "config.txt",
-             "do not delete.txt",
              "project_configurations.txt"
         ],
          "folder": "//samples"
     },
      {
         "files": [
-            "Neopixel.py",
-             "Save_Files_List.py",
-             "Temp_measurement_lm35_file.py",
-             "auto_street_light_file.py",
-             "automatic_door_file.py",
-             "automatic_fire_detection_file.py",
-             "boot.py",
-             "buzzer.py",
+            "boot.py",
              "config.txt",
-             "dig_dist_measurement_file.py",
-             "display.py",
-             "do not delete.txt",
-             "do_not_delete.txt",
-             "esp_as_AP.py",
-             "file_mgr.py",
              "files_list.txt",
-             "funWithLed_file.py",
              "imports.py",
-             "index.html",
-             "ir_decode.py",
-             "led_strip.py",
              "main.py",
-             "oled.py",
-             "ota_update.py",
              "pin_mapping.py",
-             "project.html",
-             "projectList.py",
-             "project_config_update.py",
-             "project_configurations.txt",
-             "project_options_JSON.txt",
-             "project_page.html",
-             "runProject.py",
-             "student_counter_file.py",
-             "temp.html",
-             "test.py",
-             "test_web_page.py",
-             "tm1637.py",
-             "utils.py",
-             "webServer.py",
-             "web_page.py",
-             "web_page_AP.py"
+             "utils.py"
         ],
          "folder": "/"
     }

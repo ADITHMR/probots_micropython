@@ -1,7 +1,11 @@
 from machine import Pin, PWM
 import time
-from imports import *
-# Set up the GPIO pins
+from process.file_mgr import get_project_config_data
+from pin_mapping import set_pin_in,get_trig_state
+from drivers.display import disp_seq_str
+from drivers.oled import oled_two_data
+from drivers.led_strip import all_set_color
+
 
 
 

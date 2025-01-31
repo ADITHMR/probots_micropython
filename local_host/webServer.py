@@ -2,19 +2,22 @@
 
 import socket
 import network
-from oled import *
+from drivers.oled import *
 from local_host.project_config_update import *
-from file_mgr import *
+from process.file_mgr import *
 from local_host.web_page import *
 import ure
 import traceback
-from display import *
+from drivers.display import *
 import sys
+import gc
 
+from test.get_project_page import *
+# from ota_update import *
 
 # Global variable for WiFi connection status
 wifi_connected = False
-wifi_connection_timeout = 10  # Timeout after 10 seconds
+wifi_connection_timeout = 5  # Timeout after 10 seconds
 wifi_conn_start_time = time.time()
 
 restart = 0
@@ -73,6 +76,7 @@ def handle_request(client):
             return
         
         request_str = str(data)
+        print(request_str)
         
         # Handle different routes
         response = handle_route(request_str, client)
@@ -118,8 +122,9 @@ def handle_route(request_str, client):
         
         return successProjectPage(datas['project'].replace("+", " "))
     elif 'selectedItem=' in request_str and 'POST' in request_str:
-        
         return handle_post_selected_item(request_str)
+    elif 'POST /update HTTP' in request_str:
+        return handle_firmware_update()
     elif 'GET / HTTP' in request_str:
         return handle_homepage_request()
     elif '/reset' in request_str:
@@ -130,24 +135,22 @@ def handle_route(request_str, client):
             return response
     else:
         return errorPage()
-
+def handle_firmware_update():
+    response=None
+    with open('local_host/update_firmware.html', 'r') as f:
+                response = f.read()
+    return response
+    
 
 def handle_post_selected_item(request_str):
     match = ure.search(r'selectedItem=([^&]+)', request_str)
     if match:
         selected_option = match.group(1).replace("'", "").replace("+", " ")
-        with open('local_host/project_options_JSON.txt', 'r') as f:
-            data = json.load(f)
-        print(f"selected project-------->{selected_option}")
-        if selected_option in data:
-            with open('local_host/project_page.html', 'r') as f:
-                response = f.read()
-            response = response.replace('{*config_list*}', json.dumps(data[selected_option]))
-            response = response.replace('{*heading*}', selected_option)
-            return response
-        else:
-            return errorPage()
-    return None
+        response=get_project_html(selected_option)
+        return response
+    else:
+        return errorPage()
+    
 
 
 def handle_homepage_request():
@@ -202,42 +205,4 @@ def runWebServer():
     connect_wifi()  # Connect to WiFi
     start_server()  # Start the server
 
-
-
-
-
-
-
-def successProjectPage(data):
-    success_page=website_style+f"""
-                          <body>
-                            <div class="container"><h1>Project Selection Successful!</h1>
-                            <p>You selected: {data}</p>
-                            
-                            <a>Restart the device.</a>
-                        </div>
-                          </body>
-                        </html>
-                       """
-    return success_page
-def errorPage():
-    error_page=website_style+f"""
-                          <body>
-                            <div class="container"><h1>ERROR!</h1>
-                
-                            
-                            <a href="/reset">Click here to restart the device.</a>
-                        </div>
-                          </body>
-                        </html>
-                       """
-    return error_page
-def restartSuccessPage():
-    error_page=website_style+f"""
-                          <body>
-                            <div class="container"><h1>Restarted Successfully!</h1>
-                        </div>
-                          </body>
-                        </html>
-                       """
-    return error_page
+runWebServer()
