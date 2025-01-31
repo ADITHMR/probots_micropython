@@ -1,9 +1,11 @@
 {
-"01 Fun with LED Lights": {
-        "project": "01 Fun with LED Lights",
-        "led_num": "5",
-        "strip_led_pin": "5"
+"params": {
+        "sensor2_active_state": "Active Low",
+        "sensor1_active_state": "Active Low",
+        "servo_pin": "33",
+        "sensor1_pin": "39",
+        "sensor2_pin": "36"
     },
-    "project_name":"01 Fun with LED Lights",
-    "function_name":"led_strip_fun"
+    "project_name":"AutoGate: Self opening gate",
+    
 }

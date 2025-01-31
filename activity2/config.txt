@@ -1,9 +1,8 @@
 {
-"02 Sensor-controlled street light": {
+"params": {
         "sensor_active_state": "Active High",
-        "project": "02 Sensor-controlled street light",
         "sensor_pin": "39"
     },
-    "project_name":"02 Sensor-controlled street light",
+    "project_name":"SentiLume: Intelligent street illumination",
     "function_name":"auto_street_light_fun"
 }

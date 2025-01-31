@@ -11,7 +11,7 @@ import traceback
 from drivers.display import *
 import sys
 import gc
-
+from utils import url_decode
 from test.get_project_page import *
 # from ota_update import *
 
@@ -146,6 +146,7 @@ def handle_post_selected_item(request_str):
     match = ure.search(r'selectedItem=([^&]+)', request_str)
     if match:
         selected_option = match.group(1).replace("'", "").replace("+", " ")
+        selected_option=url_decode(selected_option)
         response=get_project_html(selected_option)
         return response
     else:
@@ -205,4 +206,4 @@ def runWebServer():
     connect_wifi()  # Connect to WiFi
     start_server()  # Start the server
 
-runWebServer()
+# runWebServer()

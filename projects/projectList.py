@@ -1,1 +1,1 @@
-project_topic_list =['01 Fun with LED Lights', '02 Sensor-controlled street light']
+project_topic_list =['Luminous Play: LED light magic', 'SentiLume: Intelligent street illumination', 'AutoGate: Self opening gate', 'CountMaster: Student headcount Tracker', 'FireGuard: Intelligent Fire Detection']

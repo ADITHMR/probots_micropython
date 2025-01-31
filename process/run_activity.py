@@ -7,14 +7,7 @@ from activity4.pactivity import run_activity as run_activity4
 from activity5.pactivity import run_activity as run_activity5
 
 from process.route_activity import route_activity
-# project=None
-# with open('activity1/config.txt', 'r') as f:
-#             data = json.load(f)
-# project=data["project_name"]
-# function=data["function_name"]
-# print(function)
 
-# globals()[function]()
 
 
 def run(project_name):
@@ -29,4 +22,3 @@ def run(project_name):
         run_activity4(activity)
     elif activity=="activity5":
         run_activity5(activity)
-run("AutoGate: Self opening gate")

@@ -1,9 +1,8 @@
 {
-"01 Fun with LED Lights": {
-        "project": "01 Fun with LED Lights",
+"params": {
         "led_num": "5",
         "strip_led_pin": "5"
     },
-    "project_name":"01 Fun with LED Lights",
+    "project_name":"Luminous Play: LED light magic",
     "function_name":"led_strip_fun"
 }

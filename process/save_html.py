@@ -75,5 +75,6 @@ def save_html():
         with open("html/activity5.html", "w") as f:
             f.write(response)
         # -----------------------------------------------------------
+        print("Successfully saved HTML files...")
     except Exception as e:
         print("Error on 'save_html()':", e)

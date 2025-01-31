@@ -1,19 +1,23 @@
 
-
+# ******************SentiLume: Intelligent street illumination************************
 
 from imports import *
+from utils import get_activity_params
 
 
 
 
 
-def run_activity():
-    project_configs=get_project_config_data("02 Sensor-controlled street light")  
-    sensor=set_pin_in(project_configs["sensor_pin"])
-    sensor_trig=get_trig_state(project_configs["sensor_active_state"])
-    print(f"{project_configs}")
+def run_activity(activity):
+    params=get_activity_params(activity)
+     
+    sensor=set_pin_in(params["sensor_pin"])
+    sensor_trig=get_trig_state(params["sensor_active_state"])
     
-    del project_configs
+    print("starting 'SentiLume: Intelligent street illumination ' activity")
+    
+    
+
     last=0
     while True: 
         if sensor.value() ==sensor_trig:

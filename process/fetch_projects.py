@@ -1,4 +1,5 @@
 import  json
+from process.file_mgr import set_parameter,get_parameter
 
 def fetch_projects():
     try:
@@ -9,6 +10,8 @@ def fetch_projects():
                     data = json.load(f)
                     
         project_name=data["project_name"]
+        
+        
         if project_name in projectlist:
             pass
         else:
@@ -70,6 +73,10 @@ def fetch_projects():
             
         print( f"project_topic_list ={projectlist}")
         print("Project fetching completed..")
+        if get_parameter("PROJECT") in projectlist:
+            pass
+        else:
+            set_parameter("PROJECT",projectlist[0])
     except Exception as e:
         # Code to handle the exception
         print(f"Error in 'fetch_projects()' : {e}")
