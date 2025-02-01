@@ -1,5 +1,6 @@
 import machine
 from  projects.projectList import  *
+from machine_id import get_serial_no
 
 
 
@@ -19,11 +20,14 @@ def web_page():
     with open('local_host/index.html', 'r') as f:
                 html_content = f.read()
                 html_content=html_content.replace("{html_dropdown}",html_dropdown)
+                html_content=html_content.replace("{*Serial No*}",get_serial_no())
     return html_content
 def successProjectPage(data):
     with open('local_host/project_sel_success.html', 'r') as f:
                 html_content = f.read()
                 html_content=html_content.replace("{data}",data)
+                
+                
     return html_content
 
 def errorPage():

@@ -3,6 +3,8 @@ from process.file_mgr import set_parameter
 from utils import url_decode
 from time import sleep
 from drivers.display import disp_scroll_str
+from machine_id import get_serial_no
+
 import json
 try:
   import usocket as socket
@@ -28,8 +30,8 @@ def enable_AP():
 
     sleep(1)
 
-    ssid = 'Prosol AP'
-    password = '12341234'
+    ssid = get_serial_no()
+    password = '123456789'
 
     ap = network.WLAN(network.AP_IF)
     ap.active(True)

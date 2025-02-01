@@ -1,8 +1,10 @@
-
+from machine_id import get_serial_no
 
 def web_page_AP():
+    # Get the serial number
+    serial_no = get_serial_no()
     
-
+    # HTML page content with dynamic serial number insertion
     html_page = f"""
   <!DOCTYPE html>
 <html lang="en">
@@ -81,7 +83,9 @@ def web_page_AP():
 <body>
 
 <div class="form-container">
+
   <h4>Submit SSID and Password</h4>
+  <h1 class="page-heading">S/N: {serial_no}</h1>
   <!-- Form to collect SSID and password -->
   <form action="your-server-endpoint" method="POST" onsubmit="replaceSpaces(event)">
     <div class="form-group">
@@ -98,9 +102,5 @@ def web_page_AP():
 
 </body>
 </html>
-
-
 """
-
     return html_page
-

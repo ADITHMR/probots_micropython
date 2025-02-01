@@ -12,7 +12,7 @@ from drivers.display import *
 import sys
 import gc
 from utils import url_decode
-from test.get_project_page import *
+from test.get_project_page_ import *
 from local_host.project_config_update import *
 from utils import url_decode
 # from ota_update import *

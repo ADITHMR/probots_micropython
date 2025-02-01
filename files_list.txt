@@ -117,7 +117,6 @@
             "Save_Files_List.py",
              "fetch_projects.py",
              "file_mgr.py",
-             "ota_update.py",
              "route_activity.py",
              "runProject.py",
              "run_activity.py",
@@ -151,21 +150,11 @@
     },
      {
         "files": [
-            "fetch_project_data.py",
-             "get_project_page.py",
-             "run_activity.py",
-             "save_html.py",
-             "web_server.py",
-             "webserver_old.py"
-        ],
-         "folder": "//test"
-    },
-     {
-        "files": [
             "boot.py",
              "config.txt",
              "files_list.txt",
              "imports.py",
+             "machine_id.py",
              "main.py",
              "ota_update.py",
              "pin_mapping.py",
