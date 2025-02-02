@@ -4,12 +4,15 @@ import ujson
 import time
 import os
 import machine
+from local_host.connect_wifi import connect_wifi
 try:
     from drivers.oled import *
 except Exception as e:
         print("Error:", e)
 led = machine.Pin(2, machine.Pin.OUT)
+progress=0
 
+    
 # Wi-Fi Connection Function
 def connect_wifi(ssid, password):
     wlan = network.WLAN(network.STA_IF)
@@ -84,13 +87,7 @@ def ota_update():
     # Replace with your Wi-Fi credentials
     global progress
     progress=0
-    ssid = "Ponnus"
-    password = "Ariyilla"
-
-    # Connect to Wi-Fi
-    if not connect_wifi(ssid, password):
-        print("Wi-Fi connection failed. Exiting.")
-        return
+    
 
     # Replace with your GitHub username, repository name, and directory path (use empty string for root directory)
     owner = "ADITHMR"  # Replace with the GitHub username
@@ -138,4 +135,18 @@ def ota_update():
             except Exception as e:
                 print("OLED Error:", e)
             print(f"progress={progress}")
-ota_update()
+def run_update():
+    try:
+        connect_wifi()
+    except:
+        ssid = "Ponnus"
+        password = "Ariyilla"
+
+    # Connect to Wi-Fi
+        if not connect_wifi(ssid, password):
+            print("Wi-Fi connection failed. Exiting.")
+            return
+    ota_update()  
+def get_progres():
+    global progress
+    return progress

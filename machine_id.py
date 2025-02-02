@@ -22,5 +22,25 @@ def get_serial_no():
         return("Serial Number ERROR")
        
 
+def get_version():
+    with open('version.dat', 'r') as f:
+        data = json.load(f)
+            
+        version=f"{data['version']}"
+        return (version)
 
-
+def get_update_flag():
+    try:
+        with open('schema.dat', 'r') as f:
+            data = json.load(f)
+        if data["update_flag"]=="enabled":
+            return True
+        elif data["update_flag"]=="disabled":
+            return False
+        else:
+            return "Error"
+    except Exception as e:
+        print("Error: on get_serial_no()", e)
+        return("ERROR")
+        
+  
