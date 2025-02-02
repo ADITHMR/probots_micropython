@@ -5,6 +5,7 @@ from machine_id import get_serial_no
 
 
 
+
 # Generate HTML for the dropdown
 html_dropdown =  """<select id="mydropdown" name="selectedItem" class="form-select" required>"""
 for proj in project_topic_list:
@@ -41,5 +42,12 @@ def restartSuccessPage():
                 html_content = f.read()
                
     return html_content
+def message_page(machine_id,message):
     
+    with open('local_host/message.html', 'r') as f:
+                html_content = f.read()
+    html_content=html_content.replace("{machine_id}",get_serial_no())
+    html_content=html_content.replace("{message}",message)
+
+    return html_content    
  

@@ -90,6 +90,7 @@
              "esp_as_AP.py",
              "get_project_html.py",
              "index.html",
+             "message.html",
              "project_config_update.py",
              "project_options_JSON.txt",
              "project_page.html",
@@ -150,6 +151,17 @@
     },
      {
         "files": [
+            "fetch_project_data_.py",
+             "get_project_page_.py",
+             "run_activity_.py",
+             "save_html_.py",
+             "web_server_.py",
+             "webserver_old.py"
+        ],
+         "folder": "//test"
+    },
+     {
+        "files": [
             "boot.py",
              "config.txt",
              "files_list.txt",
@@ -158,7 +170,8 @@
              "main.py",
              "ota_update.py",
              "pin_mapping.py",
-             "utils.py"
+             "utils.py",
+             "version.dat"
         ],
          "folder": "/"
     }
