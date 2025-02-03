@@ -5,7 +5,7 @@ from process.file_mgr import *
 
 # Global variable for WiFi connection status
 wifi_connected = False
-wifi_connection_timeout = 5  # Timeout after 10 seconds
+wifi_connection_timeout = 8  # Timeout after 10 seconds
 wifi_conn_start_time = time.time()
 
 def connect_wifi():
