@@ -84,6 +84,7 @@ def download_file(url, folder, filename):
 
 # Main function to perform OTA update
 def ota_update():
+
     # Replace with your Wi-Fi credentials
     global progress
     progress=0
@@ -135,6 +136,19 @@ def ota_update():
             except Exception as e:
                 print("OLED Error:", e)
             print(f"progress={progress}")
+            if progress >=100:
+                with open('schema.dat', 'r') as f:
+                    data = json.load(f)
+                data["update_flag"]="False"
+                with open('schema.dat', 'w') as f:
+                    json.dump(data, f)
+                try:
+                    from drivers.oled import oled_log
+                    oled_two_data(1,3,"Update",f"Complete.")
+                    print("Update complete")
+                    time.sleep(1)
+                except Exception as e:
+                    print("OLED Error:", e)
 def run_update():
     try:
         connect_wifi()
@@ -146,4 +160,15 @@ def run_update():
         if not connect_wifi(ssid, password):
             print("Wi-Fi connection failed. Exiting.")
             return
-    ota_update()  
+    try:
+        ota_update()
+    except Exception as e:
+        print("Error on ota_update()", e)
+        with open('schema.dat', 'r') as f:
+            data = json.load(f)
+        data["update_flag"]="False"
+        with open('schema.dat', 'w') as f:
+            json.dump(data, f)
+        from drivers.oled import oled_log
+        oled_two_data(1,3,"Update",f"Failed.")
+        print("Update Failed")

@@ -14,6 +14,13 @@ elif  TOUCH1.value()==True and TOUCH2.value()==False:
     oled_log("Web server ")
     oled_log("Mode ")
     runWebServer()
+    
+from machine_id import get_update_flag
+if get_update_flag()==True:
+    from ota_update import run_update
+    run_update()
+    
+    
 time.sleep(1)
 connect_wifi()
 from process.save_html import save_html

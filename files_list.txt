@@ -97,7 +97,6 @@
              "project_sel_success.html",
              "restart_success_page.html",
              "test_web_page.py",
-             "update_firmware.html",
              "webServer.py",
              "web_page.py",
              "web_page_AP.py"
@@ -170,6 +169,7 @@
              "main.py",
              "ota_update.py",
              "pin_mapping.py",
+             "schema.dat",
              "utils.py",
              "version.dat"
         ],
