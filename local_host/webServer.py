@@ -73,7 +73,7 @@ def check_update(req, resp):
         latest_version=data["version"]
         
         if latest_version==version_now:
-            message_page("<h2> You are up to date!</h2>")
+            response=message_page("<h2> You are up to date!</h2>")
         else:
             response=message_page('''
             <h1>Update available.</h1>
