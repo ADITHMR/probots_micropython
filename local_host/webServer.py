@@ -80,13 +80,14 @@ def check_update(req, resp):
             <h2> Do you want to update device?.</h2>
             <a href="/updatenow"  class="btn btn-warning" >Update Now </a>
             ''')
+        yield from picoweb.start_response(resp)
+        yield from resp.awrite(response)
     except Exception as e:
         print(f"Error at check_update() route : {e}")
         response=errorPage
     
     
-    yield from picoweb.start_response(resp)
-    yield from resp.awrite(response)
+    
 
 @app.route("/updatenow")
 def update_now(req, resp):
