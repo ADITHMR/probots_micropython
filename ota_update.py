@@ -139,14 +139,11 @@ def run_update():
     try:
         connect_wifi()
     except:
-        ssid = "Ponnus"
-        password = "Ariyilla"
+        ssid = "Probots"
+        password = "Probots@1234"
 
     # Connect to Wi-Fi
         if not connect_wifi(ssid, password):
             print("Wi-Fi connection failed. Exiting.")
             return
     ota_update()  
-def get_progres():
-    global progress
-    return progress

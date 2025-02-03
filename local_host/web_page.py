@@ -42,11 +42,11 @@ def restartSuccessPage():
                 html_content = f.read()
                
     return html_content
-def message_page(machine_id,message):
+def message_page(message):
     
     with open('local_host/message.html', 'r') as f:
                 html_content = f.read()
-    html_content=html_content.replace("{machine_id}",get_serial_no())
+    html_content=html_content.replace("{machine_id}",f"S/N: {get_serial_no()}")
     html_content=html_content.replace("{message}",message)
 
     return html_content    
