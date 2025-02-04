@@ -37,31 +37,7 @@ def F_ON(Red,Green,Blue):
     for i in range(num_pixels):
         np[i]=(Red,Green,Blue)
     Write()
-def mode1x():
-    for i in range(255):
-        if((i%3)==0):
-            a=1
-            b=0
-            c=0
-        elif((i+1)%3==0):
-            b=1
-            a=0
-            c=0
-        elif((i+2)%3==0):
-            b=0
-            a=0
-            c=1 
-        np[0]=(i*a,i*b,i*c)
-        np[1]=(i*b,i*c,i*a)
-        np[2]=(i*c,i*a,i*b)
-        np[3]=(i*a,i*b,i*c)
-        np[4]=(i*b,i*c,i*a)
-        np[5]=(i*c,i*a,i*b)
-        np[6]=(i*a,i*b,i*c)   
-        Write()
-        if get_IR_data()!=1:
-            return
-        time.sleep(0.001*(256-i))
+
 def mode2():
     clear()
     colorset={(255,0,0),(0,255,0),(0,0,255),(0,255,255),(255,255,0),(255,255,255)}
@@ -74,24 +50,7 @@ def mode2():
             time.sleep(.2)
         time.sleep(0.5)
     
-def mode0():
-    color=0xff
-    k=0
-    while k<(num_pixels):
-#         print(f"no of led {num_pixels}")
-        for i in range(num_pixels):    
-            np[i]=((color&0xFF000000)>>24,(color&0x00FF0000)>>16,(color&0x0000FF00)>>8)
-            Write()
-            #print(color)
-            #print(i)
-            color=color*256
-            time.sleep(0.5)
-            if color > 0x100000000:
-                color = 0xff00
-                clear()
-            k=k+1
-        time.sleep(0.5)
-        color=color*256
+
 def ON(Led,Red,Green,Blue):
     np[Led]=(Blue,Red,Green)
     Write()
@@ -229,7 +188,7 @@ def mode9():  #wave
                 np[i] = (0, 0, 0)  # Turn off the LED
         Write()
         time.sleep(wait)
-def mode10():
+def mode0():
     wait=0.1
     for i in range(num_pixels):
         np[i] = (255, 255, 255)  # White light
