@@ -1,6 +1,7 @@
 import network
 import urequests
 import ujson
+import json
 import time
 import os
 import machine
@@ -151,15 +152,27 @@ def ota_update():
                     print("OLED Error:", e)
 def run_update():
     try:
-        connect_wifi()
+        if not connect_wifi():
+            try:
+                from drivers.oled import oled_log
+                oled_two_data(1,3,"WIFI Conn",f"Failed") 
+                
+            except Exception as e:
+                print("OLED Error:", e)
+            time.sleep(2)
+            return()
+            
     except:
-        ssid = "Probots"
-        password = "Probots@1234"
-
-    # Connect to Wi-Fi
-        if not connect_wifi(ssid, password):
-            print("Wi-Fi connection failed. Exiting.")
-            return
+        
+        if not connect_wifi(ssid="Probot",password="Probot@1234"):
+            try:
+                from drivers.oled import oled_log
+                oled_two_data(1,3,"WIFI Conn",f"Failed")
+                
+            except Exception as e:
+                print("OLED Error:", e)
+            time.sleep(2)
+            return()
     try:
         ota_update()
     except Exception as e:

@@ -74,24 +74,24 @@ def mode2():
             time.sleep(.2)
         time.sleep(0.5)
     
-def mode0():
-    color=0xff
-    k=0
-    while k<(num_pixels):
-        print(f"no of led {num_pixels}")
-        for i in range(num_pixels):    
-            np[i]=((color&0xFF000000)>>24,(color&0x00FF0000)>>16,(color&0x0000FF00)>>8)
-            Write()
-            #print(color)
-            #print(i)
-            color=color*256
-            time.sleep(0.5)
-            if color > 0x100000000:
-                color = 0xff00
-                clear()
-            k=k+1
-        time.sleep(0.5)
-        color=color*256
+# def mode0():
+#     color=0xff
+#     k=0
+#     while k<(num_pixels):
+#         print(f"no of led {num_pixels}")
+#         for i in range(num_pixels):    
+#             np[i]=((color&0xFF000000)>>24,(color&0x00FF0000)>>16,(color&0x0000FF00)>>8)
+#             Write()
+#             #print(color)
+#             #print(i)
+#             color=color*256
+#             time.sleep(0.5)
+#             if color > 0x100000000:
+#                 color = 0xff00
+#                 clear()
+#             k=k+1
+#         time.sleep(0.5)
+#         color=color*256
 def ON(Led,Red,Green,Blue):
     np[Led]=(Blue,Red,Green)
     Write()
@@ -229,7 +229,7 @@ def mode9():  #wave
                 np[i] = (0, 0, 0)  # Turn off the LED
         Write()
         time.sleep(wait)
-def mode10():
+def mode0():
     wait=0.1
     for i in range(num_pixels):
         np[i] = (255, 255, 255)  # White light

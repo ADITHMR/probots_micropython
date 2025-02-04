@@ -8,10 +8,14 @@ wifi_connected = False
 wifi_connection_timeout = 8  # Timeout after 10 seconds
 wifi_conn_start_time = time.time()
 
-def connect_wifi():
+def connect_wifi(ssid=0,password=0):
     global wifi_connected  # Ensure we're using the global variable
-    WIFI_SSID = str(get_parameter("SSID"))
-    WIFI_PASSWORD = str(get_parameter("PASSWORD"))
+    if ssid==0 or password==0:
+        WIFI_SSID = str(get_parameter("SSID"))
+        WIFI_PASSWORD = str(get_parameter("PASSWORD"))
+    else:
+        WIFI_SSID = str(ssid)
+        WIFI_PASSWORD = str(password)
     
     wlan = network.WLAN(network.STA_IF)
     wlan.active(True)
@@ -26,11 +30,11 @@ def connect_wifi():
         if (time.time() - wifi_conn_start_time) > wifi_connection_timeout:
             print("Connection timed out")
             wifi_connected = False
-            return
+            return False
         time.sleep(1)
     
     wifi_connected = True
-    print('WiFi connected')
+    print('WiFi connected') 
     oled_log("WiFi connected")
     disp_seq_str(["DONE"], 1)
     print('IP Address:', wlan.ifconfig()[0])
@@ -39,3 +43,4 @@ def connect_wifi():
     
     ip_last_byte = wlan.ifconfig()[0].split('.')[3]
     disp_seq_str([str(ip_last_byte)], 1)
+    return True
