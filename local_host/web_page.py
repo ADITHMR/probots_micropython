@@ -4,10 +4,14 @@ from machine_id import get_serial_no
 
 
 
-
+# <option value=" ">--Select Project--</option>
 
 # Generate HTML for the dropdown
-html_dropdown =  """<select id="mydropdown" name="selectedItem" class="form-select" required>"""
+html_dropdown =  """
+<select id="mydropdown" name="selectedItem" class="form-select" required>
+<option value="">--Select Project--</option>
+
+"""
 for proj in project_topic_list:
     html_dropdown += f"<option value=\"{proj}\">{proj}</option>\n"
 html_dropdown+="</select>"    
