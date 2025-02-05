@@ -13,19 +13,19 @@
   <style>
     /* Body and Global Styles */
     body {
-      background-color: #070303;
-      color: #ffffff;
-      font-family: "Roboto", sans-serif;
+      background-color: #1d1f20;
+      color: #f5f5f5;
+      font-family: 'Arial', sans-serif;
       margin: 0;
       padding: 0;
       display: flex;
       flex-direction: column;
       min-height: 100vh;
     }
-
+  
     /* Fixed Top Bar */
     .top-bar {
-      background-color: #2c3e50;
+      background-color: #000000;
       color: white;
       width: 100%;
       padding: 10px 20px;
@@ -38,17 +38,18 @@
       left: 0;
       z-index: 1000;
     }
-
+  
     .top-bar h1 {
       margin: 0;
       font-size: 24px;
     }
-
+  
     .top-bar .logo {
       height: 40px;
       margin-right: 10px;
+      max-width: 100%; /* Make logo responsive */
     }
-
+  
     .top-bar .btn-home {
       background-color: #16a085;
       color: #ffffff;
@@ -59,128 +60,119 @@
       cursor: pointer;
       text-decoration: none;
     }
-
+  
     .top-bar .btn-home:hover {
       background-color: #1abc9c;
     }
-
-    .top-bar .btn-update {
-      background-color: #f39c12;
-      color: #ffffff;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .top-bar .btn-update:hover {
-      background-color: #e67e22;
-    }
-
+  
     /* Container Styles */
     .container {
+      background-color: #2c2f33;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      padding: 40px;
       text-align: center;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #1e1e1e;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-      padding: 30px;
-      width: 90%;
-      margin-top: 80px; /* Adjusted for top bar */
-      flex-wrap: wrap;
-      flex-grow: 1;
+      width: 100%;
+      max-width: 600px;
+      margin: 80px auto 40px; /* Adjusted bottom margin for space */
     }
-
-    /* Form Styles */
-    .form-container {
-      flex: 1;
-      margin-right: 20px;
-      padding: 20px;
-      text-align: left;
-    }
-
-    .form-container h2 {
+  
+    /* Heading Styles */
+    h2 {
+      font-size: 2.2rem;
       color: #03a9f4;
-      font-size: 2.5rem;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
+      font-weight: 700;
     }
-
-    .form-container button {
-      font-size: 18px;
-      padding: 12px 24px;
-      margin: 10px;
-      border-radius: 5px;
-      transition: all 0.3s ease;
-    }
-
-    .form-container button:hover {
-      transform: scale(1.05);
-    }
-
-    .form-container button.btn-success {
-      background-color: #4caf50;
-    }
-
-    .form-container button.btn-danger {
-      background-color: #f44336;
-    }
-
-    .form-container button.btn-warning {
-      background-color: #ff9800;
-    }
-
-    .form-container p {
-      font-size: 1.2rem;
-      color: #ccc;
-    }
-
-    /* Image Styling */
-    #image {
-      max-width: 100%;
-      max-height: 100vh;
-      object-fit: contain;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
-    }
-
+  
     /* Footer Styling */
     footer {
       margin-top: 20px;
       padding: 20px;
       text-align: center;
-      background-color: #1e1e1e;
+      background-color: #000000;
       width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      z-index: 1000;
+      color: white;
+      position: relative; /* Changed to relative to avoid fixed footer issue */
     }
-
+  
     footer form button {
       padding: 12px 24px;
       border-radius: 5px;
       font-size: 18px;
+      background-color: #f39c12;
+      border: none;
+      color: white;
+      cursor: pointer;
     }
-
-    /* Media query for mobile screens */
-    @media (max-width: 768px) {
-      .container {
+  
+    footer form button:hover {
+      background-color: #e67e22;
+    }
+  
+    /* Form Controls */
+    .form-control, .form-select, .form-check-input {
+      background-color: #444c56;
+      border: 1px solid #333;
+      color: #ddd;
+      padding: 12px 15px;
+      font-size: 1rem;
+      border-radius: 5px;
+      box-shadow: none;
+      transition: background-color 0.3s ease;
+    }
+  
+    .form-control:focus, .form-select:focus, .form-check-input:focus {
+      background-color: #555c66;
+      border-color: #03a9f4;
+      outline: none;
+    }
+  
+    /* Submit Button */
+    .btn-primary {
+      background-color: #03a9f4;
+      border: none;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 12px 24px;
+      margin-top: 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+  
+    .btn-primary:hover {
+      background-color: #0288d1;
+    }
+  
+    /* Responsive Design Enhancements */
+    @media (max-width: 576px) {
+      .top-bar {
         flex-direction: column;
         align-items: center;
+        padding: 10px;
       }
-
-      .form-container {
-        margin-right: 0;
-        margin-bottom: 20px;
+  
+      .top-bar h1 {
+        font-size: 20px;
+        text-align: center;
       }
-
+  
+      .container {
+        padding: 20px;
+        margin-top: 120px; /* Adjusted for top bar on small screens */
+        margin-bottom: 80px; /* Ensure space before footer */
+      }
+  
+      .btn-home {
+        width: 100%;
+        margin-top: 10px;
+      }
+  
       footer {
-        margin-top: 30px;
+        position: relative; /* Changed position from fixed to relative for better content display */
+        margin-top: 20px;
       }
     }
   </style>
@@ -204,10 +196,11 @@
   <h1 class="page-heading">{*Serial No*}</h1>
   <div class="container">
     <div class="form-container">
-      <h2 class="mb-4">ESP32 Control Panel</h2>
+      <h2 class="mb-4">Probots Control Panel</h2>
       <form method="POST">
         <div class="mb-3">
-          <label for="exampleDropdown" class="form-label">Powered By: Prosol Technologies.</label>
+          <h3 class="mb-4">{machine_id}</h3>
+          <label for="exampleDropdown" class="form-label">Select Project: </label>
           <!-- Dropdown for selecting project -->
           {html_dropdown}
         </div>
@@ -250,3 +243,5 @@
 </body>
 
 </html>
+
+

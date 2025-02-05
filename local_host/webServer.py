@@ -8,7 +8,7 @@ import machine
 from local_host.connect_wifi import  connect_wifi
 from local_host.web_page import web_page, successProjectPage,message_page,errorPage
 from local_host.get_project_html import get_project_html
-
+from machine_id import get_serial_no
 from utils import url_decode
 
 from local_host.project_config_update import update_project_config
@@ -44,8 +44,9 @@ app = picoweb.WebApp(__name__)
 @app.route("/")
 def index(req, resp):
     if req.method=="GET":
+        response=str(web_page()).replace("{machine_id}",f"S/N: {get_serial_no()}")
         yield from picoweb.start_response(resp)
-        yield from resp.awrite(web_page())
+        yield from resp.awrite(response)
     else:
         yield from req.read_form_data()
         data = req.form

@@ -9,122 +9,171 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
     <style>
+        /* Body and Global Styles */
         body {
-            background-color: #070303;
-            color: #ffffff;
-            font-family: "Roboto", sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-            padding-top: 70px; /* Prevent content from hiding behind the fixed top bar */
+          background-color: #1d1f20;
+          color: #f5f5f5;
+          font-family: 'Arial', sans-serif;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          min-height: 100vh;
         }
-
-        /* New Fixed Top Bar Style with Logo and Buttons */
+      
+        /* Fixed Top Bar */
         .top-bar {
-            background-color: #2c3e50;
-            color: white;
-            width: 100%;
-            padding: 10px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
+          background-color: #000000;
+          color: white;
+          width: 100%;
+          padding: 10px 20px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 1000;
         }
-
+      
         .top-bar h1 {
-            margin: 0;
-            font-size: 24px;
+          margin: 0;
+          font-size: 24px;
         }
-
+      
         .top-bar .logo {
-            height: 40px;
-            margin-right: 10px;
+          height: 40px;
+          margin-right: 10px;
+          max-width: 100%; /* Make logo responsive */
         }
-
+      
         .top-bar .btn-home {
-            background-color: #16a085;
-            color: #ffffff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            text-decoration: none;
+          background-color: #16a085;
+          color: #ffffff;
+          border: none;
+          padding: 10px 20px;
+          border-radius: 5px;
+          font-size: 16px;
+          cursor: pointer;
+          text-decoration: none;
         }
-
+      
         .top-bar .btn-home:hover {
-            background-color: #1abc9c;
+          background-color: #1abc9c;
         }
-
-        .top-bar .btn-update {
-            background-color: #f39c12;
-            color: #ffffff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        .top-bar .btn-update:hover {
-            background-color: #e67e22;
-        }
-
-        /* Container for message content */
+      
+        /* Container Styles */
         .container {
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            background-color: #1e1e1e;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            width: 90%;
-            margin-top: 80px;
-            flex: 1;
+          background-color: #2c2f33;
+          border-radius: 10px;
+          box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+          padding: 40px;
+          text-align: center;
+          width: 100%;
+          max-width: 600px;
+          margin: 80px auto 40px; /* Adjusted bottom margin for space */
         }
-
-        .message-container {
-            flex: 1;
+      
+        /* Heading Styles */
+        h2 {
+          font-size: 2.2rem;
+          color: #03a9f4;
+          margin-bottom: 30px;
+          font-weight: 700;
         }
-
-        .message-container h2 {
-            color: #03a9f4;
-        }
-
-        .message-container p {
-            font-size: 20px;
-            color: #ccc;
-        }
-
-        /* Fixed Footer */
+      
+        /* Footer Styling */
         footer {
-            margin-top: auto;
-            padding: 20px;
+          margin-top: 20px;
+          padding: 20px;
+          text-align: center;
+          background-color: #000000;
+          width: 100%;
+          color: white;
+          position: relative; /* Changed to relative to avoid fixed footer issue */
+        }
+      
+        footer form button {
+          padding: 12px 24px;
+          border-radius: 5px;
+          font-size: 18px;
+          background-color: #f39c12;
+          border: none;
+          color: white;
+          cursor: pointer;
+        }
+      
+        footer form button:hover {
+          background-color: #e67e22;
+        }
+      
+        /* Form Controls */
+        .form-control, .form-select, .form-check-input {
+          background-color: #444c56;
+          border: 1px solid #333;
+          color: #ddd;
+          padding: 12px 15px;
+          font-size: 1rem;
+          border-radius: 5px;
+          box-shadow: none;
+          transition: background-color 0.3s ease;
+        }
+      
+        .form-control:focus, .form-select:focus, .form-check-input:focus {
+          background-color: #555c66;
+          border-color: #03a9f4;
+          outline: none;
+        }
+      
+        /* Submit Button */
+        .btn-primary {
+          background-color: #03a9f4;
+          border: none;
+          color: #fff;
+          font-size: 1.1rem;
+          font-weight: 600;
+          padding: 12px 24px;
+          margin-top: 20px;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+        }
+      
+        .btn-primary:hover {
+          background-color: #0288d1;
+        }
+      
+        /* Responsive Design Enhancements */
+        @media (max-width: 576px) {
+          .top-bar {
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+          }
+      
+          .top-bar h1 {
+            font-size: 20px;
             text-align: center;
-            background-color: #1e1e1e;
+          }
+      
+          .container {
+            padding: 20px;
+            margin-top: 120px; /* Adjusted for top bar on small screens */
+            margin-bottom: 80px; /* Ensure space before footer */
+          }
+      
+          .btn-home {
             width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            z-index: 1000;
+            margin-top: 10px;
+          }
+      
+          footer {
+            position: relative; /* Changed position from fixed to relative for better content display */
+            margin-top: 20px;
+          }
         }
-
-        @media (max-width: 768px) {
-            .container {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-    </style>
+      </style>
 </head>
 <body>
 
@@ -164,3 +213,4 @@
         crossorigin="anonymous"></script>
 </body>
 </html>
+
