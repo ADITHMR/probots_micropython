@@ -1,5 +1,6 @@
 import  json
-
+from local_host.web_page import web_page
+from machine_id import get_serial_no
 def save_html():
     try:
         with open('local_host/project_page.html', 'r') as f:
@@ -75,6 +76,10 @@ def save_html():
         with open("html/activity5.html", "w") as f:
             f.write(response)
         # -----------------------------------------------------------
+        indexPage=str(web_page()).replace("{machine_id}",f"S/N: {get_serial_no()}")
+        with open("local_host/index_page.html", "w") as f:
+            f.write(indexPage)
         print("Successfully saved HTML files...")
     except Exception as e:
         print("Error on 'save_html()':", e)
+    

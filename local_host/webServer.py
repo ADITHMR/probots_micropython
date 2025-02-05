@@ -8,7 +8,7 @@ import machine
 from local_host.connect_wifi import  connect_wifi
 from local_host.web_page import web_page, successProjectPage,message_page,errorPage
 from local_host.get_project_html import get_project_html
-from machine_id import get_serial_no
+
 from utils import url_decode
 
 from local_host.project_config_update import update_project_config
@@ -44,7 +44,8 @@ app = picoweb.WebApp(__name__)
 @app.route("/")
 def index(req, resp):
     if req.method=="GET":
-        response=str(web_page()).replace("{machine_id}",f"S/N: {get_serial_no()}")
+        with open("local_host/index_page.html", 'r') as f:
+            response= f.read()
         yield from picoweb.start_response(resp)
         yield from resp.awrite(response)
     else:
@@ -100,13 +101,13 @@ def update_now(req, resp):
             json.dump(schema, f)
     response=message_page('''
     <h2>Update Initiated...</h2>
-    <h3>Device getting restarted...</h3>
+    <h3>Press the reset button to proceed with the update...</h3>
     <h3>Sit back and relax...</h3>
     <h1 class="text-danger">Do not interrupt the update process.</h1>''')
     yield from picoweb.start_response(resp)
     yield from resp.awrite(response)
-    time.sleep(.1)
-    machine.reset()
+    
+    
 @app.route("/restart")
 def restart(req, resp):
     response=message_page(f'''
