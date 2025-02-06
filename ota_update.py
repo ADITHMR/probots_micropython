@@ -60,15 +60,15 @@ def download_file(url, folder, filename):
     try:
         # Check if the folder exists, if not, create it
         try:
-            os.listdir(folder)
+            os.listdir(f"backup/{folder}")
             
             
         except OSError:
-            os.mkdir(folder)
+            os.mkdir(f"backup/{folder}")
             print(f"Created folder: {folder}")
 
         # Construct the full file path
-        file_path = f"{folder}/{filename}"
+        file_path = f"backup/{folder}/{filename}"
 
         # Download the file and save it to the specified folder
         response = urequests.get(url)
@@ -111,7 +111,7 @@ def ota_update():
     finished_files=0
     for folder_data in file_folders:
         folder = folder_data["folder"]
-        files = folder_data["files"]
+        files = folder_data["files"] 
 
             # For each folder, get the list of files from GitHub and download them
         for filename in files:
