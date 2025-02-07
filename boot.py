@@ -61,13 +61,17 @@ def delete_all_content(directory):
 
 with open('schema.dat', 'r') as f:
     data = json.load(f)
-temp=str(data["update_flag"]) 
-print(f"update_status={temp}")
+update_flag=str(data["update_flag"])
+download_flag=str(data["download_flag"])
+print(f"update_status={update_flag}")
+print(f"download_status={download_flag}")
 
 
-if temp=="True":
+if update_flag=="True":
     print("Starting Update")
-    time.sleep(.5)
+    oled_two_data(1,1,"Starting","Update")
+    time.sleep(1)
+    oled_two_data(1,1,"Clearing","Files")
     try:
         os.listdir("/backup")
         delete_all_content("/backup")
@@ -81,11 +85,27 @@ if temp=="True":
         print("OLED Error:", e)
     from ota_update import run_update
     run_update()
+    oled_two_data(1,1,"Downloading","Completed")
+    with open('schema.dat', 'r') as f:
+        data = json.load(f)
+    data["update_flag"]="False"
+    data["download_flag"]="True"
+    with open('config.txt', 'w') as f:
+        json.dump(data, f)
+    time.sleep(2)
+if download_flag=="True":
     oled_two_data(1,1,"Installing","Update")
+    time.sleep(.5)
     copy_all_content("/backup", "/")
     oled_two_data(1,1,"Updation","Completed")
-    time.sleep(2)
-
+    with open('schema.dat', 'r') as f:
+        data = json.load(f)
+    data["download_flag"]="False"
+    with open('config.txt', 'w') as f:
+        json.dump(data, f)
+    time.sleep(1)
+    
+    
 time.sleep(.5)
 from process.save_html import save_html
 from process.fetch_projects import fetch_projects
