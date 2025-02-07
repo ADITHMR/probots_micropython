@@ -2,7 +2,7 @@ import json
 
 
 def set_parameter(parameter,value):
-    with open('config.txt', 'r') as f: 
+    with open('sys_config.txt', 'r') as f: 
         data = json.load(f)
         if parameter in data:
             try:
