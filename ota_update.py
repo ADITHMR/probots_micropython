@@ -133,7 +133,7 @@ def ota_update():
             progress=int((finished_files / file_count) * 100)
             try:
                 from drivers.oled import oled_log
-                oled_two_data(1,3,"Updating",f"{progress}%")
+                oled_two_data(1,3,"Downloading",f"{progress}%")
             except Exception as e:
                 print("OLED Error:", e)
             print(f"progress={progress}")

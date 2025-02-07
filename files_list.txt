@@ -162,14 +162,12 @@
      {
         "files": [
             "boot.py",
-             "config.txt",
              "files_list.txt",
              "imports.py",
              "machine_id.py",
              "main.py",
              "ota_update.py",
              "pin_mapping.py",
-             "schema.dat",
              "utils.py",
              "version.dat"
         ],
