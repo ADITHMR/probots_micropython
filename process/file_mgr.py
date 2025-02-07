@@ -9,7 +9,7 @@ def set_parameter(parameter,value):
                 data[parameter]=str(value)
             except :
                 return "Data format error"
-            with open('config.txt', 'w') as f:
+            with open('sys_config.txt', 'w') as f:
                 json.dump(data, f)
                 print("Data storedf in config.txt")
             read_data=get_parameter(parameter)
@@ -20,7 +20,7 @@ def set_parameter(parameter,value):
                 return "Error Saving Data"
         else: return f"Error 404: No parameter named {parameter}"
 def get_parameter(parameter):
-        with open('config.txt', 'r') as f:
+        with open('sys_config.txt', 'r') as f:
             data= json.load(f)
             if parameter in data:
                 result=data[parameter].replace("'","")
