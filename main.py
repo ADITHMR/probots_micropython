@@ -24,7 +24,7 @@ import _thread
 
 
 
-ir = NEC_8(pin_ir, callback) # Instantiate the NEC_8 receiver
+# ir = NEC_8(pin_ir, callback) # Instantiate the NEC_8 receiver
 # # Show debug information
 # ir.error_function(print_error)
 
@@ -41,8 +41,8 @@ print(f"project_name-->{proj}")
 
 
 try:
-
-    _thread.start_new_thread(run, (proj,))
+    run(proj)
+#     _thread.start_new_thread(run, (proj,))
     
 
     

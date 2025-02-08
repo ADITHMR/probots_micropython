@@ -11,8 +11,8 @@ from imports import *
 from drivers.ir_decode import get_IR_data
 import os
 from utils import get_activity_params
-# from ir_rx.nec import NEC_8
-# ir = NEC_8(pin_ir, callback) # Instantiate the NEC_8 receiver
+from ir_rx.nec import NEC_8
+ir = NEC_8(pin_ir, callback) # Instantiate the NEC_8 receiver
 
 num_pixels=5
 Red=0
@@ -381,7 +381,7 @@ def run_activity(activity):
     while True:
         irdata=get_IR_data()
         LED(irdata)
-        
+       
 
 
 

@@ -1,128 +1,160 @@
 # ********************AutoGate: Self opening gate**********************
-
-
-from machine import Pin, PWM
+from machine import Pin
 import time
-from process.file_mgr import get_project_config_data
-from pin_mapping import set_pin_in,get_trig_state
-from drivers.display import disp_seq_str
-from drivers.oled import oled_two_data,oled_three_data
-from drivers.led_strip import all_set_color
+from servo import Servo
+from drivers.oled import oled_two_data
+from neopixel import NeoPixel
+from analog_buzzer import AnalogBuzzer
 from utils import get_activity_params
+from pin_mapping import get_trig_state
 
 
 
 
-# servo_pin=None
-# Function to initialize the PWM for the servo
-def init_servo():
-    global servo
-    servo = PWM(servo_pin, freq=50)  # Create PWM object for controlling the servo
-    print("PWM initialized for servo.")
+is_led_used=None
+buzzer_pin=None
+total_counts = None
+timeout_duration = None
+num_pixels=None
+led_strip_pin=None
+np=[]
+buzzer=None
+servo_mtr=None
 
-# Function to open the gate (move servo to 90 degrees)
-def open_gate():
-    init_servo()
-    Servo(0)  # Adjust the duty cycle to open the gate (angle ~90 degrees)
-    print("Gate opened")
-    oled_two_data(2,2,"Gate","OPEN")
-    disp_seq_str(["OPEN"],0)
-    all_set_color(0,255,0)
-    stop_pwm()
 
-# Function to close the gate (move servo to 0 degrees)
-def close_gate():
-    init_servo()
-    Servo(180)  # Adjust the duty cycle to close the gate (angle ~0 degrees)
-    print("Gate closed")
-    disp_seq_str(["CLSE"],0)
-    oled_two_data(2,2,"Gate","Closed")
-    all_set_color(255,0,0)
-    stop_pwm()
     
-def Servo(angle):
-    servo.duty(int(((angle)/180 *2 + 0.5) / 20 * 1023))
+def run_activity(activity):    
+    oled_two_data(1,2,"Running","AutoGate")
+    time.sleep(2)
     
-# Function to disable the PWM signal for the servo
-def stop_pwm():
-    servo.deinit()  # Disable PWM on the servo pin
-    print("PWM signal disabled")
-
-def run_activity(activity):
+    global np, is_led_used,buzzer_pin,total_counts,buzzer
+    global timeout_duration ,num_pixels,led_strip_pin,servo_mtr
+    # -----------------------------------
+    # User Defined Datas
+#     is_led_used=1
+# # Initialize IR sensors and servo motor
+#     sensor_in_pin=36
+#     sensor_out_pin=39
+#     servo_mtr_pin=33
+#           # Servo motor control
+#     buzzer_pin=32
+#     timeout_duration = 5 
+#     num_pixels=5
+#     led_strip_pin=5
     params=get_activity_params(activity)
+#     print(params)
+    
+    sensor_in_pin=int(params["sensor_in_pin"])
+    sensor_out_pin=int(params["sensor_out_pin"])
+    servo_mtr_pin=int(params["servo_mtr_pin"])
+          # Servo motor control
+    buzzer_pin=int(params["buzzer_pin"])
+    timeout_duration = int(params["timeout_duration"])
+    num_pixels=int(params["num_pixels"])
+    led_strip_pin=int(params["led_strip_pin"])
+    sensor_out_active_state=get_trig_state(params["sensor_out_active_state"])
+    sensor_in_active_state=get_trig_state(params["sensor_in_active_state"])
+    # -----------------------------------
+    sensor_in = Pin(sensor_in_pin, Pin.IN)  # IR sensor for entry
+    sensor_out = Pin(sensor_out_pin, Pin.IN) # IR sensor for exit
+    servo_mtr = Servo(servo_mtr_pin)
     
     
-    # Initialize sensors and servo pin
-    sensor_1_pin = set_pin_in(params["sensor1_pin"])
-    sensor_2_pin = set_pin_in(params["sensor2_pin"])
+    buzzer = AnalogBuzzer(pin_number=buzzer_pin)
+    buzzer.play_tone(2000, 2)
     
-    sensor_1_state = get_trig_state(params["sensor1_active_state"])
-    sensor_2_state = get_trig_state(params["sensor2_active_state"])
-    
-    # Servo pin initialization
-    global servo_pin  # Only if necessary, else handle it locally
-    servo_pin = int(params["servo_pin"])
-    init_servo()  # Initialize servo motor
+    led_strip=Pin(led_strip_pin, Pin.IN)
+    np = NeoPixel(led_strip,num_pixels)
+    gate_close()
+    total_counts = 0
+#     red(num_pixels)
+    is_entering = 0
+    is_exiting = 0
 
-    TIMEOUT_DURATION = 15  # Timeout duration in seconds
-    last_open_time = 0  # Track the time the gate was last opened
-    gate_open = False  # Track the state of the gate (open or closed)
-    open_direction=0
-    # Initial gate closure
-    close_gate()
-   
-    print("starting 'AutoGate: Self opening gate' activity")
+    # Main loop
     while True:
-        # Check if either sensor detects an object to open the gate
-        if (sensor_1_pin.value() == sensor_1_state or sensor_2_pin.value() == sensor_2_state) and not gate_open:
-            if sensor_1_pin.value() == sensor_1_state:
-                open_direction=1
-            elif sensor_2_pin.value() == sensor_2_state:
-                open_direction=2
+        try:
+            start_time = time.time()  
+
+            if is_exiting == 0 and is_entering == 0:
+                if sensor_in.value() == sensor_in_active_state:  
+        #             time.sleep(0.1)  
+                    print("Student Entering.")
+                    oled_two_data(2,1,"Entering","-----")
+                    gate_open()
+                    is_entering = 1 
+
+                elif sensor_out.value() == sensor_out_active_state:  
+        #             time.sleep(0.1) 
+                    print("Student Exiting.")
+                    oled_two_data(2,1,"Exiting","-----")
+                    gate_open()
+                    is_exiting = 1  
+
+            else:
+              
+                while time.time() - start_time < timeout_duration:
+                    if is_exiting == 1:
+                        if sensor_in.value() == sensor_in_active_state: 
+        #                     time.sleep(0.1)  
+                            total_counts -= 1
+                            print(f"Total count = {total_counts}")
+                            oled_two_data(1,2,"Count",str(total_counts))
+                            gate_close()  
+                            is_exiting = 0  
+                            
+                            while sensor_in.value() == sensor_in_active_state:
+                                pass
+                            time.sleep(.2)  
+                            break  
+                    elif is_entering == 1:
+                        if sensor_out.value() == sensor_out_active_state:  
+        #                     time.sleep(0.1) 
+                            total_counts += 1
+                            print(f"Total count = {total_counts}")
+                            oled_two_data(1,2,"Count",str(total_counts))
+                            gate_close() 
+                            is_entering = 0  
+                            
+                            while sensor_out.value() == sensor_out_active_state:
+                                pass
+                            time.sleep(.2)  
+                            break  
                 
-            print("Entry detected! Opening the gate.")
-            init_servo()  # Initialize the servo before moving it
-            open_gate()   # Open the gate
-            gate_open = True  # Mark the gate as open
-            last_open_time = time.time()  # Store the current time when the gate opened
-            time.sleep(1)  # Add a small delay to avoid multiple triggers
+              
+                if time.time() - start_time >= timeout_duration:
+                    print("Timeout! Closing gate.")
+                    gate_close()
+                    oled_two_data(2,1,"Timeout","Gate Closed")
+                    is_entering = 0
+                    is_exiting = 0
+                    time.sleep(1)  
 
-        # If the gate is open, check for timeout or exit
-        if gate_open:
-            current_time = time.time()
-            timeout_display = str(TIMEOUT_DURATION - (current_time - last_open_time))
-#             print(f"Time since last open: {current_time - last_open_time}s")
-            
-            # Update the OLED display with timeout
-            oled_three_data(2, 2, 1, "Gate", "OPEN", f"t-out->{timeout_display}")
-            disp_seq_str([timeout_display], 0)
+            time.sleep(0.1)
+        except Exception as e:
+            print(f"Error in Autogate activity(): {e}")
+def led_write():
+    np.write()
+    
+def red(num_pixels):
+    for i in range(num_pixels):
+        np[i] = (255,0,0)
+        led_write()
+def green(num_pixels):
+    for i in range(num_pixels):
+        np[i] = (0,255,0)
+        led_write()
 
-            # Check for timeout condition
-            if current_time - last_open_time >= TIMEOUT_DURATION:
-#                 print(f"Timeout reached ({TIMEOUT_DURATION} seconds)! Closing the gate.")
-                oled_two_data(2, 2, "Timeout", "______")
-                disp_seq_str(["TOUT"], 0)
-                time.sleep(1)
-                close_gate()
-                gate_open = False  # Mark the gate as closed
-                time.sleep(1)  # Add a small delay to avoid multiple triggers
+def gate_open():
+    global num_pixels
+    servo_mtr.move(90)
+    green(num_pixels)
+    buzzer.play_tone(2500, .5)
 
-            # Check if the other sensor detects an object to close the gate
-            elif (sensor_1_pin.value() == sensor_1_state and sensor_2_pin.value() != sensor_2_state)and open_direction==2:  # If Sensor 1 detects and Sensor 2 does not
-                print("Exit detected! Closing the gate.")
-                close_gate()
-                gate_open = False  # Mark the gate as closed
-                open_direction=0
-                time.sleep(1)  # Add a small delay to avoid multiple triggers
-
-            elif (sensor_2_pin.value() == sensor_2_state and sensor_1_pin.value() != sensor_1_state)and open_direction==1:  # If Sensor 2 detects and Sensor 1 does not
-                print("Exit detected! Closing the gate.")
-                close_gate()
-                gate_open = False  # Mark the gate as closed
-                open_direction=0
-                time.sleep(1)  # Add a small delay to avoid multiple triggers
-            elif sensor_1_pin.value() != sensor_1_state and sensor_2_pin.value() != sensor_2_state:
-                pass
-        time.sleep(0.1)  # Polling interval to reduce CPU load
-
-
+def gate_close():
+    global num_pixels
+    servo_mtr.move(180)
+    red(num_pixels)
+    buzzer.play_tone(2500, .5)
+    
+# run_activity("activity3")

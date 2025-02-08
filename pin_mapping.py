@@ -45,4 +45,6 @@ def get_trig_state(state):
         return 0
     elif state=="Active High":
         return 1
+    else:
+        return 0
     

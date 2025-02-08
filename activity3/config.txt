@@ -1,1 +1,1 @@
-{"project_name": "AutoGate: Self opening gate", "params": {"sensor2_active_state": "Active Low", "sensor1_active_state": "Active Low", "sensor2_pin": "36", "servo_pin": "33", "sensor1_pin": "39"}}
+{"project_name": "AutoGate: Self opening gate", "params": {"sensor_out_pin": "36", "timeout_duration": "6", "sensor_in_active_state": "Active Low", "led_strip_pin": "5", "buzzer_pin": "13", "num_pixels": "5", "sensor_in_pin": "39", "servo_mtr_pin": "33", "sensor_out_active_state": "Active Low"}}

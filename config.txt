@@ -1,1 +1,1 @@
-{"SSID": "Ponnus", "PROJECT": "Luminous Play: LED light magic", "PASSWORD": "Ariyilla"}
+{"SSID": "Ponnus", "PROJECT": "AutoGate: Self opening gate", "PASSWORD": "Ariyilla"}

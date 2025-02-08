@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="Control your ESP32 using a web interface." />
+  <title>Probot Web Server</title>
+  <meta name="favicon" href="https://img.icons8.com/?size=80&id=dxoYK8bxqiJr&format=png" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+  <style>
+    /* Body and Global Styles */
+    body {
+      background-color: #1d1f20;
+      color: #f5f5f5;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Fixed Top Bar */
+    .top-bar {
+      background-color: #000000;
+      color: white;
+      width: 100%;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+    }
+
+    .top-bar h1 {
+      margin: 0;
+      font-size: 24px;
+    }
+
+    .top-bar .logo {
+      height: 40px;
+      margin-right: 10px;
+      max-width: 100%;
+    }
+
+    .top-bar .btn-home {
+      background-color: #16a085;
+      color: #ffffff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .top-bar .btn-home:hover {
+      background-color: #1abc9c;
+    }
+
+    /* Main Layout Styles */
+    .main-layout {
+      display: flex;
+      margin-top: 80px; /* Add margin to prevent content from hiding behind the fixed top bar */
+      flex: 1;
+    }
+
+    /* Sidebar Styles */
+    .sidebar {
+      background-color: #2c2f33;
+      width: 250px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      flex: 1; /* Sidebar takes up 1 part of the space */
+    }
+
+    /* Heading Styles inside Sidebar */
+    h2 {
+      font-size: 2.2rem;
+      color: #03a9f4;
+      margin-bottom: 30px;
+      font-weight: 700;
+    }
+
+    .form-container {
+      margin-bottom: 20px;
+    }
+
+    .form-control,
+    .form-select,
+    .form-check-input {
+      background-color: #444c56;
+      border: 1px solid #333;
+      color: #ddd;
+      padding: 12px 15px;
+      font-size: 1rem;
+      border-radius: 5px;
+      box-shadow: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .form-control:focus,
+    .form-select:focus,
+    .form-check-input:focus {
+      background-color: #555c66;
+      border-color: #03a9f4;
+      outline: none;
+    }
+
+    /* Submit Button */
+    .btn-primary {
+      background-color: #03a9f4;
+      border: none;
+      color: #fff;
+      font-size: 1.1rem;
+      font-weight: 600;
+      padding: 12px 24px;
+      margin-top: 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background-color: #0288d1;
+    }
+
+    /* Image Container */
+    .image-container {
+      flex: 2; /* Image takes 2 parts of the space */
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Footer Styling */
+    footer {
+      padding: 20px;
+      text-align: center;
+      background-color: #000000;
+      width: 100%;
+      color: white;
+      position: relative;
+    }
+
+    footer form button {
+      padding: 12px 24px;
+      border-radius: 5px;
+      font-size: 18px;
+      background-color: #f39c12;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    footer form button:hover {
+      background-color: #e67e22;
+    }
+
+    /* Responsive Design Enhancements */
+    @media (max-width: 768px) {
+      .main-layout {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        margin-bottom: 20px; /* Adjust margin when stacked */
+      }
+
+      .image-container {
+        width: 100%;
+      }
+
+      .image-container img {
+        width: 100%;
+      }
+
+      footer {
+        margin-top: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Fixed Top Bar with Home Button and Update Firmware Button -->
+  <div class="top-bar">
+    <div>
+      <img src="https://scontent.fblr2-2.fna.fbcdn.net/v/t39.30808-6/300113092_198364385873102_4925997586295706610_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=HSVi3dg0_O4Q7kNvgF55eJH&_nc_zt=23&_nc_ht=scontent.fblr2-2.fna&_nc_gid=AQ0ua-sBWhjlSiMlt_f49Qz&oh=00_AYBwXKET7woh8WPY-fdp8JS20bi_aTnKBMrjWEZJPLsKAg&oe=67A53D83" alt="Logo" class="logo">
+    </div>
+    <h1>Probot Web Interface</h1>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="main-layout">
+    <!-- Sidebar Section -->
+    <div class="sidebar">
+      <h2 class="mb-4">Probots Control Panel</h2>
+      <form method="POST">
+        <div class="form-container">
+          <h3 class="mb-4">S/N: PB4e3cb400001</h3>
+          <label for="exampleDropdown" class="form-label">Select Project: </label>
+          <!-- Dropdown for selecting project -->
+          
+<select id="mydropdown" name="selectedItem" class="form-select" required>
+<option value="">--Select Project--</option>
+
+<option value="Luminous Play: LED light magic">Luminous Play: LED light magic</option>
+<option value="SentiLume: Intelligent street illumination">SentiLume: Intelligent street illumination</option>
+<option value="AutoGate: Self opening gate">AutoGate: Self opening gate</option>
+<option value="CountMaster: Student headcount Tracker">CountMaster: Student headcount Tracker</option>
+<option value="FireGuard: Intelligent Fire Detection">FireGuard: Intelligent Fire Detection</option>
+</select>
+        </div>
+        <button type="submit" class="btn btn-primary" id="nextButton" style="display: none;">Next</button>
+      </form>
+    </div>
+
+    <!-- Image Container -->
+    <div class="image-container">
+      <img id="image" src="https://raw.githubusercontent.com/ADITHMR/probot_Images/refs/heads/main/default.jpeg" alt="Selected Image">
+    </div>
+  </div>
+
+  <!-- Footer Section with Firmware Update Button -->
+  <footer>
+    <a class="btn-home" href="/checkUpdate">Check for updates</a>
+    <p>Probot Web Server | Powered by Prosol Technologies</p>
+  </footer>
+
+  <script>
+    // Function to handle the dropdown change event and update the image
+    document.getElementById('mydropdown').addEventListener("change", function () {
+      var selectedValue = this.value;
+      var image_name = selectedValue.split(":")[0]; // Remove spaces from selected value
+      var imgSrc=""
+      if(selectedValue==""){
+        imgSrc="https://raw.githubusercontent.com/ADITHMR/probot_Images/refs/heads/main/default.jpeg"
+      }else{
+        imgSrc = "https://raw.githubusercontent.com/ADITHMR/probot_Images/refs/heads/main/" + image_name + ".jpeg";
+
+      }
+      document.getElementById('image').src = imgSrc; // Update the image source
+
+      // Show or hide the "Next" button based on dropdown selection
+      var nextButton = document.getElementById('nextButton');
+      if (selectedValue === "") {
+        nextButton.style.display = "none"; // Hide the "Next" button
+      } else {
+        nextButton.style.display = "inline-block"; // Show the "Next" button
+      }
+    });
+  </script>
+</body>
+
+</html>
