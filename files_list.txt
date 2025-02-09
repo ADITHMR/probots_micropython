@@ -75,8 +75,10 @@
     },
      {
         "files": [
-            "neopixel.py",
+            "analog_buzzer.py",
+             "neopixel.py",
              "pkg_resources.py",
+             "servo.py",
              "ssd1306.py",
              "traceback.py",
              "ulogging.py"
@@ -90,12 +92,11 @@
              "esp_as_AP.py",
              "get_project_html.py",
              "index.html",
+             "index_page.html",
              "message.html",
              "project_config_update.py",
              "project_options_JSON.txt",
              "project_page.html",
-             "project_sel_success.html",
-             "restart_success_page.html",
              "test_web_page.py",
              "webServer.py",
              "web_page.py",
@@ -144,6 +145,7 @@
      {
         "files": [
             "config.txt",
+             "html_options.txt",
              "project_configurations.txt"
         ],
          "folder": "//samples"
@@ -162,14 +164,12 @@
      {
         "files": [
             "boot.py",
-             "config.txt",
              "files_list.txt",
              "imports.py",
              "machine_id.py",
              "main.py",
              "ota_update.py",
              "pin_mapping.py",
-             "schema.dat",
              "utils.py",
              "version.dat"
         ],
