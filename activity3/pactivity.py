@@ -95,7 +95,9 @@ def run_activity(activity):
               
                 while time.time() - start_time < timeout_duration:
                     if is_exiting == 1:
-                        if sensor_in.value() == sensor_in_active_state: 
+                        if sensor_in.value() == sensor_in_active_state:
+                            while sensor_in.value() == sensor_in_active_state:
+                                pass
         #                     time.sleep(0.1)  
                             total_counts -= 1
                             print(f"Total count = {total_counts}")
@@ -103,12 +105,13 @@ def run_activity(activity):
                             gate_close()  
                             is_exiting = 0  
                             
-                            while sensor_in.value() == sensor_in_active_state:
-                                pass
-                            time.sleep(.2)  
+                            
+#                             time.sleep(.2)  
                             break  
                     elif is_entering == 1:
-                        if sensor_out.value() == sensor_out_active_state:  
+                        if sensor_out.value() == sensor_out_active_state:
+                            while sensor_out.value() == sensor_out_active_state:
+                                pass
         #                     time.sleep(0.1) 
                             total_counts += 1
                             print(f"Total count = {total_counts}")
@@ -116,9 +119,8 @@ def run_activity(activity):
                             gate_close() 
                             is_entering = 0  
                             
-                            while sensor_out.value() == sensor_out_active_state:
-                                pass
-                            time.sleep(.2)  
+                            
+#                             time.sleep(.2)  
                             break  
                 
               
