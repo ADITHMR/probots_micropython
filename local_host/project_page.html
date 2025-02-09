@@ -274,7 +274,7 @@
           checkbox.setAttribute('type', 'checkbox');
           checkbox.setAttribute('id', input.name);
           checkbox.setAttribute('name', input.name);
-          checkbox.required = input.required;
+          checkbox.setAttribute('value', 'false');
           if (input.defaultValue) checkbox.checked = input.defaultValue;
 
           const checkboxLabel = document.createElement('label');
@@ -289,7 +289,13 @@
           const bottomSeparator = document.createElement('hr');
     bottomSeparator.classList.add('bottom-separator'); // Add custom bottom separator styling
     div.appendChild(bottomSeparator);
-          
+          checkbox.addEventListener('change', function () {
+    if (checkbox.checked) {
+      checkbox.setAttribute('value', 'true'); // Set the value to true when checked
+    } else {
+      checkbox.setAttribute('value', 'false'); // Set the value to false when unchecked
+    }
+  });
         }
         else if (input.type === 'project') {
           const hiddenInput = document.createElement('input');
@@ -329,7 +335,10 @@
       submitButton.classList.add('btn', 'btn-primary');
       submitButton.textContent = 'Submit';
       form.appendChild(submitButton);
+     // Attach submit event listener
+     
     }
+
 
     window.onload = generateForm;
   </script>

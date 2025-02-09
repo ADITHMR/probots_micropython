@@ -10,7 +10,9 @@
         "num_pixels": "5",
         "servo_mtr_pin": "33",
         "sensor_out_active_state": "Active Low",
-        "is_led_used":"",
-        "is_buzzer_used":""
+        "is_led_used":"Enabled",
+        "is_buzzer_used":"Enabled",
+        "close_angle":"0",
+        "open_angle":"90"
     }
 }

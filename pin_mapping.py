@@ -16,7 +16,7 @@ TOUCH2=Pin(15,Pin.IN)
 
 LED_STRIP=Pin(5,Pin.OUT)
 
-BUZZER=Pin(32,Pin.OUT)
+
 
 
 IR_LDR1=Pin(39,Pin.IN,Pin.PULL_UP)

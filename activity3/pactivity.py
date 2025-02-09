@@ -21,6 +21,9 @@ led_strip_pin=None
 np=[]
 buzzer=None
 servo_mtr=None
+open_angle=None
+close_angle=None
+
 
 
     
@@ -28,8 +31,8 @@ def run_activity(activity):
     oled_two_data(1,2,"Running","AutoGate")
     time.sleep(2)
     
-    global np, is_led_used,buzzer_pin,total_counts,buzzer
-    global timeout_duration ,num_pixels,led_strip_pin,servo_mtr
+    global np, is_led_used,buzzer_pin,total_counts,buzzer,open_angle,close_angle
+    global timeout_duration ,num_pixels,led_strip_pin,servo_mtr,is_buzzer_used
     # -----------------------------------
     # User Defined Datas
 #     is_led_used=1
@@ -44,29 +47,30 @@ def run_activity(activity):
 #     led_strip_pin=5
     params=get_activity_params(activity)
     print(params)
-#     is_led_used=None
-#     is_buzzer_used=None
+    is_led_used=params["is_led_used"]
+    is_buzzer_used=params["is_buzzer_used"]
     sensor_in_pin=int(params["sensor_in_pin"])
     sensor_out_pin=int(params["sensor_out_pin"])
     servo_mtr_pin=int(params["servo_mtr_pin"])
-          # Servo motor control
     buzzer_pin=int(params["buzzer_pin"])
     timeout_duration = int(params["timeout_duration"])
     num_pixels=int(params["num_pixels"])
     led_strip_pin=int(params["led_strip_pin"])
     sensor_out_active_state=get_trig_state(params["sensor_out_active_state"])
     sensor_in_active_state=get_trig_state(params["sensor_in_active_state"])
+    open_angle=int(params["open_angle"])
+    close_angle=int(params["close_angle"])
     # -----------------------------------
     sensor_in = Pin(sensor_in_pin, Pin.IN)  # IR sensor for entry
     sensor_out = Pin(sensor_out_pin, Pin.IN) # IR sensor for exit
     servo_mtr = Servo(servo_mtr_pin)
     
-    
-    buzzer = AnalogBuzzer(pin_number=buzzer_pin)
-    buzzer.play_tone(2000, 2)
-    
-    led_strip=Pin(led_strip_pin, Pin.IN)
-    np = NeoPixel(led_strip,num_pixels)
+    if is_buzzer_used=="Enabled":
+        buzzer = AnalogBuzzer(pin_number=buzzer_pin)
+        buzzer.play_tone(2000, 2)
+    if is_led_used=="Enabled":
+        led_strip=Pin(led_strip_pin, Pin.IN)
+        np = NeoPixel(led_strip,num_pixels)
     gate_close()
     total_counts = 0
 #     red(num_pixels)
@@ -141,24 +145,28 @@ def led_write():
     np.write()
     
 def red(num_pixels):
-    for i in range(num_pixels):
-        np[i] = (255,0,0)
-        led_write()
+    if is_led_used=="Enabled":
+        for i in range(num_pixels):
+            np[i] = (255,0,0)
+            led_write()
 def green(num_pixels):
-    for i in range(num_pixels):
-        np[i] = (0,255,0)
-        led_write()
+    if is_led_used=="Enabled":
+        for i in range(num_pixels):
+            np[i] = (0,255,0)
+            led_write()
 
 def gate_open():
-    global num_pixels
-    servo_mtr.move(90)
+    global num_pixels,open_angle
+    servo_mtr.move(float(open_angle))
     green(num_pixels)
-    buzzer.play_tone(2500, .5)
+    if is_buzzer_used=="Enabled":
+        buzzer.play_tone(2500, .5)
 
 def gate_close():
-    global num_pixels
-    servo_mtr.move(180)
+    global num_pixels,close_angle
+    servo_mtr.move(float(close_angle))
     red(num_pixels)
-    buzzer.play_tone(2500, .5)
+    if is_buzzer_used=="Enabled":
+        buzzer.play_tone(2500, .5)
     
 # run_activity("activity3")
