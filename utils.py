@@ -1,6 +1,13 @@
 import json
 
-
+def replace_true_with_true_json_list(data):
+    for item in data:
+        for key, value in item.items():
+            if value is True:
+                item[key] = True  # JSON-compatible true, as Python's True is already used in the list
+            elif isinstance(value, list):  # Check if it's a list and recursively process
+                replace_true_with_true(value)
+    return data
 
 def get_activity_params(activity):
     path=f"{activity}/config.txt"

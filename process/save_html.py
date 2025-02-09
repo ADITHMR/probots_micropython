@@ -1,6 +1,7 @@
 import  json
 from local_host.web_page import web_page
 from machine_id import get_serial_no
+from utils import replace_true_with_true_json_list
 def save_html():
     try:
         with open('local_host/project_page.html', 'r') as f:
@@ -12,7 +13,7 @@ def save_html():
             project_name = json.load(f)
                             
         project_name=project_name["project_name"]
-        optons=str(data["data"]).replace("'",'"')
+        optons=str(data["data"]).replace("'",'"').replace("True",'true')
         response = project_page.replace('{*config_list*}',str(optons))
         response = response.replace('{*heading*}', project_name)
 
@@ -22,11 +23,13 @@ def save_html():
         # -----------------------------------------------------------
         with open('activity2/web_data.html', 'r') as f:
             data = json.load(f)
+        
         with open('activity2/config.txt', 'r') as f:
             project_name = json.load(f)
                             
         project_name=project_name["project_name"]
-        optons=str(data["data"]).replace("'",'"')
+        optons=str(data["data"]).replace("'",'"').replace("True",'true')
+        
         response = project_page.replace('{*config_list*}',str(optons))
         response = response.replace('{*heading*}', project_name)
 
@@ -40,7 +43,7 @@ def save_html():
             project_name = json.load(f)
                             
         project_name=project_name["project_name"]
-        optons=str(data["data"]).replace("'",'"')
+        optons=str(data["data"]).replace("'",'"').replace("True",'true')
         response = project_page.replace('{*config_list*}',str(optons))
         response = response.replace('{*heading*}', project_name)
 
@@ -54,7 +57,7 @@ def save_html():
             project_name = json.load(f)
                             
         project_name=project_name["project_name"]
-        optons=str(data["data"]).replace("'",'"')
+        optons=str(data["data"]).replace("'",'"').replace("True",'true')
         response = project_page.replace('{*config_list*}',str(optons))
         response = response.replace('{*heading*}', project_name)
 
@@ -68,7 +71,7 @@ def save_html():
             project_name = json.load(f)
                             
         project_name=project_name["project_name"]
-        optons=str(data["data"]).replace("'",'"')
+        optons=str(data["data"]).replace("'",'"').replace("True",'true')
         response = project_page.replace('{*config_list*}',str(optons))
         response = response.replace('{*heading*}', project_name)
 

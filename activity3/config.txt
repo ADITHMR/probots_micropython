@@ -1,1 +1,16 @@
-{"project_name": "AutoGate: Self opening gate", "params": {"sensor_out_pin": "36", "timeout_duration": "6", "sensor_in_active_state": "Active Low", "led_strip_pin": "5", "buzzer_pin": "13", "num_pixels": "5", "sensor_in_pin": "39", "servo_mtr_pin": "33", "sensor_out_active_state": "Active Low"}}
+{
+    "project_name": "AutoGate: Self opening gate",
+    "params": {
+        "sensor_out_pin": "36",
+        "timeout_duration": "5",
+        "sensor_in_active_state": "Active Low",
+        "buzzer_pin": "32",
+        "led_strip_pin": "5",
+        "sensor_in_pin": "39",
+        "num_pixels": "5",
+        "servo_mtr_pin": "33",
+        "sensor_out_active_state": "Active Low",
+        "is_led_used":"",
+        "is_buzzer_used":""
+    }
+}

@@ -201,7 +201,7 @@
 
   <!-- JSON Data embedded within the script -->
   <script type="application/json" id="inputs-list">
-    [{"name": "AutoGate: Self opening gate", "type": "project"}, {"type": "select", "name": "sensor_in_pin", "label": "Entry IR Sensor ", "required": "true", "defaultValue": "39", "options": ["2", "4", "5", "12", "13", "14", "15", "16", "17", "18", "19", "23", "26", "32", "33", "34", "35", "36", "39"]}, {"type": "radio", "name": "sensor_in_active_state", "label": "Entry IR Sensor Output Type ", "required": "true", "defaultValue": "Active Low", "options": ["Active Low", "Active High"]}, {"type": "select", "name": "sensor_out_pin", "label": "Exit IR Sensor", "required": "true", "defaultValue": "36", "options": ["2", "4", "5", "12", "13", "14", "15", "16", "17", "18", "19", "23", "26", "32", "33", "34", "35", "36", "39"]}, {"type": "radio", "name": "sensor_out_active_state", "label": "Exit IR Sensor Output Type ", "required": "true", "defaultValue": "Active Low", "options": ["Active Low", "Active High"]}, {"type": "select", "name": "servo_mtr_pin", "label": "Servo motor Pin", "required": "true", "defaultValue": "33", "options": ["2", "4", "5", "12", "13", "14", "15", "16", "17", "18", "19", "23", "26", "32", "33"]}, {"type": "select", "name": "buzzer_pin", "label": "Buzzer Pin", "required": "true", "defaultValue": "32", "options": ["2", "4", "5", "12", "13", "14", "15", "16", "17", "18", "19", "23", "26", "32", "33"]}, {"type": "select", "name": "led_strip_pin", "label": "LED pin Pin", "required": "true", "defaultValue": "5", "options": ["2", "4", "5", "12", "13", "14", "15", "16", "17", "18", "19", "23", "26", "32", "33"]}, {"type": "select", "name": "num_pixels", "label": "No. of LEDs", "required": "true", "defaultValue": "5", "options": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100"]}, {"type": "select", "name": "timeout_duration", "label": "Door Timeout", "required": "true", "defaultValue": "6", "options": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]}]
+    [{"name": "AutoGate: Self opening gate", "type": "project"}, {"type": "select", "name": "sensor_in_pin", "label": "Entry IR Sensor ", "required": true, "defaultValue": "39", "options": ["2", "4", "5", "12", "13", "14", "15", "16", "17", "18", "19", "23", "26", "32", "33", "34", "35", "36", "39"]}, {"type": "radio", "name": "sensor_in_active_state", "label": "Entry IR Sensor Output Type ", "required": true, "defaultValue": "Active Low", "options": ["Active Low", "Active High"]}, {"type": "select", "name": "sensor_out_pin", "label": "Exit IR Sensor", "required": true, "defaultValue": "36", "options": ["2", "4", "5", "12", "13", "14", "15", "16", "17", "18", "19", "23", "26", "32", "33", "34", "35", "36", "39"]}, {"type": "radio", "name": "sensor_out_active_state", "label": "Exit IR Sensor Output Type ", "required": true, "defaultValue": "Active Low", "options": ["Active Low", "Active High"]}, {"type": "select", "name": "servo_mtr_pin", "label": "Servo motor Pin", "required": true, "defaultValue": "33", "options": ["2", "4", "5", "12", "13", "14", "15", "16", "17", "18", "19", "23", "26", "32", "33"]}, {"required": true, "name": "is_buzzer_used", "label": "Enable Buzzer", "defaultValue": true, "type": "checkbox"}, {"type": "select", "name": "buzzer_pin", "label": "Buzzer Pin", "required": true, "defaultValue": "13", "options": ["2", "4", "5", "12", "13", "14", "15", "16", "17", "18", "19", "23", "26", "32", "33"]}, {"required": true, "name": "is_led_used", "label": "Enable LED", "defaultValue": true, "type": "checkbox"}, {"type": "select", "name": "led_strip_pin", "label": "LED pin Pin", "required": true, "defaultValue": "5", "options": ["2", "4", "5", "12", "13", "14", "15", "16", "17", "18", "19", "23", "26", "32", "33"]}, {"type": "select", "name": "num_pixels", "label": "No. of LEDs", "required": true, "defaultValue": "5", "options": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59", "60", "61", "62", "63", "64", "65", "66", "67", "68", "69", "70", "71", "72", "73", "74", "75", "76", "77", "78", "79", "80", "81", "82", "83", "84", "85", "86", "87", "88", "89", "90", "91", "92", "93", "94", "95", "96", "97", "98", "99", "100"]}, {"type": "select", "name": "timeout_duration", "label": "Door Timeout", "required": true, "defaultValue": "6", "options": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30"]}]
   </script>
 
   <script>
@@ -219,6 +219,7 @@
         label.setAttribute('for', input.name);
         label.textContent = input.label;
         div.appendChild(label);
+        
 
         if (input.type === 'radio') {
           input.options.forEach(option => {
@@ -242,7 +243,11 @@
             divRadio.appendChild(radioInput);
             divRadio.appendChild(radioLabel);
             div.appendChild(divRadio);
+            
           });
+          const bottomSeparator = document.createElement('hr');
+           bottomSeparator.classList.add('bottom-separator'); // Add custom bottom separator styling
+          div.appendChild(bottomSeparator);
         } else if (input.type === 'select') {
           const select = document.createElement('select');
           select.classList.add('form-select');
@@ -259,7 +264,11 @@
           });
 
           div.appendChild(select);
+          const bottomSeparator = document.createElement('hr');
+           bottomSeparator.classList.add('bottom-separator'); // Add custom bottom separator styling
+          div.appendChild(bottomSeparator);
         } else if (input.type === 'checkbox') {
+          
           const checkbox = document.createElement('input');
           checkbox.classList.add('form-check-input');
           checkbox.setAttribute('type', 'checkbox');
@@ -271,10 +280,16 @@
           const checkboxLabel = document.createElement('label');
           checkboxLabel.classList.add('form-check-label');
           checkboxLabel.setAttribute('for', input.name);
-          checkboxLabel.textContent = input.label;
+          // checkboxLabel.textContent = input.label;
+          // Create and add a top separator (horizontal line)
+         
 
           div.appendChild(checkbox);
           div.appendChild(checkboxLabel);
+          const bottomSeparator = document.createElement('hr');
+    bottomSeparator.classList.add('bottom-separator'); // Add custom bottom separator styling
+    div.appendChild(bottomSeparator);
+          
         }
         else if (input.type === 'project') {
           const hiddenInput = document.createElement('input');
@@ -298,9 +313,14 @@
           inputField.required = input.required;
 
           div.appendChild(inputField);
+          const bottomSeparator = document.createElement('hr');
+           bottomSeparator.classList.add('bottom-separator'); // Add custom bottom separator styling
+          div.appendChild(bottomSeparator);
+          
         }
 
         form.appendChild(div);
+
       });
 
       // Add the submit button

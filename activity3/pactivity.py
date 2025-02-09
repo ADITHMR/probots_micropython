@@ -12,6 +12,7 @@ from pin_mapping import get_trig_state
 
 
 is_led_used=None
+is_buzzer_used=None
 buzzer_pin=None
 total_counts = None
 timeout_duration = None
@@ -42,8 +43,9 @@ def run_activity(activity):
 #     num_pixels=5
 #     led_strip_pin=5
     params=get_activity_params(activity)
-#     print(params)
-    
+    print(params)
+#     is_led_used=None
+#     is_buzzer_used=None
     sensor_in_pin=int(params["sensor_in_pin"])
     sensor_out_pin=int(params["sensor_out_pin"])
     servo_mtr_pin=int(params["servo_mtr_pin"])
