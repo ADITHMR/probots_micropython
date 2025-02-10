@@ -11,20 +11,20 @@ from drivers.display import *
 from drivers.ir_decode import *
 from ir_rx.nec import NEC_8
 from ir_rx.print_error import print_error
-from process.runProject import *
+from process.run_activity import run
 import _thread
 
 
-if TOUCH1.value()==True and TOUCH2.value()==True:
-    enable_AP()
-elif  TOUCH1.value()==True and TOUCH2.value()==False:
-    runWebServer()
+# if TOUCH1.value()==True and TOUCH2.value()==True:
+#     enable_AP()
+# elif  TOUCH1.value()==True and TOUCH2.value()==False:
+#     runWebServer()
     
 
 
 
 
-ir = NEC_8(pin_ir, callback) # Instantiate the NEC_8 receiver
+# ir = NEC_8(pin_ir, callback) # Instantiate the NEC_8 receiver
 # # Show debug information
 # ir.error_function(print_error)
 
@@ -41,8 +41,9 @@ print(f"project_name-->{proj}")
 
 
 try:
-
-    _thread.start_new_thread(runProject, (proj,))
+#     run(proj)
+    _thread.start_new_thread(run, (proj,))
+    
 
     
     

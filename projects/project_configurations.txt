@@ -1,0 +1,48 @@
+{
+    "05 Automatic fire detection system": {
+        "project": "05 Automatic fire detection system",
+        "sensor_active_state": "Active Low",
+        "sensor_pin": "35"
+    },
+    "02 Sensor-controlled street light": {
+        "sensor_active_state": "Active Low",
+        "project": "02 Sensor-controlled street light",
+        "sensor_pin": "39"
+    },
+    "07 Digital distance measurement": {
+        "project": "07 Digital distance measurement",
+        "trig_pin": "16",
+        "echo_pin": "17"
+    },
+    "04 Student headcount Tracker": {
+        "sensor2_active_state": "Active High",
+        "sensor1_active_state": "Active High",
+        "project": "04 Student headcount Tracker",
+        "sensor1_pin": "39",
+        "sensor2_pin": "36"
+    },
+    "03 Self-opening gate": {
+        "sensor2_active_state": "Active Low",
+        "sensor1_active_state": "Active Low",
+        "project": "03 Self-opening gate",
+        "servo_pin": "33",
+        "sensor1_pin": "39",
+        "sensor2_pin": "36"
+    },
+    "06 Temperature measurement device": {
+        "project": "06 Temperature measurement device",
+        "sensor_pin": "34"
+    },
+    "08 Automatic gas leak detecion": {
+        "sensor_pin": "35",
+        "project": "08 Automatic gas leak detecion",
+        "fan_pin_B": "19",
+        "sensor_active_state": "Active Low",
+        "fan_pin_A": "18"
+    },
+    "01 Fun with LED Lights": {
+        "project": "01 Fun with LED Lights",
+        "led_num": "5",
+        "strip_led_pin": "5"
+    }
+}

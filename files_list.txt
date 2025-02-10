@@ -1,31 +1,41 @@
 [
     {
         "files": [
-            
+            "config.txt",
+             "pactivity.py",
+             "web_data.html"
         ],
          "folder": "//activity1"
     },
      {
         "files": [
-            
+            "config.txt",
+             "pactivity.py",
+             "web_data.html"
         ],
          "folder": "//activity2"
     },
      {
         "files": [
-            
+            "config.txt",
+             "pactivity.py",
+             "web_data.html"
         ],
          "folder": "//activity3"
     },
      {
         "files": [
-            
+            "config.txt",
+             "pactivity.py",
+             "web_data.html"
         ],
          "folder": "//activity4"
     },
      {
         "files": [
-            
+            "config.txt",
+             "pactivity.py",
+             "web_data.html"
         ],
          "folder": "//activity5"
     },
@@ -42,6 +52,16 @@
     },
      {
         "files": [
+            "activity1.html",
+             "activity2.html",
+             "activity3.html",
+             "activity4.html",
+             "activity5.html"
+        ],
+         "folder": "//html"
+    },
+     {
+        "files": [
             "__init__.py",
              "acquire.py",
              "mce.py",
@@ -55,24 +75,29 @@
     },
      {
         "files": [
-            "neopixel.py",
+            "analog_buzzer.py",
+             "neopixel.py",
+             "pkg_resources.py",
+             "servo.py",
              "ssd1306.py",
-             "traceback.py"
+             "traceback.py",
+             "ulogging.py"
         ],
          "folder": "//lib"
     },
      {
         "files": [
-            "error404.html",
+            "connect_wifi.py",
+             "error404.html",
              "esp_as_AP.py",
+             "get_project_html.py",
              "index.html",
+             "index_page.html",
+             "message.html",
              "project_config_update.py",
              "project_options_JSON.txt",
              "project_page.html",
-             "project_sel_success.html",
-             "restart_success_page.html",
              "test_web_page.py",
-             "update_firmware.html",
              "webServer.py",
              "web_page.py",
              "web_page_AP.py"
@@ -81,10 +106,22 @@
     },
      {
         "files": [
+            "__init__.py",
+             "example_webapp.py",
+             "example_webapp2.py",
+             "utils.py"
+        ],
+         "folder": "//picoweb"
+    },
+     {
+        "files": [
             "Save_Files_List.py",
+             "fetch_projects.py",
              "file_mgr.py",
-             "ota_update.py",
-             "runProject.py"
+             "route_activity.py",
+             "runProject.py",
+             "run_activity.py",
+             "save_html.py"
         ],
          "folder": "//process"
     },
@@ -100,6 +137,7 @@
              "gas_leak_detection_file.py",
              "projectList.py",
              "project_configurations.txt",
+             "project_routing.json",
              "student_counter_file.py"
         ],
          "folder": "//projects"
@@ -107,19 +145,33 @@
      {
         "files": [
             "config.txt",
+             "html_options.txt",
              "project_configurations.txt"
         ],
          "folder": "//samples"
     },
      {
         "files": [
+            "fetch_project_data_.py",
+             "get_project_page_.py",
+             "run_activity_.py",
+             "save_html_.py",
+             "web_server_.py",
+             "webserver_old.py"
+        ],
+         "folder": "//test"
+    },
+     {
+        "files": [
             "boot.py",
-             "config.txt",
              "files_list.txt",
              "imports.py",
+             "machine_id.py",
              "main.py",
+             "ota_update.py",
              "pin_mapping.py",
-             "utils.py"
+             "utils.py",
+             "version.dat"
         ],
          "folder": "/"
     }

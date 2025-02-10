@@ -1,3 +1,4 @@
+BUZZER=13
 from imports import *
 from machine import PWM
 

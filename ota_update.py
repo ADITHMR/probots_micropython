@@ -1,15 +1,19 @@
 import network
 import urequests
 import ujson
+import json
 import time
 import os
 import machine
+from local_host.connect_wifi import connect_wifi
 try:
     from drivers.oled import *
 except Exception as e:
         print("Error:", e)
 led = machine.Pin(2, machine.Pin.OUT)
+progress=0
 
+    
 # Wi-Fi Connection Function
 def connect_wifi(ssid, password):
     wlan = network.WLAN(network.STA_IF)
@@ -57,6 +61,8 @@ def download_file(url, folder, filename):
         # Check if the folder exists, if not, create it
         try:
             os.listdir(folder)
+            
+            
         except OSError:
             os.mkdir(folder)
             print(f"Created folder: {folder}")
@@ -79,14 +85,11 @@ def download_file(url, folder, filename):
 
 # Main function to perform OTA update
 def ota_update():
-    # Replace with your Wi-Fi credentials
-    ssid = "Ponnus"
-    password = "Ariyilla"
 
-    # Connect to Wi-Fi
-    if not connect_wifi(ssid, password):
-        print("Wi-Fi connection failed. Exiting.")
-        return
+    # Replace with your Wi-Fi credentials
+    global progress
+    progress=0
+    
 
     # Replace with your GitHub username, repository name, and directory path (use empty string for root directory)
     owner = "ADITHMR"  # Replace with the GitHub username
@@ -112,14 +115,7 @@ def ota_update():
 
             # For each folder, get the list of files from GitHub and download them
         for filename in files:
-            try:
-                
-                    
-                from drivers.oled import oled_log
-                oled_log(f"<< {filename}")
-            except Exception as e:
-                
-                print("OLED Error:", e)
+            
             print(f"Downloading {filename} from {folder}...")
             url = f"https://raw.githubusercontent.com/ADITHMR/probots_micropython/refs/heads/device_branch/"
             if folder== "/" :
@@ -133,7 +129,59 @@ def ota_update():
             # Download each file and save it in the corresponding folder
             download_file(url, folder.strip('/'), filename)# Run the OTA update process
             finished_files+=1
-            global progress
-            progress=int((finished_files / file_count) * 100) 
+            
+            progress=int((finished_files / file_count) * 100)
+            try:
+                from drivers.oled import oled_log
+                oled_two_data(1,3,"Updating",f"{progress}%")
+            except Exception as e:
+                print("OLED Error:", e)
             print(f"progress={progress}")
-ota_update()
+            if progress >=100:
+                with open('schema.dat', 'r') as f:
+                    data = json.load(f)
+                data["update_flag"]="False"
+                with open('schema.dat', 'w') as f:
+                    json.dump(data, f)
+                try:
+                    from drivers.oled import oled_log
+                    oled_two_data(1,3,"Update",f"Complete.")
+                    print("Update complete")
+                    time.sleep(1)
+                except Exception as e:
+                    print("OLED Error:", e)
+def run_update():
+    try:
+        if not connect_wifi():
+            try:
+                from drivers.oled import oled_log
+                oled_two_data(1,3,"WIFI Conn",f"Failed") 
+                
+            except Exception as e:
+                print("OLED Error:", e)
+            time.sleep(2)
+            return()
+            
+    except:
+        
+        if not connect_wifi(ssid="Probot",password="Probot@1234"):
+            try:
+                from drivers.oled import oled_log
+                oled_two_data(1,3,"WIFI Conn",f"Failed")
+                
+            except Exception as e:
+                print("OLED Error:", e)
+            time.sleep(2)
+            return()
+    try:
+        ota_update()
+    except Exception as e:
+        print("Error on ota_update()", e)
+        with open('schema.dat', 'r') as f:
+            data = json.load(f)
+        data["update_flag"]="False"
+        with open('schema.dat', 'w') as f:
+            json.dump(data, f)
+        from drivers.oled import oled_log
+        oled_two_data(1,3,"Update",f"Failed.")
+        print("Update Failed")

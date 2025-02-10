@@ -39,17 +39,17 @@ def oled_two_data(s1,s2,head,value):
     if isOled==1:
         oled.fill(0)
         
-        total_height_px=(s1*8)+(s2*8)+5
+        total_height_px=(s1*8)+(s2*8)+3
         gap=(64-total_height_px)//3
         
-        text_width = len(head) * 6*s1
-        x1 = (120 - text_width) // 2
+        text_width = (len(head)+2) * 6*s1
+        x1 = (128 - text_width) // 2
         y1=(64-total_height_px)//2
         oled.write_text(head,x1,y1,s1)
         
-        text_width = len(value) * 6*s2
-        x2 = (120 - text_width) // 2
-        y2=y1+(s1*8)+5
+        text_width = (len(value)+2) * 6*s2
+        x2 = (128 - text_width) // 2
+        y2=y1+(s1*8)+3
         oled.write_text(value,x2,y2,s2)
         
         oled.show()
@@ -58,22 +58,22 @@ def oled_three_data(s1,s2,s3,head,value1,value2):
     if isOled==1:
         oled.fill(0)
         
-        total_height_px=(s1*8)+(s2*8)+(s3*8)+5+5
+        total_height_px=(s1*8)+(s2*8)+(s3*8)+5
         gap=(64-total_height_px)//3
         
         text_width = len(head) * 6*s1
-        x1 = (120 - text_width) // 2
+        x1 = (128 - text_width) // 2
         y1=(64-total_height_px)//2
         oled.write_text(head,x1,y1,s1)
         
         text_width = len(value1) * 6*s2
-        x2 = (120 - text_width) // 2
-        y2=y1+(s1*8)+5
+        x2 = (128 - text_width) // 2
+        y2=y1+(s1*8)+3
         oled.write_text(value1,x2,y2,s2)
         
         text_width = len(value2) * 6*s2
-        x3= (120 - text_width) // 2
-        y3=y2+(s2*8)+5
+        x3= (128 - text_width) // 2
+        y3=y2+(s2*8)+3
         oled.write_text(value2,x3,y3+1,s3)
     #     print(f"total={total_height_px},y1={y1},y2={y2},y3={y3}")
         oled.show()
