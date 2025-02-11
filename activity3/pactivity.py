@@ -181,4 +181,4 @@ def gate_close():
     time.sleep(.5)
 
     
-run_activity("activity3")
+# run_activity("activity3")
