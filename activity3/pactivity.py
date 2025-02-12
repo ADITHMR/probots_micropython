@@ -3,7 +3,7 @@ from machine import Pin
 import time
 from servo import Servo
 from drivers.oled import oled_two_data
-from neopixel import NeoPixel
+from custom_neopixel import CustomNeoPixel
 from analog_buzzer import AnalogBuzzer
 from utils import get_activity_params
 from pin_mapping import get_trig_state
@@ -18,12 +18,12 @@ total_counts = None
 timeout_duration = None
 num_pixels=None
 led_strip_pin=None
-np=[]
+led=[]
 buzzer=None
 servo_mtr=None
 open_angle=None
 close_angle=None
-
+led_strip=None
 
 
     
@@ -31,8 +31,8 @@ def run_activity(activity):
     oled_two_data(1,2,"Running","AutoGate")
     time.sleep(2)
     
-    global np, is_led_used,buzzer_pin,total_counts,buzzer,open_angle,close_angle
-    global timeout_duration ,num_pixels,led_strip_pin,servo_mtr,is_buzzer_used
+    global led, is_led_used,buzzer_pin,total_counts,buzzer,open_angle,close_angle
+    global timeout_duration ,num_pixels,led_strip_pin,servo_mtr,is_buzzer_used,led_strip
     # -----------------------------------
     # User Defined Datas
 #     is_led_used=1
@@ -63,25 +63,38 @@ def run_activity(activity):
     # -----------------------------------
     sensor_in = Pin(sensor_in_pin, Pin.IN)  # IR sensor for entry
     sensor_out = Pin(sensor_out_pin, Pin.IN) # IR sensor for exit
-    servo_mtr = Servo(servo_mtr_pin)
-    
-    if is_buzzer_used=="Enabled":
-        buzzer = AnalogBuzzer(pin_number=buzzer_pin)
-        buzzer.play_tone(2000, 2)
+    servo_mtr = Servo(servo_mtr_pin,True)
+    buzzer_enabled=False
+    led_enabled=False
     if is_led_used=="Enabled":
+        led_enabled=True
         led_strip=Pin(led_strip_pin, Pin.IN)
-        np = NeoPixel(led_strip,num_pixels)
-    gate_close()
+    if  is_buzzer_used=="Enabled":
+        buzzer_enabled=True
+    else:
+        num_pixels=0
+    buzzer = AnalogBuzzer(pin_number=buzzer_pin,enOrDi=buzzer_enabled)
+    buzzer.play_tone(2000, 2)
+    
+#     if is_led_used=="Enabled":
+        
+    led=CustomNeoPixel(led_strip_pin,num_pixels,led_enabled)
+    led.clear()
+   
     total_counts = 0
 #     red(num_pixels)
     is_entering = 0
     is_exiting = 0
+    time.sleep(1)
 
+    gate_close()
+    gate_close()
+    gate_close()
     # Main loop
     while True:
         try:
             start_time = time.time()  
-
+            
             if is_exiting == 0 and is_entering == 0:
                 if sensor_in.value() == sensor_in_active_state:  
         #             time.sleep(0.1)  
@@ -138,35 +151,34 @@ def run_activity(activity):
                     is_exiting = 0
                     time.sleep(1)  
 
-            time.sleep(0.1)
+            
         except Exception as e:
             print(f"Error in Autogate activity(): {e}")
-def led_write():
-    np.write()
+        time.sleep(0.1)
+
     
 def red(num_pixels):
-    if is_led_used=="Enabled":
-        for i in range(num_pixels):
-            np[i] = (255,0,0)
-            led_write()
+    for i in range(num_pixels):
+        led.set_color(i,255,0,0)
+            
 def green(num_pixels):
-    if is_led_used=="Enabled":
-        for i in range(num_pixels):
-            np[i] = (0,255,0)
-            led_write()
+    for i in range(num_pixels):
+        led.set_color(i,0,255,0)
+            
 
 def gate_open():
     global num_pixels,open_angle
     servo_mtr.move(float(open_angle))
     green(num_pixels)
-    if is_buzzer_used=="Enabled":
-        buzzer.play_tone(2500, .5)
+    buzzer.play_tone(2500, .5)
+
 
 def gate_close():
     global num_pixels,close_angle
     servo_mtr.move(float(close_angle))
     red(num_pixels)
-    if is_buzzer_used=="Enabled":
-        buzzer.play_tone(2500, .5)
+    buzzer.play_tone(2500, .5)
+    time.sleep(.5)
+
     
 # run_activity("activity3")

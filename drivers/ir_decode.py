@@ -7,7 +7,10 @@ IR_DATA=0
 def get_IR_data():
     global IR_DATA
     return int(IR_DATA)
-
+def set_IR_data(data):
+    global IR_DATA
+    if data>-1 and data<15:
+        IR_DATA=data
     
 def callback(data, addr, ctrl):
     proj=get_parameter("PROJECT") 

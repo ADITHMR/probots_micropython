@@ -1,24 +1,17 @@
 # ********************CountMaster: Student headcount Tracker**********************
 from machine import Pin
 import time
-# from servo import Servo
 from drivers.oled import oled_two_data
-# from neopixel import NeoPixel
 from analog_buzzer import AnalogBuzzer
 from utils import get_activity_params
 from pin_mapping import get_trig_state
 
-# is_led_used=None
+
 is_buzzer_used=None
 buzzer_pin=None
 timeout_duration = None
-# num_pixels=None
-# led_strip_pin=None
-# np=[]
 buzzer=None
-# servo_mtr=None
-# open_angle=None
-# close_angle=None
+
     
 def run_activity(activity):
     oled_two_data(1,1,"Starting","CountMaster")
@@ -51,10 +44,12 @@ def run_activity(activity):
     sensor_in = Pin(sensor_in_pin, Pin.IN)  # IR sensor for entry
     sensor_out = Pin(sensor_out_pin, Pin.IN) # IR sensor for exit
 
+    buzzer_enabled=False
     
     if is_buzzer_used=="Enabled":
-        buzzer = AnalogBuzzer(pin_number=buzzer_pin)
-        buzzer.play_tone(2000, 2)
+        buzzer_enabled=True
+    buzzer = AnalogBuzzer(pin_number=buzzer_pin,enOrDi=buzzer_enabled)
+    buzzer.play_tone(2000, 2)
 
     total_counts = 0
     is_entering = 0
@@ -88,8 +83,7 @@ def run_activity(activity):
                             print(f"Total count = {total_counts}")
                             oled_two_data(1,2,"Count",str(total_counts))
                             is_exiting = 0  
-                            if is_buzzer_used=="Enabled":
-                                buzzer.play_tone(2500, .5)                            
+                            buzzer.play_tone(2500, .5)                            
 #                             time.sleep(.2)  
                             break  
                     elif is_entering == 1:
@@ -101,8 +95,7 @@ def run_activity(activity):
                             print(f"Total count = {total_counts}")
                             oled_two_data(1,2,"Count",str(total_counts))
                             is_entering = 0  
-                            if is_buzzer_used=="Enabled":
-                                buzzer.play_tone(2500, .5)                            
+                            buzzer.play_tone(2500, .5)                            
 #                             time.sleep(.2)  
                             break  
                 
@@ -118,4 +111,4 @@ def run_activity(activity):
         except Exception as e:
             print(f"Error in CountMaster activity(): {e}")
 
-run_activity("activity4")
+# run_activity("activity4")
