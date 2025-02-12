@@ -1,387 +1,157 @@
-
-# *************Luminous Play: LED light magic**********************
-
-from machine import Pin
-from pin_mapping import *
-import machine
-import neopixel
 import time
 import random
-from imports import *
-from drivers.ir_decode import get_IR_data
-import os
-from utils import get_activity_params
+import neopixel
+from machine import Pin
+from pin_mapping import *
+from drivers.ir_decode import get_IR_data, callback,set_IR_data
 from ir_rx.nec import NEC_8
-ir = NEC_8(pin_ir, callback) # Instantiate the NEC_8 receiver
+from utils import get_activity_params
 
-num_pixels=5
-Red=0
-Green=0
-Blue=0
-i=0
-k=0
-interrupted=0
-count=0
-intensity=255
-switch_val=0
+class NeoPixelEffects:
+    def __init__(self, pin, num_pixels, increment_pin, decrement_pin):
+        # Initialize NeoPixel setup
+        self.pin = Pin(pin, Pin.OUT)
+        self.num_pixels = num_pixels
+        self.np = neopixel.NeoPixel(self.pin, self.num_pixels)
+        self.old_ir_code = -1
+        self.ir_code = 0
+        self.loopExit = False
 
+        # Colors for rainbow effect
+        self.rainbow_colors = [
+            (255, 0, 0),    # Red
+            (255, 127, 0),  # Orange
+            (255, 255, 0),  # Yellow
+            (0, 255, 0),    # Green
+            (0, 0, 255),    # Blue
+            (75, 0, 130),   # Indigo
+            (148, 0, 211)   # Violet
+        ]
 
+        # Setup the IR receiver
+        self.ir = NEC_8(pin_ir, callback)
 
-a=1
-b=c=0
-def clear():
-    for i in range(num_pixels):
-        np[i]=(0,0,0,0)
-    Write()
-def F_ON(Red,Green,Blue):
-    for i in range(num_pixels):
-        np[i]=(Red,Green,Blue)
-    Write()
+        # Pins for increment and decrement switches
+        self.increment_pin = Pin(increment_pin, Pin.IN, Pin.PULL_UP)
+        self.decrement_pin = Pin(decrement_pin, Pin.IN, Pin.PULL_UP)
 
-def mode2():
-    clear()
-    colorset={(255,0,0),(0,255,0),(0,0,255),(0,255,255),(255,255,0),(255,255,255)}
-    for color in colorset:
-        for i in range(num_pixels):  
-            np[i]=color   
-            Write()
-            if get_IR_data()!=2:
-                return
-            time.sleep(.2)
-        time.sleep(0.5)
-    
+        # Attach interrupts to handle switch presses
+        self.increment_pin.irq(trigger=Pin.IRQ_FALLING, handler=self.increment_ir_code)
+        self.decrement_pin.irq(trigger=Pin.IRQ_FALLING, handler=self.decrement_ir_code)
+        
+    def increment_ir_code(self, pin):
+        """Increment the IR code when the increment button is pressed."""
+        set_IR_data(get_IR_data()+1)
+        print(f"Incremented IR Code: {self.ir_code}")
 
-def ON(Led,Red,Green,Blue):
-    np[Led]=(Blue,Red,Green)
-    Write()
-def Write():
-    np.write()
-    if(interrupted):
-        return
-def OFF(Led,Red,Green,Blue):
-    np[Led]=(0,0,0)
-    Write()    
-def mode3():
-    color=255,0,0,0,255,0,0,0,255,255,255,0,0,255,255,255,255,255
-    for i in range(len(color)-3):        
-        Red=color[i]
-        Green=color[i+1]
-        Blue=color[i+2]
-        i=i+3
-        for k in range(num_pixels):
-            ON(k,Red,Green,Blue)
-            time.sleep(.1)
-            if get_IR_data()!=3:
-                return
-        for k in range(num_pixels):
-            ON(num_pixels-k-1,0,0,0)
-            time.sleep(.1)
+    def decrement_ir_code(self, pin):
+        """Decrement the IR code when the decrement button is pressed."""
+        set_IR_data(get_IR_data()-1)
+        print(f"Decremented IR Code: {self.ir_code}")
+
+    def get_random_color(self):
+        """Generates a random color with RGB values."""
+        return random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)
+        
+    def circular_chase(self):
+        """Creates a circular chase effect with random colors."""
+        while not self.loopExit:
+            r, g, b = self.get_random_color()
+
+            for i in range(self.num_pixels):
+                self.np.fill((0, 0, 0))  # Turn off all pixels
+                self.np[i] = (r, g, b)   # Set current pixel to the random color
+                self.np.write()
+                time.sleep(0.05)
+
+                if self.check_for_exit():
+                    return
+
+    def rainbow_effect(self):
+        """Displays a rainbow effect cycling through the colors."""
+        while not self.loopExit:
+            for color in self.rainbow_colors:
+                for i in range(self.num_pixels):
+                    self.np[i] = color
+                self.np.write()
+                time.sleep(0.5)
+
+                if self.check_for_exit():
+                    return
+
+    def filling_effect(self):
+        """Creates a filling effect where colors fill in both directions."""
+        while not self.loopExit:
+            for i in range(len(self.rainbow_colors)):
+                color = self.rainbow_colors[(i - 1) % len(self.rainbow_colors)]
+                next_color = self.rainbow_colors[(i + 1) % len(self.rainbow_colors)]
+
+                for j in range(self.num_pixels):
+                    self.np[j] = color
+                    self.np.write()
+                    time.sleep(0.1)
+
+                    if self.check_for_exit():
+                        return
+
+                color = next_color
+
+                for j in range(self.num_pixels - 1, -1, -1):
+                    self.np[j] = color
+                    self.np.write()
+                    time.sleep(0.1)
+
+                    if self.check_for_exit():
+                        return
+
+    def check_for_exit(self):
+        """Checks if IR signal is received and exits the effect."""
+        ir_code = get_IR_data()
+        if ir_code != self.old_ir_code:
+            self.old_ir_code = ir_code
+            self.loopExit = True  # Exit the current effect
             
-def mode4():
-    color=255,0,0,0,255,0,0,0,255,255,255,0,0,255,255,255,255,255
-    for i in range(len(color)-3):        
-        Red=color[i]
-        Green=color[i+1]
-        Blue=color[i+2]
-        i=i+3
-        for k in range(num_pixels):
-            clear()
-            ON(k,Red,Green,Blue)
-            time.sleep(.1)
-            if get_IR_data()!=4:
-                return
-        for k in range(num_pixels):
-            clear()
-            ON(num_pixels-k-1,Red,Green,Blue)
-            time.sleep(.1)
-def mode5():
-    color=255,0,0,0,255,0,0,0,255,255,255,0,0,255,255,255,255,255
-    for i in range(len(color)-3):        
-        Red=color[i]
-        Green=color[i+1]
-        Blue=color[i+2]
-        i=i+3
-        for k in range(num_pixels):
-            F_ON(Red,Green,Blue)
-            ON(k,0,0,0)
-            #if(k+1<num_pixels):
-                #ON(k+1,Red,Green,Blue)
-            time.sleep(.1)
-            if get_IR_data()!=5:
-                return
-        for k in range(num_pixels):
-            F_ON(Red,Green,Blue)
-            ON(num_pixels-k-1,0,0,0)
-#             if(k>0):
-#                 ON(k-1,0,0,0)
-            time.sleep(.1)
-            if get_IR_data()!=5:
-                return
-def mode6():
-    color=255,0,0,0,255,0,0,0,255,255,255,0,0,255,255,255,255,255
-    for i in range(len(color)-3):        
-        Red=color[i]
-        Green=color[i+1]
-        Blue=color[i+2]
-        i=i+3
-        for k in range(num_pixels):
-            clear()
-            ON(k,Red,Green,Blue)
-            if(k+1<num_pixels):
-                ON(k+1,Red,Green,Blue)   
-            time.sleep(.2)
-            if get_IR_data()!=6:
-                return
-            
-        for k in range(num_pixels):
-            clear()
-            ON(num_pixels-k-1,Red,Green,Blue)
-            if(k>0):
-                ON(k-1,Red,Green,Blue) 
-            time.sleep(.2)
-            if get_IR_data()!=6:
-                return
-def mode7():
-    l=0
-    color=255,0,0,0,255,0,0,0,255,0,255,255,255,255,0,255,255,255
-    colorset={(255,0,0),(0,255,0),(0,0,255),(0,255,255),(255,255,0),(255,255,255)}
-    clear()
-#     for i in range(len(color)-3):
-#         Red=color[i]
-#         Green=color[i+1]
-#         Blue=color[i+2]            
-#         i=i+3
-    for color in colorset:
-        for z in range(10):
-            for k in range(num_pixels):
-                clear()
-                #ON(k,Red,Green,Blue)
-                np[k]=color
-                Write()
-                time.sleep(.1)
-                if get_IR_data()!=7:
-                    return
-            clear()
-            time.sleep(.05)
-def mode8(): #random
-    wait=0.1
-#    print(num_pixels)
-    for i in range(num_pixels):        
-        if random.randint(0, 10) > 8:  # 20% chance of twinkling
-            color = (random.randint(0, 255), random.randint(0, 255), random.randint(0, 255))
-            np[i] = color
-            if get_IR_data()!=8:
-                return
-        else:
-            np[i] = (0, 0, 0)  # Turn off some LEDs
-    Write()
-    time.sleep(wait)
-def mode9():  #wave
-    wait=0.05
-    for j in range(num_pixels * 2):
-        for i in range(num_pixels):
-            if (i + j) % num_pixels == 0:
-                np[i] = (255, 0, 0)  # green color
-                if get_IR_data()!=9:
-                    return
-            else:
-                np[i] = (0, 0, 0)  # Turn off the LED
-        Write()
-        time.sleep(wait)
-def mode0():
-    wait=0.1
-    for i in range(num_pixels):
-        np[i] = (255, 255, 255)  # White light
-        Write()
-        time.sleep(wait)
-        np[i] = (0, 0, 0)  # Turn off the light
-        if get_IR_data()!=10:
-                return
+            print(f"IR Code: {ir_code}")
 
-    for i in range(num_pixels - 1, -1, -1):
-        np[i] = (255, 255, 255)
-        Write()
-        time.sleep(wait)
-        np[i] = (0, 0, 0)
-        if get_IR_data()!=10:
-                return
-import random
+            # Check for specific IR codes and switch effects
+            if ir_code == 0:  # IR code for Circular Chase
+                print("Switching to Circular Chase")
+                self.loopExit = False
+                self.circular_chase()
 
-def mode11():#fire_effect
-    wait=0.05
-    for i in range(num_pixels):
-        red = random.randint(0, 255)
-        green = random.randint(0, red)  # Green is always less than or equal to red
-        blue = random.randint(0, green)  # Blue is always less than or equal to green
-        np[i] = (blue,red,green)  # Simulate fire color
-        if get_IR_data()!=11:
-                return
-    Write()
-    time.sleep(wait)
-def mode12(): # increase & decrease colorset brightness
-    wait=0.01
-    colorset={(1,0,0),(0,1,0),(0,0,1),(0,1,1),(1,1,0),(1,1,1)}
-    for color in colorset:
-        for brightness in range(0, 255, 5):  # Increasing brightness
-            for i in range(num_pixels):
-                np[i] =((brightness*color[0]),(brightness*color[1]),(brightness*color[2]))
-                if get_IR_data()!=12:
-                    return
-            Write()
-            time.sleep(wait)
-        for brightness in range(255, 0, -5):  # Decreasing brightness
-            for i in range(num_pixels):
-                np[i] =((brightness*color[0]),(brightness*color[1]),(brightness*color[2]))
-                if get_IR_data()!=12:
-                    return
-            Write()
-            time.sleep(wait)
-def mode13(): #rainbow_chase
-    wait=0.1
-    for j in range(256):  # Number of color shifts (one full rainbow)
-        for i in range(num_pixels):
-            color = wheel((i + j) & 255)  # Shift color based on position
-            np[i] = color
-            if get_IR_data()!=13:
-                return
-        Write()
-        time.sleep(wait)
-def mode14():#full_color_fade
-#     print("Fade in colors")
-    wait=0.2
-    for j in range(256):
-        for i in range(num_pixels):
-            np[i] = (j, 0, 0)  # Red fades in
-            if get_IR_data()!=14:
-                return
-        Write()
-        time.sleep(wait)        
-        for i in range(num_pixels):
-            np[i] = (0, j, 0)  # Green fades in
-            if get_IR_data()!=14:
-                return
-        Write()
-        time.sleep(wait)
+            elif ir_code == 1:  # IR code for Rainbow Effect
+                print("Switching to Rainbow Effect")
+                self.loopExit = False
+                self.rainbow_effect()
+
+            elif ir_code == 2:  # IR code for Filling Effect
+                print("Switching to Filling Effect")
+                self.loopExit = False
+                self.filling_effect()
+
+            return True
         
-        for i in range(num_pixels):
-            np[i] = (0, 0, j)  # Blue fades in
-            if get_IR_data()!=14:
-                return
-        Write()
-        time.sleep(wait)
-      
-#     print("colors")
-    for j in range(255, -1, -1):
-        for i in range(num_pixels):
-            np[i] = (j, 0, 0)  # Red fades out
-            if get_IR_data()!=14:
-                return
-        Write()
-        time.sleep(wait)
-        
-        for i in range(num_pixels):
-            np[i] = (0, j, 0)  # Green fades out
-            if get_IR_data()!=14:
-                return
-        Write()
-        time.sleep(wait)
-        
-        for i in range(num_pixels):
-            np[i] = (0, 0, j)  # Blue fades out
-            if get_IR_data()!=14:
-                return
-        Write()
-        time.sleep(wait)
-def wheel(pos):
-    """
-    Generate color from a position on the color wheel.
-    :param pos: Integer position from 0 to 255 (representing 360 degrees on the color wheel)
-    :return: (r, g, b) tuple for the RGB color
-    """
-    if pos < 85:
-        return (pos * 3, 255 - pos * 3, 0)
-    elif pos < 170:
-        pos -= 85
-        return (255 - pos * 3, 0, pos * 3)
-    else:
-        pos -= 170
-        return (0, pos * 3, 255 - pos * 3)
-def mode1():
-    clear()
-    colorset={(255,0,0),(0,255,0),(0,0,255),(0,255,255),(255,255,0),(255,255,255)}
-    for color in colorset:
-        for i in range(num_pixels):
-            if(i):
-                OFF(i-1,color[0],color[1],color[2])
-            ON(i,color[0],color[1],color[2])
-            if get_IR_data()!=1:
-                return
-            time.sleep(1)
-        for i in range(num_pixels):        
-            OFF(num_pixels-i-1,0,0,0)
-            if((num_pixels-i-2)>=0):
-                ON(num_pixels-2-i,color[0],color[1],color[2])
-            if get_IR_data()!=1:
-                return
-            time.sleep(1)
-def LED(mode):
-    #print(mode)
-    if(mode==0):
-        mode0()
-    elif(mode==1):
-        mode1()
-    elif(mode==2):
-        mode2()
-    elif(mode==3):
-        mode3()
-    elif(mode==4):
-        mode4()
-    elif(mode==5):
-        mode5()
-    elif(mode==6):
-        mode6()
-    elif(mode==7):
-        mode7()
-    elif(mode==8):
-        mode8()
-    elif(mode==9):
-        mode9()
-    elif(mode==10):
-        mode10()
-    elif(mode==11):
-        mode11()
-    elif(mode==12):
-        mode12()
-    elif(mode==13):
-        mode13()
-    elif(mode==14):
-        mode14()
-num_leds=5
-def fire_effect():
-    # Create a random flickering effect that simulates fire colors
-      # Simulate a lightning strike (all LEDs flash brightly)
-    for i in range(num_leds):
-        # Create a gradient effect, moving from blue to green to red
-        r = int(255 * (i / num_leds))  # Smooth red transition
-        g = int(255 * ((num_leds - i) / num_leds))  # Smooth green transition
-        b = 255 - r - g  # Blue is the remaining part
-        np[i] = (r, g, b)
-    
-    Write()
+        return False
+
+    def run(self):
+        """Main loop to control the effect switching based on IR input."""
+        while True:
+            self.check_for_exit()
+
+
 def run_activity(activity):
-    
-    params=get_activity_params(activity)
-    
-    global led_pin,num_pixels,np
-    led_pin=set_pin_out(params["strip_led_pin"])
-    num_pixels=int(params["led_num"])
-    
-    np = neopixel.NeoPixel(led_pin,num_pixels)
-    print("starting 'Luminous Play: LED light magic' activity")
-    while True:
-        irdata=get_IR_data()
-        LED(irdata)
-       
+    """Starts the LED effects based on the given activity parameters."""
+    params = get_activity_params(activity)
 
-
-
+    # Assuming the activity params include pin and LED count
+    led_pin = set_pin_out(params["strip_led_pin"])  # Ensure this function returns a valid Pin object
+    num_pixels = int(params["led_num"])
+    
+    # Specify the pins for increment and decrement switches
+    increment_pin = 14  # Pin 14 for increment
+    decrement_pin = 15  # Pin 15 for decrement
+    
+    neo_effects = NeoPixelEffects(pin=led_pin, num_pixels=num_pixels, increment_pin=increment_pin, decrement_pin=decrement_pin)
+    print("Starting 'Luminous Play: LED light magic' activity")
+    neo_effects.run()
+run_activity("activity1")
