@@ -55,6 +55,12 @@ class NeoPixelEffects:
     def get_random_color(self):
         """Generates a random color with RGB values."""
         return random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)
+    def led_write(self):
+        try:
+            time.sleep(0.1) 
+            self.np.write()
+        except Exception as e:
+            print(f"Error in RGB led_write(): {e}")
         
     def circular_chase(self,speed=0.1):
         """Creates a circular chase effect with random colors."""
@@ -63,7 +69,7 @@ class NeoPixelEffects:
                 for i in range(self.num_pixels):
                     for j in range(self.num_pixels):
                         self.np[j] = color if j == i else (0, 0, 0)  # Light up one pixel at a time
-                    self.np.write()
+                    self.led_write()
                     time.sleep(speed)
                     if self.check_for_exit():
                         return
@@ -74,7 +80,7 @@ class NeoPixelEffects:
             for color in self.rainbow_colors:
                 for i in range(self.num_pixels):
                     self.np[i] = color
-                self.np.write()
+                self.led_write()
                 time.sleep(0.5)
 
                 if self.check_for_exit():
@@ -89,7 +95,7 @@ class NeoPixelEffects:
 
                 for j in range(self.num_pixels):
                     self.np[j] = color
-                    self.np.write()
+                    self.led_write()
                     time.sleep(0.1)
 
                     if self.check_for_exit():
@@ -99,7 +105,7 @@ class NeoPixelEffects:
 
                 for j in range(self.num_pixels - 1, -1, -1):
                     self.np[j] = color
-                    self.np.write()
+                    self.led_write()
                     time.sleep(0.1)
 
                     if self.check_for_exit():
@@ -113,7 +119,7 @@ class NeoPixelEffects:
                         self.np[i] = (int(color[0] * brightness / max_brightness), 
                                       int(color[1] * brightness / max_brightness), 
                                       int(color[2] * brightness / max_brightness))
-                    self.np.write()
+                    self.led_write()
                     time.sleep(speed)
                     if self.check_for_exit():  # Check if IR code was received
                         return  # Exit the effect immediately when check_for_exit returns True
@@ -122,7 +128,7 @@ class NeoPixelEffects:
                         self.np[i] = (int(color[0] * brightness / max_brightness), 
                                       int(color[1] * brightness / max_brightness), 
                                       int(color[2] * brightness / max_brightness))
-                    self.np.write()
+                    self.led_write()
                     time.sleep(speed)
                     if self.check_for_exit():  # Exit if IR signal detected
                         return
@@ -134,7 +140,7 @@ class NeoPixelEffects:
 #                 color_index = (i + int(time.time() * 10)) % len(self.rainbow_colors)
 #                 color = self.rainbow_colors[color_index]
 #                 self.np[i] = color
-#             self.np.write()
+#             self.led_write()
 #             time.sleep(0.1)
     def sparkle_effect(self,  spark_chance=0.1, speed=0.05):
         """Creates a sparkling effect with random pixels lighting up in the given color."""
@@ -147,7 +153,7 @@ class NeoPixelEffects:
                         self.np[i] = (0, 0, 0)  # Turn off other pixels
                     if self.check_for_exit():
                         return
-                self.np.write()
+                self.led_write()
                 time.sleep(speed)
     def colorful_fade_effect(self, fade_time=5):
         """Smoothly fades through a set of rainbow colors."""
@@ -167,7 +173,7 @@ class NeoPixelEffects:
                         self.np[j] = (r, g, b)
                         if self.check_for_exit():
                             return
-                    self.np.write()
+                    self.led_write()
                     time.sleep(fade_time / 100)
    
     def alternating_stripes_effect(self,  stripe_size=1, speed=0.1):
@@ -185,7 +191,7 @@ class NeoPixelEffects:
                     for j in range(i + stripe_size, min(i + 2 * stripe_size, self.num_pixels)):
                         self.np[j] = color2
                         
-                self.np.write()
+                self.led_write()
                 if self.check_for_exit():
                     return
                 time.sleep(speed)
@@ -196,7 +202,7 @@ class NeoPixelEffects:
                     # Set color for the second stripe
                     for j in range(i + stripe_size, min(i + 2 * stripe_size, self.num_pixels)):
                         self.np[j] = color1
-                self.np.write()
+                self.led_write()
                 if self.check_for_exit():
                     return
                 time.sleep(speed)
@@ -210,7 +216,7 @@ class NeoPixelEffects:
                         if ripple_start + i < self.num_pixels:
                             self.np[ripple_start + i] = color
                             
-                    self.np.write()
+                    self.led_write()
                     if self.check_for_exit():
                         return
                     time.sleep(speed)
@@ -229,7 +235,7 @@ class NeoPixelEffects:
                         self.np[i] = color
                     else:
                         self.np[i] = (0, 0, 0)
-                self.np.write()
+                self.led_write()
                 if self.check_for_exit():
                     return
                 time.sleep(speed)
@@ -240,7 +246,7 @@ class NeoPixelEffects:
                         self.np[i] = (0, 0, 0)
                     else:
                         self.np[i] = color
-                self.np.write()
+                self.led_write()
                 if self.check_for_exit():
                     return
                 time.sleep(speed)
@@ -250,7 +256,7 @@ class NeoPixelEffects:
             for i in range(self.num_pixels):
                 flicker_brightness = random.randint(0, max_brightness)
                 self.np[i] = (flicker_brightness, flicker_brightness // 2, 0)  # Yellowish flicker
-            self.np.write()
+            self.led_write()
             if self.check_for_exit():
                 return
             time.sleep(speed)

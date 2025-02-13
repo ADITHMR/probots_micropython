@@ -1,1 +1,1 @@
-{"project_name": "Luminous Play: LED light magic", "params": {"remote_enabled": "Disabled", "led_num": "12", "strip_led_pin": "5"}}
+{"project_name": "Luminous Play: LED light magic", "params": {"remote_enabled": "Enabled", "led_num": "12", "strip_led_pin": "5"}}
