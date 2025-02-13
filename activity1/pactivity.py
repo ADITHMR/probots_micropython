@@ -7,6 +7,7 @@ from drivers.ir_decode import get_IR_data, callback,set_IR_data
 from ir_rx.nec import NEC_8
 from utils import get_activity_params
 from drivers.oled import oled_two_data
+ir_receiver_enabled=None
 
 class NeoPixelEffects:
     def __init__(self, pin, num_pixels, increment_pin, decrement_pin):
@@ -30,7 +31,7 @@ class NeoPixelEffects:
         ]
 
         # Setup the IR receiver
-        self.ir = NEC_8(pin_ir, callback)
+        
 
         # Pins for increment and decrement switches
         self.increment_pin = Pin(increment_pin, Pin.IN, Pin.PULL_UP)
@@ -42,13 +43,14 @@ class NeoPixelEffects:
         
     def increment_ir_code(self, pin):
         """Increment the IR code when the increment button is pressed."""
-        set_IR_data(get_IR_data()+1)
-        print(f"Incremented IR Code: {self.ir_code}")
+       
+        set_IR_data(self.ir_code+1)
+        print(f"Incremented IR Code: {self.ir_code+1}")
 
     def decrement_ir_code(self, pin):
         """Decrement the IR code when the decrement button is pressed."""
-        set_IR_data(get_IR_data()-1)
-        print(f"Decremented IR Code: {self.ir_code}")
+        set_IR_data(self.ir_code-1)
+        print(f"Decremented IR Code: {self.ir_code-1}")
 
     def get_random_color(self):
         """Generates a random color with RGB values."""
@@ -113,8 +115,8 @@ class NeoPixelEffects:
                                       int(color[2] * brightness / max_brightness))
                     self.np.write()
                     time.sleep(speed)
-                    if self.check_for_exit():
-                        return
+                    if self.check_for_exit():  # Check if IR code was received
+                        return  # Exit the effect immediately when check_for_exit returns True
                 for brightness in range(max_brightness, -1, -5):  # Decrease brightness
                     for i in range(self.num_pixels):
                         self.np[i] = (int(color[0] * brightness / max_brightness), 
@@ -122,7 +124,7 @@ class NeoPixelEffects:
                                       int(color[2] * brightness / max_brightness))
                     self.np.write()
                     time.sleep(speed)
-                    if self.check_for_exit():
+                    if self.check_for_exit():  # Exit if IR signal detected
                         return
 #     def color_wave_effect(self):
 #         """Creates a color wave effect moving along the LED strip."""
@@ -255,76 +257,16 @@ class NeoPixelEffects:
     
     def check_for_exit(self):
         """Checks if IR signal is received and exits the effect."""
-        ir_code = get_IR_data()
-        if ir_code > 9:
-            ir_code=9
+        self.ir_code = get_IR_data()
+        if self.ir_code > 9:
+            self.ir_code=9
             set_IR_data(9)
         
-        if ir_code != self.old_ir_code:
-            self.old_ir_code = ir_code
+        if self.ir_code != self.old_ir_code:
+            self.old_ir_code = self.ir_code
             self.loopExit = True  # Exit the current effect
             
-            print(f"IR Code: {ir_code}")
-
-            # Check for specific IR codes and switch effects
-            if ir_code == 0:  # IR code for Circular Chase
-                print("Switching to Circular Chase")
-                self.loopExit = False
-                oled_two_data(2,2,"Circular","Chase")
-                self.circular_chase()
-                
-
-            elif ir_code == 1:  # IR code for Rainbow Effect
-                print("Switching to Rainbow Effect")
-                self.loopExit = False
-                oled_two_data(2,2,"Rainbow","Effect")
-                self.rainbow_effect()
-
-            elif ir_code == 2:  # IR code for Filling Effect
-                print("Switching to Filling Effect")
-                self.loopExit = False
-                oled_two_data(2,2,"Filling","Effect")
-                self.filling_effect()
-            elif ir_code == 3:  # IR code for Circular Chase
-                print("Switching to Pulse Effect")
-                self.loopExit = False
-                oled_two_data(2,2,"Pulse","Effect")
-                self.pulse_effect()
-            elif ir_code == 4:  # IR code for Circular Chase
-                print("Switching to Sparkle Effect")
-                self.loopExit = False
-                oled_two_data(2,2,"Sparkle","Effect")
-                self.sparkle_effect()
-            elif ir_code == 5:  # IR code for Circular Chase
-                print("Switching to Colorful fade  Effect")
-                self.loopExit = False
-                oled_two_data(2,2,"Fade","Effect")
-                self.colorful_fade_effect()
-            
-            if ir_code == 6:  # IR code for Circular Chase
-                print("Switching to Alternating stripes Chase")
-                self.loopExit = False
-                oled_two_data(2,2,"Stripes","Chase")
-                self.alternating_stripes_effect()
-            if ir_code == 7:  # IR code for Circular Chase
-                print("Switching to riplle effect")
-                self.loopExit = False
-                oled_two_data(2,2,"Ripple","Effect")
-                self.ripple_effect()
-            if ir_code == 8:  # IR code for Circular Chase
-                print("Switching to ZigZag effect")
-                self.loopExit = False
-                oled_two_data(2,2,"ZigZag","Effect")
-                self.zigzag_effect()
-            if ir_code == 9:  # IR code for Circular Chase
-                print("Switching to candlelight flicker effect")
-                self.loopExit = False
-                oled_two_data(2,2,"Candle","Flicker")
-                self.candlelight_flicker()
-                
-                
-                
-                
+            print(f"IR Code: {self.ir_code}")
 
             return True
         
@@ -334,24 +276,82 @@ class NeoPixelEffects:
     def run(self):
         """Main loop to control the effect switching based on IR input."""
         while True:
-            self.check_for_exit()
+            # Check for specific IR codes and switch effects
+            if self.ir_code == 0:  # IR code for Circular Chase
+                print("Switching to Circular Chase")
+                self.loopExit = False
+                oled_two_data(2,2,"Circular","Chase")
+                self.circular_chase()
+                
+
+            elif self.ir_code == 1:  # IR code for Rainbow Effect
+                print("Switching to Rainbow Effect")
+                self.loopExit = False
+                oled_two_data(2,2,"Rainbow","Effect")
+                self.rainbow_effect()
+
+            elif self.ir_code == 2:  # IR code for Filling Effect
+                print("Switching to Filling Effect")
+                self.loopExit = False
+                oled_two_data(2,2,"Filling","Effect")
+                self.filling_effect()
+            elif self.ir_code == 3:  # IR code for Circular Chase
+                print("Switching to Pulse Effect")
+                self.loopExit = False
+                oled_two_data(2,2,"Pulse","Effect")
+                self.pulse_effect()
+            elif self.ir_code == 4:  # IR code for Circular Chase
+                print("Switching to Sparkle Effect")
+                self.loopExit = False
+                oled_two_data(2,2,"Sparkle","Effect")
+                self.sparkle_effect()
+            elif self.ir_code == 5:  # IR code for Circular Chase
+                print("Switching to Colorful fade  Effect")
+                self.loopExit = False
+                oled_two_data(2,2,"Fade","Effect")
+                self.colorful_fade_effect()
+            
+            if self.ir_code == 6:  # IR code for Circular Chase
+                print("Switching to Alternating stripes Chase")
+                self.loopExit = False
+                oled_two_data(2,2,"Stripes","Chase")
+                self.alternating_stripes_effect()
+            if self.ir_code == 7:  # IR code for Circular Chase
+                print("Switching to riplle effect")
+                self.loopExit = False
+                oled_two_data(2,2,"Ripple","Effect")
+                self.ripple_effect()
+            if self.ir_code == 8:  # IR code for Circular Chase
+                print("Switching to ZigZag effect")
+                self.loopExit = False
+                oled_two_data(2,2,"ZigZag","Effect")
+                self.zigzag_effect()
+            if self.ir_code == 9:  # IR code for Circular Chase
+                print("Switching to candlelight flicker effect")
+                self.loopExit = False
+                oled_two_data(2,2,"Candle","Flicker")
+                self.candlelight_flicker()
             
 
 
 def run_activity(activity):
     """Starts the LED effects based on the given activity parameters."""
+    global ir_receiver_enabled
     params = get_activity_params(activity)
 
     # Assuming the activity params include pin and LED count
     led_pin = set_pin_out(params["strip_led_pin"])  # Ensure this function returns a valid Pin object
     num_pixels = int(params["led_num"])
-    
+    ir_receiver_enabled=params["remote_enabled"]
     # Specify the pins for increment and decrement switches
     increment_pin = 14  # Pin 14 for increment
     decrement_pin = 15  # Pin 15 for decrement
+    if ir_receiver_enabled=="Enabled":
+        ir = NEC_8(pin_ir, callback)
+    
     
     neo_effects = NeoPixelEffects(pin=led_pin, num_pixels=num_pixels, increment_pin=increment_pin, decrement_pin=decrement_pin)
     print("Starting 'Luminous Play: LED light magic' activity")
     neo_effects.run()
-run_activity("activity1")
+
     
