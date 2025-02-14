@@ -76,7 +76,7 @@
      {
         "files": [
             "analog_buzzer.py",
-             "neopixel.py",
+             "custom_neopixel.py",
              "pkg_resources.py",
              "servo.py",
              "ssd1306.py",
@@ -154,6 +154,7 @@
         "files": [
             "fetch_project_data_.py",
              "get_project_page_.py",
+             "led_patterns.py",
              "run_activity_.py",
              "save_html_.py",
              "web_server_.py",
