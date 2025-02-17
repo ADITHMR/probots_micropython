@@ -1,1 +1,1 @@
-{"project_name": "SentiLume: Intelligent street illumination", "params": {"sensor_active_state": "Active Low", "sensor_pin": "39"}}
+{"project_name": "SentiLume: Intelligent street illumination", "params": {"sensor_active_state": "Active High", "buzzer_enable": "Enabled", "buzzer_pin": "32", "sensor_pin": "39"}}

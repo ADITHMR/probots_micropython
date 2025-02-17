@@ -3,6 +3,8 @@
 
 from imports import *
 from utils import get_activity_params
+from analog_buzzer import AnalogBuzzer
+
 
 
 
@@ -16,8 +18,15 @@ def run_activity(activity):
     
     print("starting 'SentiLume: Intelligent street illumination ' activity")
     
+    buzzer_enable=params["buzzer_enable"]
+    buzzer_pin=int(params["buzzer_pin"])
     
-
+    if buzzer_enable=="Enabled":
+        buzzer_enable=True
+    else:
+        buzzer_enable=False
+    buzzer = AnalogBuzzer(pin_number=buzzer_pin,enOrDi=buzzer_enable)
+    buzzer.play_tone(2000, 1)
     last=0
     while True: 
         if sensor.value() ==sensor_trig:
@@ -27,7 +36,7 @@ def run_activity(activity):
 #                 oled_log("Street Light ON")
                 oled_three_data(2,2,2,"Street","Light","ON")
                 last=1
-                one_beep()
+                buzzer.play_tone(2000, .2)
         else:
             if last==1:
                 all_set_color(0,0,0)
@@ -35,8 +44,8 @@ def run_activity(activity):
 #                 oled_log("Street Light OFF")
                 oled_three_data(2,2,2,"Street","Light","OFF")
                 last=0
-                one_beep()
-        time.sleep(.5)
+                buzzer.play_tone(2000, .2)
+        time.sleep(.1)
      
-
+# run_activity("activity2")
 

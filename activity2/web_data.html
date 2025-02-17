@@ -18,6 +18,22 @@
             "options": ["Active Low", "Active High"],
             "required": "true",
             "defaultValue":"Active Low"
-          }
+          },
+            {
+                "type": "select",
+                "name": "buzzer_enable",
+                "label": "Enable Buzzer ",
+                "options": ["Enabled","Disabled"],
+                "required": true,
+                "defaultValue": "Enabled"
+            },
+            {
+                "type": "select",
+                "name": "buzzer_pin",
+                "label": "Buzzer Pin",
+                "options": ["2","4","5","12","13","16","17","18","19","23","26","32","33"],
+                "required": true,
+                "defaultValue": "32"
+            }
         ]
 }
