@@ -76,6 +76,7 @@
      {
         "files": [
             "analog_buzzer.py",
+             "api.py",
              "custom_neopixel.py",
              "pkg_resources.py",
              "servo.py",
@@ -88,6 +89,7 @@
      {
         "files": [
             "connect_wifi.py",
+             "credentials.html",
              "error404.html",
              "esp_as_AP.py",
              "get_project_html.py",
@@ -170,9 +172,11 @@
              "machine_id.py",
              "main.py",
              "ota_update.py",
+             "pactivity.py",
              "pin_mapping.py",
              "utils.py",
-             "version.dat"
+             "version.dat",
+             "web_data.html"
         ],
          "folder": "/"
     }
