@@ -13,11 +13,12 @@ if TOUCH1.value()==True and TOUCH2.value()==True:
     from local_host.esp_as_AP import runAP
     runAP()
 elif  TOUCH1.value()==True and TOUCH2.value()==False:
+    oled_two_data(1,1,"Web server","Mode")
     wifi_connected=connect_wifi()
     if wifi_connected:
         oled_log("Web Server")
         from local_host.webServer import runWebServer
-        oled_two_data(1,1,"Web server","Mode")
+        
         time.sleep(1)
         runWebServer()
 
@@ -41,8 +42,15 @@ if wifi_connected:
 if wifi_connected:
     import api
     api=api.Api()
-    api.user_login()
-    api.get_projects()
+    login=api.user_login()
+    if login:
+        oled_two_data(1,1,"User","Logged in")
+        time.sleep(.5)
+        oled_two_data(1,1,"Aquiring","Projects")
+        api.get_projects()
+        oled_two_data(1,1,"Aquire","Completed")
+    else:
+        oled_two_data(1,1,"Login","Failed")
 
 # time.sleep(.5)
 from process.save_html import save_html
@@ -52,7 +60,7 @@ from process.fetch_projects import fetch_projects
 oled_two_data(1,1,"Setting up","Activities")
 # time.sleep(.5)
 fetch_projects()
-oled_two_data(1,1,"Updating","Files")
+oled_two_data(1,1,"Updating","Pages")
 # time.sleep(.5)
 save_html()
 oled_two_data(1,1,"Starting","Activities")

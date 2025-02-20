@@ -101,9 +101,9 @@ def update_now(req, resp):
             json.dump(schema, f)
     response=message_page('''
     <h2>Update Initiated...</h2>
-    <h3>Press the reset button to proceed with the update...</h3>
-    <h3>Sit back and relax...</h3>
-    <h1 class="text-danger">Do not interrupt the update process.</h1>''')
+    <h1 class="text-danger">Press the reset button to proceed with the update...</h1>
+    
+    <h2 class="text-danger">Do not interrupt the update process.</h2>''')
     yield from picoweb.start_response(resp)
     yield from resp.awrite(response)
     
