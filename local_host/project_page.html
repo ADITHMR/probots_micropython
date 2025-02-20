@@ -3,27 +3,36 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-  <meta name="description" content="Styled form with dynamic input types loaded from a JSON list" />
-  <title>Probots</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Responsive sidebar form with dynamic image layout" />
+  <title>Roboninjaz</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
-  /* General Styles */
-body {
-  background-color: #181818;
-  color: #fff;
-  font-family: 'Arial', sans-serif;
-  margin: 0;
-  padding: 0;
+     html,
+    body {
+      height: 100%;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Arial', sans-serif;
+      background-color: #181818;
+      color: #ffffff;
+    }
+    .content-wrapper {
+        flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  margin-top: 3%; /* Adjust this to control the space between the top bar and the content */
 }
-
-/* Top Bar */
-.top-bar {
-  background-color: #333;
-  color: #fff;
+.content-container {
+    flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+    
+    .top-bar {
+        background-color: #333;
+  color: #ffffff;
   padding: 15px 25px;
   display: flex;
   justify-content: space-between;
@@ -34,213 +43,161 @@ body {
   width: 100%;
   z-index: 1000;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    .top-bar .logo {
+      height: 30px;
+    }
+
+    .top-bar .btn-home {
+      background-color: #0b79d0;
+      color: #ffffff;
+      border: none;
+      padding: 12px 18px;
+      font-size: 16px;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .top-bar .btn-home:hover {
+      background-color: #0977c7;
+    }
+
+    .content-container {
+      display: flex;
+      flex-wrap: wrap;
+      margin-top: 70px;
+      height: calc(100vh - 70px);
+    }
+
+    .form-sidebar {
+      background-color: #282c34;
+      padding: 30px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      flex: 1 1 300px;
+      max-width: 350px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .image-container {
+      flex: 2 1 600px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 20px;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      max-height: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-control,
+    .form-select {
+      background-color: #3d444f;
+      border: 1px solid #444c56;
+      padding: 12px;
+      font-size: 1rem;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      color: #ffffff;
+    }
+
+    .form-control:focus,
+    .form-select:focus {
+      border-color: #03a9f4;
+      outline: none;
+    }
+
+    .btn-primary {
+      background-color: #03a9f4;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background-color: #0288d1;
+    }
+
+    footer {
+      background-color: #333;
+      color: #ffffff;
+      padding: 20px;
+      text-align: center;
+      width: 100%;
+      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
+    }
+    @media (max-width: 768px) {
+      .form-sidebar {
+        max-width: 100%;
+        flex: 1 1 100%;
+        text-align: center;
+      }
+
+      .image-container {
+        flex: 1 1 100%;
+      }
+    }
+    .top-bar img {
+  height: 60px; /* Adjust the height as needed */
+  width: auto;  /* Maintain aspect ratio */
+  max-width: 100%; /* Ensure it doesn't exceed its container */
+  
 }
-
-.top-bar h1 {
-  margin: 0;
-  font-size: 24px;
-  font-weight: 600;
-}
-
-.top-bar .logo {
-  height: 30px;
-}
-
-.top-bar .btn-home {
-  background-color: #0b79d0;
-  color: #fff;
-  border: none;
-  padding: 12px 18px;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  text-decoration: none;
-}
-
-.top-bar .btn-home:hover {
-  background-color: #0977c7;
-}
-
-/* Form Container */
-.container {
-  background-color: #282c34;
-  padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-  width: 100%;
-  max-width: 600px;
-  margin: 90px auto;
-  transition: transform 0.3s ease-in-out;
-}
-
-.container:hover {
-  transform: translateY(-5px);
-}
-
-h2 {
-  color: #03a9f4;
-  font-size: 2rem;
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-/* Form Controls */
-.form-control {
-  background-color: #3d444f;
-  border: 1px solid #444c56;
-  padding: 12px;
-  font-size: 1rem;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  width: 100%;
-  color: #fff;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.form-control:focus {
-  background-color: #555c66;
-  border-color: #03a9f4;
-  outline: none;
-}
-
-.form-control::placeholder {
-  color: #aaa;
-}
-
-/* Dropdown Styling */
-.form-select {
-  background-color: #3d444f;
-  border: 1px solid #444c56;
-  padding: 12px;
-  font-size: 1rem;
-  border-radius: 8px;
-  width: 100%;
-  color: #fff;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-
-.form-select:focus {
-  background-color: #555c66;
-  border-color: #03a9f4;
-  outline: none;
-}
-
-/* Checkbox Styling */
-.form-check-input {
-  margin-right: 10px;
-  accent-color: #03a9f4;
-}
-
-/* Submit Button */
-.btn-primary {
-  background-color: #03a9f4;
-  color: white;
-  font-size: 1.1rem;
-  font-weight: 600;
-  padding: 12px 24px;
-  border-radius: 8px;
-  width: 100%;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 20px;
-}
-
-.btn-primary:hover {
-  background-color: #0288d1;
-}
-
-/* Footer */
-footer {
-  background-color: #333;
-  color: white;
-  padding: 20px;
-  text-align: center;
-  position: relative;
-  width: 100%;
-  margin-top: 20px;
-}
-
-/* Media Queries for Responsiveness */
-@media (max-width: 576px) {
-  .top-bar {
-    flex-direction: column;
-    padding: 10px 15px;
-    text-align: center;
-  }
-
-  .top-bar h1 {
-    font-size: 20px;
-  }
-
-  .top-bar .btn-home {
-    margin-top: 10px;
-    width: 100%;
-  }
-
-  .container {
-    padding: 20px;
-    margin-top: 120px;
-    max-width: none;
-    width: 100%;
-    margin-bottom: 40px;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  .form-control,
-  .form-select {
-    font-size: 0.95rem;
-    padding: 10px;
-  }
-
-  .btn-primary {
-    font-size: 1rem;
-    padding: 10px 15px;
-  }
-
-  footer {
-    padding: 15px;
-  }
-}
-
-</style>
-
+  </style>
 </head>
 
 <body>
-  <!-- Fixed Top Bar with Home Button and Update Firmware Button -->
-  <div class="top-bar">
+   <!-- Fixed Top Bar -->
+   <div class="top-bar">
     <div>
-      <img src="https://scontent.fblr2-2.fna.fbcdn.net/v/t39.30808-6/300113092_198364385873102_4925997586295706610_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=HSVi3dg0_O4Q7kNvgF55eJH&_nc_zt=23&_nc_ht=scontent.fblr2-2.fna&_nc_gid=AQ0ua-sBWhjlSiMlt_f49Qz&oh=00_AYBwXKET7woh8WPY-fdp8JS20bi_aTnKBMrjWEZJPLsKAg&oe=67A53D83" alt="Logo" class="logo">
+        <img src="https://raw.githubusercontent.com/ADITHMR/probot_Images/refs/heads/main/RoboNinjalogogreen.png" alt="Logo" >
     </div>
-    <h1>Probots Web Interface</h1>
-    <div>
-      <a href="/" class="btn-home">Home</a>
-    </div>
+    <h1>Roboninjaz Web</h1>
+    <a href="/" class="btn-home">Home</a>
   </div>
 
-  <!-- Main Content Area -->
-  <div class="container">
-    <h2>{*heading*}</h2>
+  <!-- Content Wrapper -->
+  <div class="content-wrapper">
+    <!-- Content -->
+    <div class="content-container">
+      <!-- Sidebar Form -->
+      <div class="form-sidebar">
+        <h2 id="form-heading">{*heading*}</h2>
+        <form id="dynamic-form" action="/project" method="POST"></form>
+      </div>
 
-    <div class="form-container">
-      <form id="dynamic-form" action="/project" method="POST">
-        <!-- Form inputs will be dynamically added here -->
-      </form>
+      <!-- Full Image -->
+      <div class="image-container">
+        <img id="dynamic-image" alt="Project Image: Check the internet connection" />
+      </div>
     </div>
+
+    <!-- Footer -->
+    <footer>
+      <a class="btn-home" href="/checkUpdate">Check for Update</a>
+      <p>www.roboninjaz.com | Powered by Prosol Technologies</p>
+    </footer>
   </div>
 
-  <!-- JSON Data embedded within the script -->
+  <!-- Script for Dynamic Form and Image Handling -->
   <script type="application/json" id="inputs-list">
     {*config_list*}
-  </script>
 
+  </script>
   <script>
-    // Function to generate the form dynamically based on the JSON data
+    
+
+     // Function to generate the form dynamically based on the JSON data
     function generateForm() {
       const inputsList = JSON.parse(document.getElementById('inputs-list').textContent);
       const form = document.getElementById('dynamic-form');
@@ -374,20 +331,18 @@ footer {
      
     }
 
+    function setDynamicImage() {
+      const formHeading = document.getElementById("form-heading").textContent;
+      const firstWord = formHeading.split(":")[0].trim();
+      const imageElement = document.getElementById("dynamic-image");
+      imageElement.src = `https://raw.githubusercontent.com/ADITHMR/probot_Images/refs/heads/main/${firstWord}.jpeg`;
+    }
 
-    window.onload = generateForm;
+    window.onload = function () {
+      generateForm();
+      setDynamicImage();
+    };
   </script>
-
-  <!-- Footer Section with Firmware Update Button -->
-  <footer>
-    <!-- Button that will trigger the firmware update POST request -->
-    <a class="btn-home" href="/checkUpdate">Check for update</a>
-   <p>Probot Web Server | Powered by Prosol Technologies</p>
-    
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
 </html>
-

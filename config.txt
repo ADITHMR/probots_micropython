@@ -1,1 +1,1 @@
-{"SSID": "ACT102739512896", "PROJECT": "DistanceX: Digital Range Finder", "PASSWORD": "99832154"}
+{"SSID": "Adith-2.4G", "PROJECT": "AutoGate: Self opening gate", "PASSWORD": "9061192484"}

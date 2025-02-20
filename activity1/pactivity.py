@@ -1,52 +1,114 @@
-import machine
+# ********************CountMaster: Student headcount Tracker**********************
+from machine import Pin
 import time
-from drivers.oled import oled_three_data
+from drivers.oled import oled_two_data
+from analog_buzzer import AnalogBuzzer
 from utils import get_activity_params
+from pin_mapping import get_trig_state
 
 
-# Function to measure distance
-def measure_distance(trigger_pin,echo_pin):
-    # Send a 10us pulse to the Trigger pin to start the measurement
-    trigger_pin.on()
-    time.sleep_us(10)  # Delay for 10 microseconds
-    trigger_pin.off()
-    pulse_end=0
-    pulse_start=0
-    # Wait for the Echo pin to go high (start of the pulse)
-    while echo_pin.value() == 0:
-        pulse_start = time.ticks_us()
+is_buzzer_used=None
+buzzer_pin=None
+timeout_duration = None
+buzzer=None
+
     
-    # Wait for the Echo pin to go low (end of the pulse)
-    while echo_pin.value() == 1:
-        pulse_end = time.ticks_us()
-
-    # Calculate the pulse duration in microseconds
-    pulse_duration = time.ticks_diff(pulse_end, pulse_start)
-    
-    # Speed of sound is approximately 34300 cm per second at 20°C
-    # The time it takes for the sound to travel to the object and back is divided by 2
-    distance = (pulse_duration * 0.0343) / 2  # Distance in cm
-    return distance
-
-# Main loop
 def run_activity(activity):
-    params = get_activity_params(activity)
-    trigger_pin_no = int(params["trig_pin"])
-    echo_pin_no= int(params["echo_pin"])
-# Pin configuration
-    trigger_pin = machine.Pin(trigger_pin_no, machine.Pin.OUT)  # Trigger pin (GPIO13)
-    echo_pin = machine.Pin(echo_pin_no, machine.Pin.IN)     # Echo pin (GPIO12)
+    oled_two_data(1,1,"Starting","CountMaster")
+    time.sleep(2)
+    
+    global buzzer_pin,buzzer,timeout_duration,is_buzzer_used
+    # -----------------------------------
+    # User Defined Datas
+#     is_led_used=1
+# # Initialize IR sensors and servo motor
+#     sensor_in_pin=36
+#     sensor_out_pin=39
+#     servo_mtr_pin=33
+#           # Servo motor control
+#     buzzer_pin=32
+#     timeout_duration = 5 
+#     num_pixels=5
+#     led_strip_pin=5
+    params=get_activity_params(activity)
+    print(params)
+    is_buzzer_used=params["is_buzzer_used"]
+    sensor_in_pin=int(params["sensor_in_pin"])
+    sensor_out_pin=int(params["sensor_out_pin"])
+    buzzer_pin=int(params["buzzer_pin"])
+    timeout_duration = int(params["timeout_duration"])
+    sensor_out_active_state=get_trig_state(params["sensor_out_active_state"])
+    sensor_in_active_state=get_trig_state(params["sensor_in_active_state"])
+
+    # -----------------------------------
+    sensor_in = Pin(sensor_in_pin, Pin.IN)  # IR sensor for entry
+    sensor_out = Pin(sensor_out_pin, Pin.IN) # IR sensor for exit
+
+    buzzer_enabled=False
+    
+    if is_buzzer_used=="Enabled":
+        buzzer_enabled=True
+    buzzer = AnalogBuzzer(pin_number=buzzer_pin,enOrDi=buzzer_enabled)
+    buzzer.play_tone(2000, 2)
+
+    total_counts = 0
+    is_entering = 0
+    is_exiting = 0
+
+    # Main loop
     while True:
-        dist = int(measure_distance(trigger_pin,echo_pin))  # Measure the distance
-        if dist>100:
-            print(f"Distance: {dist} cm")  # Print the distance in cm
-            oled_three_data(2,2,2,"Distance",">100","cm")
-        else:
-            print(f"Distance: {dist} cm")  # Print the distance in cm
-            oled_three_data(2,2,2,"Distance",str(dist),"cm")
+        try:
+            start_time = time.time()  
 
-#         time.sleep(.5)  # Delay between measurements
+            if is_exiting == 0 and is_entering == 0:
+                if sensor_in.value() == sensor_in_active_state:  
+        #             time.sleep(0.1)  
+                    print("Student Entering.")
+                    is_entering = 1 
 
-# Run the main loop
-# run_activity("activity1")
+                elif sensor_out.value() == sensor_out_active_state:  
+        #             time.sleep(0.1) 
+                    print("Student Exiting.")
+                    is_exiting = 1  
 
+            else:
+              
+                while time.time() - start_time < timeout_duration:
+                    if is_exiting == 1:
+                        if sensor_in.value() == sensor_in_active_state:
+                            while sensor_in.value() == sensor_in_active_state:
+                                pass
+        #                     time.sleep(0.1)  
+                            total_counts -= 1
+                            print(f"Total count = {total_counts}")
+                            oled_two_data(1,2,"Count",str(total_counts))
+                            is_exiting = 0  
+                            buzzer.play_tone(2500, .5)                            
+#                             time.sleep(.2)  
+                            break  
+                    elif is_entering == 1:
+                        if sensor_out.value() == sensor_out_active_state:
+                            while sensor_out.value() == sensor_out_active_state:
+                                pass
+        #                     time.sleep(0.1) 
+                            total_counts += 1
+                            print(f"Total count = {total_counts}")
+                            oled_two_data(1,2,"Count",str(total_counts))
+                            is_entering = 0  
+                            buzzer.play_tone(2500, .5)                            
+#                             time.sleep(.2)  
+                            break  
+                
+              
+                if time.time() - start_time >= timeout_duration:
+                    print("Timeout!")
+                    oled_two_data(2,1,"Timeout","Detected")
+                    is_entering = 0
+                    is_exiting = 0
+                    time.sleep(1)  
+
+            time.sleep(0.1)
+        except Exception as e:
+            print(f"Error in CountMaster activity(): {e}")
+
+# run_activity("activity4")
