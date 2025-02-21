@@ -66,9 +66,9 @@ def fetch_projects():
 
         project_routing_json[project_name]="activity5"
         # ------------------------------------------------------------
-        with open("projects/projectList.py", "w") as f:
+        with open("project/projectList.py", "w") as f:
             f.write(f"project_topic_list ={projectlist}")
-        with open("projects/project_routing.json", "w") as f:
+        with open("project/project_routing.json", "w") as f:
             json.dump(project_routing_json, f)
             
         print( f"project_topic_list ={projectlist}")

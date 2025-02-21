@@ -21,6 +21,13 @@
       display: flex;
       flex-direction: column;
       min-height: 100vh;
+      
+    }
+    .content-wrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        margin-top: 3%; /* Adjust this to control the space between the top bar and the content */
     }
 
     /* Fixed Top Bar */
@@ -207,13 +214,14 @@
 
 <body>
   <!-- Fixed Top Bar with Home Button and Update Firmware Button -->
+  
   <div class="top-bar">
     <div>
         <img src="https://raw.githubusercontent.com/ADITHMR/probot_Images/refs/heads/main/RoboNinjalogogreen.png" alt="Logo" >
     </div>
     <h1>RoboNinjaz Web 1.0</h1>
   </div>
-
+  <div class="content-wrapper"> 
   <!-- Main Layout -->
   <div class="main-layout">
     <!-- Sidebar Section -->
@@ -228,9 +236,7 @@
 <select id="mydropdown" name="selectedItem" class="form-select" required>
 <option value="">--Select Project--</option>
 
-<option value="CountMaster: Student headcount Tracker">CountMaster: Student headcount Tracker</option>
 <option value="FireGuard: Intelligent Fire Detection">FireGuard: Intelligent Fire Detection</option>
-<option value="DistanceX: Digital Range Finder">DistanceX: Digital Range Finder</option>
 <option value="AutoGate: Self opening gate">AutoGate: Self opening gate</option>
 <option value="SentiLume: Intelligent street illumination">SentiLume: Intelligent street illumination</option>
 </select>
@@ -244,11 +250,12 @@
       <img id="image" src="https://raw.githubusercontent.com/ADITHMR/probot_Images/refs/heads/main/default.jpeg" alt="Selected Image">
     </div>
   </div>
+</div>
 
   <!-- Footer Section with Firmware Update Button -->
   <footer>
     <a class="btn-home" href="/checkUpdate">Check for updates</a>
-    <p>RoboNinjaz Web Server | Powered by Prosol Technologies</p>
+    <p>roboninjaz.com | Powered by Prosol Technologies</p>
   </footer>
 
   <script>
@@ -277,4 +284,5 @@
 </body>
 
 </html>
+
 

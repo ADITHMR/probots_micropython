@@ -1,25 +1,39 @@
 { "data": [
             {
                 "type": "project",
-                "name": "DistanceX: Digital Range Finder"
+                "name": "SentiLume: Intelligent street illumination"
             },
-            
             {
                 "type": "select",
-                "name": "trig_pin",
-                "label": "Trigger pin",
+                "name": "sensor_pin",
+                "label": "Sensor Pin",
+                "options": ["2","4","5","12","13","14","15","16","17","18","19","23","26","32","33","34","35","36","39"],
+                "required": "true",
+                "defaultValue": "39"
+            },
+            {
+            "type": "radio",
+            "name": "sensor_active_state", 
+            "label": "Sensor Output Type ",
+            "options": ["Active Low", "Active High"],
+            "required": "true",
+            "defaultValue":"Active Low"
+          },
+            {
+                "type": "select",
+                "name": "buzzer_enable",
+                "label": "Enable Buzzer ",
+                "options": ["Enabled","Disabled"],
+                "required": true,
+                "defaultValue": "Enabled"
+            },
+            {
+                "type": "select",
+                "name": "buzzer_pin",
+                "label": "Buzzer Pin",
                 "options": ["2","4","5","12","13","16","17","18","19","23","26","32","33"],
-                "required": "true",
-                "defaultValue": "16"
-            },
-            {
-                "type": "select",
-                "name": "echo_pin",
-                "label": "Trigger pin",
-                "options": ["2","4","5","12","13","16","17","18","19","23","26","32","33","34","35","36","39"],
-                "required": "true",
-                "defaultValue": "17"
+                "required": true,
+                "defaultValue": "32"
             }
-           
         ]
 }

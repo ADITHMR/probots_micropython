@@ -9,150 +9,180 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" />
   <style>
      html,
-    body {
-      height: 100%;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      font-family: 'Arial', sans-serif;
-      background-color: #181818;
-      color: #ffffff;
-    }
-    .content-wrapper {
-        flex: 1;
-  display: flex;
-  flex-direction: column;
-  margin-top: 3%; /* Adjust this to control the space between the top bar and the content */
-}
-.content-container {
-    flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-}
-    
-    .top-bar {
-        background-color: #333;
-  color: #ffffff;
-  padding: 15px 25px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    }
-    .top-bar .logo {
-      height: 30px;
-    }
-
-    .top-bar .btn-home {
-      background-color: #0b79d0;
-      color: #ffffff;
-      border: none;
-      padding: 12px 18px;
-      font-size: 16px;
-      border-radius: 5px;
-      text-decoration: none;
-      transition: background-color 0.3s ease;
-    }
-
-    .top-bar .btn-home:hover {
-      background-color: #0977c7;
-    }
-
-    .content-container {
-      display: flex;
-      flex-wrap: wrap;
-      margin-top: 70px;
-      height: calc(100vh - 70px);
-    }
-
-    .form-sidebar {
-      background-color: #282c34;
-      padding: 30px;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-      flex: 1 1 300px;
-      max-width: 350px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .image-container {
-      flex: 2 1 600px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      padding: 20px;
-    }
-
-    .image-container img {
-      max-width: 100%;
-      max-height: 100%;
-      border-radius: 8px;
-      object-fit: cover;
-      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-    }
-
-    .form-control,
-    .form-select {
-      background-color: #3d444f;
-      border: 1px solid #444c56;
-      padding: 12px;
-      font-size: 1rem;
-      border-radius: 8px;
-      margin-bottom: 20px;
-      color: #ffffff;
-    }
-
-    .form-control:focus,
-    .form-select:focus {
-      border-color: #03a9f4;
-      outline: none;
-    }
-
-    .btn-primary {
-      background-color: #03a9f4;
-      border: none;
-      padding: 12px 24px;
-      font-size: 1rem;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-
-    .btn-primary:hover {
-      background-color: #0288d1;
-    }
-
-    footer {
-      background-color: #333;
-      color: #ffffff;
-      padding: 20px;
-      text-align: center;
-      width: 100%;
-      box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
-    }
-    @media (max-width: 768px) {
-      .form-sidebar {
-        max-width: 100%;
-        flex: 1 1 100%;
-        text-align: center;
+      body {
+        height: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        font-family: "Arial", sans-serif;
+        background-color: #181818;
+        color: #ffffff;
       }
+      .content-wrapper {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        margin-top: 3%; /* Adjust this to control the space between the top bar and the content */
+      }
+      .content-container {
+        flex: 1;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      .top-bar {
+        background-color: #333;
+        color: #ffffff;
+        padding: 15px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        z-index: 1000;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      }
+      .top-bar .logo {
+        height: 30px;
+      }
+
+      .top-bar .btn-home {
+        background-color: #0b79d0;
+        color: #ffffff;
+        border: none;
+        padding: 12px 18px;
+        font-size: 16px;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+      }
+
+      .top-bar .btn-home:hover {
+        background-color: #0977c7;
+      }
+
+      .content-container {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 70px;
+        height: calc(100vh - 70px);
+      }
+
+      .form-sidebar {
+        background-color: #282c34;
+        padding: 30px;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        flex: 1 1 300px;
+        max-width: 350px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+  
 
       .image-container {
-        flex: 1 1 100%;
+        flex: 2 1 600px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+        padding: 20px;
       }
-    }
-    .top-bar img {
-  height: 60px; /* Adjust the height as needed */
-  width: auto;  /* Maintain aspect ratio */
-  max-width: 100%; /* Ensure it doesn't exceed its container */
-  
-}
+
+      .image-container img {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 8px;
+        object-fit: cover;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+      }
+
+      .form-control,
+      .form-select {
+        background-color: #3d444f;
+        border: 1px solid #444c56;
+        padding: 12px;
+        font-size: 1rem;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        color: #ffffff;
+      }
+
+      .form-control:focus,
+      .form-select:focus {
+        border-color: #03a9f4;
+        outline: none;
+      }
+
+      .btn-primary {
+        background-color: #03a9f4;
+        border: none;
+        padding: 12px 24px;
+        font-size: 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+      }
+
+      .btn-primary:hover {
+        background-color: #0288d1;
+      }
+
+      footer {
+        background-color: #333;
+        color: #ffffff;
+        padding: 20px;
+        text-align: center;
+        width: 100%;
+        box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.3);
+      }
+      @media (max-width: 768px) {
+        .form-sidebar {
+          max-width: 100%;
+          flex: 1 1 100%;
+          text-align: center;
+        }
+
+        .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+  }
+      }
+      .top-bar img {
+        height: 60px; /* Adjust the height as needed */
+        width: auto; /* Maintain aspect ratio */
+        max-width: 100%; /* Ensure it doesn't exceed its container */
+      }
+      .form-description {
+        margin: 15px 0 25px;
+        padding: 50px;
+        background-color: #3b3838;
+        border-left: 4px solid #03a9f4;
+        border-radius: 10px;
+        font-size: 1rem;
+        line-height: 1.6;
+        height: fit-content;
+        color: #e0e0e0;
+        margin-bottom: 20px;
+      }
+
+      .form-description p {
+        margin: 0;
+      }
+
+      .form-description strong {
+        color: #03a9f4; /* Highlight important terms */
+      }
+      .description-and-image {
+        display: flex;
+        flex: 2 1 600px;
+        flex-direction: column;
+        padding: 20px;
+      }
+
   </style>
 </head>
 
@@ -172,17 +202,26 @@
     <div class="content-container">
       <!-- Sidebar Form -->
       <div class="form-sidebar">
-        <h2 id="form-heading">{*heading*}</h2>
+        <h5 id="form-heading">{*heading*} </h5>
+        <h2 id="form-heading">Settings:</h2>
         <form id="dynamic-form" action="/project" method="POST"></form>
       </div>
-
-      <!-- Full Image -->
-      <div>
-      <div class="image-container">
-        <img id="dynamic-image" alt="Project Image: Check the internet connection" />
-      </div>
-    </div>
-    </div>
+       <!-- New Description Section -->
+       <div class="description-and-image">
+       <h2 id="form-heading">{*heading*}  </h2>
+          <div id="form-description" class="form-description">
+            <p><strong>Overview:</strong> AutoGate: Self opening gate</p>
+          </div>
+          <div>
+            <div class="image-container">
+              <img
+                id="dynamic-image"
+                alt="Project Image: Check the internet connection"
+              />
+            </div>
+          </div>
+        </div>
+    </div> 
 
     <!-- Footer -->
     <footer>

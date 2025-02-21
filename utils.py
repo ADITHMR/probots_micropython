@@ -4,24 +4,23 @@ import json
 
 
 def get_jsonvalue_from_file(file_path,key):
-    with open(file_path, 'r') as f:
-            conf_data = json.load(f)
-            return conf_data[key]
+    try:
+        with open(file_path, 'r') as f:
+                conf_data = json.load(f)
+                return conf_data[key]
+    except Exception as e:
+        print("Error on 'get_jsonvalue_from_file()':", e)
 def put_jsonvalue_to_file(file_path,key,value):
-    with open(file_path, 'r') as f:
+    try:
+        with open(file_path, 'r') as f:
             data = json.load(f)
-    data[key]=value
-    with open(file_path, 'w') as f:
-            json.dump(data, f)
+        data[key]=value
+        with open(file_path, 'w') as f:
+                json.dump(data, f)
+    except Exception as e:
+        print("Error on 'put_jsonvalue_to_file()':", e)
+    
 
-def replace_true_with_true_json_list(data):
-    for item in data:
-        for key, value in item.items():
-            if value is True:
-                item[key] = True  # JSON-compatible true, as Python's True is already used in the list
-            elif isinstance(value, list):  # Check if it's a list and recursively process
-                replace_true_with_true(value)
-    return data
 
 def get_activity_params(activity):
     path=f"{activity}/config.txt"

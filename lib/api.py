@@ -76,16 +76,21 @@ class Api:
         i=0
         for project in projects:
             files=project["files"]
+            description=project['description']
+            put_jsonvalue_to_file("project/project_description.dat",folders[i],description)
 #             print(files)
             for file in files:
                 file_path=f"{folders[i]}/{file['filename'].split("-")[1]}"
                 fileid=file['id']
                 file_content=self.get_project_file(fileid)
+                
+               
+                
                 if file_content!="0":
                     with open(file_path, 'w') as f:
                         f.write(file_content)
                         print(f"{fileid} written to {file_path}")
-                print(fileid)
+                
             i+=1
     def get_project_file(self,id):
         try:

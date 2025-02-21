@@ -106,7 +106,7 @@ class SSD1306(framebuf.FrameBuffer):
         self.write_cmd(x1)
         self.write_cmd(SET_PAGE_ADDR)
         self.write_cmd(0)
-        self.write_cmd(self.pages - 1)
+        selfelf.pages - 1)
         self.write_data(self.buffer)
     def write_text(self, text, x, y, size):
         ''' Method to write Text on OLED/LCD Displays with a variable font size
@@ -125,72 +125,4 @@ class SSD1306(framebuf.FrameBuffer):
         # Creating reference characters to read their values
         self.text(text, x, y)
         for i in range(x, x + (8 * len(text))):
-            for j in range(y, y + 8):
-                # Fetching and saving details of pixels, such as
-                # x co-ordinate, y co-ordinate, and color of the pixel
-                px_color = self.pixel(i, j)                
-                info.append((i, j, px_color))
-        # Clearing the reference characters from the screen
-        self.text(text, x, y, background)        
-        # Writing the custom-sized font characters on screen
-        for px_info in info:
-            self.fill_rect(size * px_info[0] - (size - 1) * x,
-                           size * px_info[1] - (size - 1) * y,
-                           size, size, px_info[2])        
-
-
-class SSD1306_I2C(SSD1306):
-    def __init__(self, width, height, i2c, addr=0x3C, external_vcc=False):
-        self.i2c = i2c
-        self.addr = addr
-        self.temp = bytearray(2)
-        self.write_list = [b"\x40", None]  # Co=0, D/C#=1
-        super().__init__(width, height, external_vcc)
-
-    def write_cmd(self, cmd):
-        self.temp[0] = 0x80  # Co=1, D/C#=0
-        self.temp[1] = cmd
-        self.i2c.writeto(self.addr, self.temp)
-
-    def write_data(self, buf):
-        self.write_list[1] = buf
-        self.i2c.writevto(self.addr, self.write_list)
-
-
-class SSD1306_SPI(SSD1306):
-    def __init__(self, width, height, spi, dc, res, cs, external_vcc=False):
-        self.rate = 10 * 1024 * 1024
-        dc.init(dc.OUT, value=0)
-        res.init(res.OUT, value=0)
-        cs.init(cs.OUT, value=1)
-        self.spi = spi
-        self.dc = dc
-        self.res = res
-        self.cs = cs
-        import time
-
-        self.res(1)
-        time.sleep_ms(1)
-        self.res(0)
-        time.sleep_ms(10)
-        self.res(1)
-        super().__init__(width, height, external_vcc)
-
-    def write_cmd(self, cmd):
-        self.spi.init(baudrate=self.rate, polarity=0, phase=0)
-        self.cs(1)
-        self.dc(0)
-        self.cs(0)
-        self.spi.write(bytearray([cmd]))
-        self.cs(1)
-
-    def write_data(self, buf):
-        self.spi.init(baudrate=self.rate, polarity=0, phase=0)
-        self.cs(1)
-        self.dc(1)
-        self.cs(0)
-        self.spi.write(buf)
-        self.cs(1)
-
-
-__version__ = '0.1.0'
+            for j 

@@ -99,7 +99,6 @@
              "project_config_update.py",
              "project_options_JSON.txt",
              "project_page.html",
-             "test_web_page.py",
              "webServer.py",
              "web_page.py",
              "web_page_AP.py"
@@ -129,20 +128,11 @@
     },
      {
         "files": [
-            "Temp_measurement_lm35_file.py",
-             "auto_street_light_file.py",
-             "automatic_door_file.py",
-             "automatic_fire_detection_file.py",
-             "dig_dist_measurement_file.py",
-             "do_not_delete.txt",
-             "funWithLed_file.py",
-             "gas_leak_detection_file.py",
-             "projectList.py",
-             "project_configurations.txt",
-             "project_routing.json",
-             "student_counter_file.py"
+            "projectList.py",
+             "project_description.dat",
+             "project_routing.json"
         ],
-         "folder": "//projects"
+         "folder": "//project"
     },
      {
         "files": [

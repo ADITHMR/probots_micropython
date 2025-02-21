@@ -1,1 +1,0 @@
-project_topic_list =['CountMaster: Student headcount Tracker', 'FireGuard: Intelligent Fire Detection', 'DistanceX: Digital Range Finder', 'AutoGate: Self opening gate', 'SentiLume: Intelligent street illumination']
