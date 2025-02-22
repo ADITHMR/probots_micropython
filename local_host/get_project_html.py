@@ -1,15 +1,8 @@
 import json
-#        01 Fun with LED Lights
 def get_project_html(project_name):
-    
-    with open('project/project_routing.json', 'r') as f:
-        activity = json.load(f)
-    if project_name in activity:
-        path=f"html/{activity[project_name]}.html"
-        
-        with open(path, 'r') as f:
-            page = f.read()
-    return page
-       
-           
-        
+	B=project_name
+	with open('project/project_routing.json','r')as A:C=json.load(A)
+	if B in C:
+		D=f"html/{C[B]}.html"
+		with open(D,'r')as A:E=A.read()
+		return E

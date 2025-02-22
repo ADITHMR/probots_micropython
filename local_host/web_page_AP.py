@@ -1,11 +1,5 @@
 from machine_id import get_serial_no
-
-def web_page_AP():
-    # Get the serial number
-    serial_no = get_serial_no()
-    
-    # HTML page content with dynamic serial number insertion
-    html_page = f"""
+def web_page_AP():A=get_serial_no();B=f'''
   <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,12 +65,12 @@ def web_page_AP():
     // Function to replace spaces with %20 in form inputs
     function replaceSpaces(event) {{
       const form = event.target;
-      const ssidField = form.querySelector('#ssid');
-      const passwordField = form.querySelector('#password');
+      const ssidField = form.querySelector(\'#ssid\');
+      const passwordField = form.querySelector(\'#password\');
       
       // Replace spaces in SSID and Password fields with %20
-      ssidField.value = ssidField.value.replace(/ /g, '@@!##');
-      passwordField.value = passwordField.value.replace(/ /g, '@@!##');
+      ssidField.value = ssidField.value.replace(/ /g, \'@@!##\');
+      passwordField.value = passwordField.value.replace(/ /g, \'@@!##\');
     }}
   </script>
 </head>
@@ -85,7 +79,7 @@ def web_page_AP():
 <div class="form-container">
 
   <h4>Submit SSID and Password</h4>
-  <h1 class="page-heading">S/N: {serial_no}</h1>
+  <h1 class="page-heading">S/N: {A}</h1>
   <!-- Form to collect SSID and password -->
   <form action="your-server-endpoint" method="POST" onsubmit="replaceSpaces(event)">
     <div class="form-group">
@@ -102,5 +96,4 @@ def web_page_AP():
 
 </body>
 </html>
-"""
-    return html_page
+''';return B

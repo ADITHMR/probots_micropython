@@ -41,10 +41,8 @@
     },
      {
         "files": [
-            "buzzer.py",
-             "display.py",
+            "display.py",
              "ir_decode.py",
-             "led_strip.py",
              "oled.py",
              "tm1637.py"
         ],
@@ -76,7 +74,6 @@
      {
         "files": [
             "analog_buzzer.py",
-             "api.py",
              "custom_neopixel.py",
              "pkg_resources.py",
              "servo.py",
@@ -90,14 +87,12 @@
         "files": [
             "connect_wifi.py",
              "credentials.html",
-             "error404.html",
              "esp_as_AP.py",
              "get_project_html.py",
              "index.html",
              "index_page.html",
              "message.html",
              "project_config_update.py",
-             "project_options_JSON.txt",
              "project_page.html",
              "webServer.py",
              "web_page.py",
@@ -117,10 +112,9 @@
      {
         "files": [
             "Save_Files_List.py",
-             "fetch_projects.py",
+             "api.py",
              "file_mgr.py",
              "route_activity.py",
-             "runProject.py",
              "run_activity.py",
              "save_html.py"
         ],
@@ -136,33 +130,11 @@
     },
      {
         "files": [
-            "config.txt",
-             "html_options.txt",
-             "project_configurations.txt"
-        ],
-         "folder": "//samples"
-    },
-     {
-        "files": [
-            "fetch_project_data_.py",
-             "get_project_page_.py",
-             "led_patterns.py",
-             "run_activity_.py",
-             "save_html_.py",
-             "web_server_.py",
-             "webserver_old.py"
-        ],
-         "folder": "//test"
-    },
-     {
-        "files": [
             "boot.py",
              "files_list.txt",
-             "imports.py",
              "machine_id.py",
              "main.py",
              "ota_update.py",
-             "pactivity.py",
              "pin_mapping.py",
              "utils.py",
              "version.dat",

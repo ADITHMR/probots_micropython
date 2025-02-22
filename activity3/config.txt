@@ -1,1 +1,12 @@
-{"project_name": "SentiLume: Intelligent street illumination", "params": {"sensor_active_state": "Active High", "buzzer_enable": "Enabled", "buzzer_pin": "32", "sensor_pin": "39"}}
+{
+    "project_name": "CountMaster: Student headcount Tracker",
+    "params": {
+        "sensor_out_pin": "36",
+        "timeout_duration": "5",
+        "sensor_in_active_state": "Active Low",
+        "buzzer_pin": "32",
+        "sensor_in_pin": "39",
+        "sensor_out_active_state": "Active Low",
+        "is_buzzer_used":"Enabled"
+    }
+}

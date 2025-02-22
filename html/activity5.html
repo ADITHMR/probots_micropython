@@ -202,13 +202,13 @@
     <div class="content-container">
       <!-- Sidebar Form -->
       <div class="form-sidebar">
-        <h5 id="form-heading">SentiLume: Intelligent street illumination </h5>
+        <h5 id="form-heading">DistanceX: Digital Range Finder </h5>
         <h2 id="form-heading">Settings:</h2>
         <form id="dynamic-form" action="/project" method="POST"></form>
       </div>
        <!-- New Description Section -->
        <div class="description-and-image">
-       <h2 id="form-heading">SentiLume: Intelligent street illumination  </h2>
+       <h2 id="form-heading">DistanceX: Digital Range Finder  </h2>
           <div id="form-description" class="form-description">
             <p><strong>Overview:</strong> AutoGate: Self opening gate</p>
           </div>
@@ -232,7 +232,7 @@
 
   <!-- Script for Dynamic Form and Image Handling -->
   <script type="application/json" id="inputs-list">
-    [{"name": "SentiLume: Intelligent street illumination", "type": "project"}, {"type": "select", "name": "sensor_pin", "label": "Sensor Pin", "required": "true", "defaultValue": "39", "options": ["2", "4", "5", "12", "13", "14", "15", "16", "17", "18", "19", "23", "26", "32", "33", "34", "35", "36", "39"]}, {"type": "radio", "name": "sensor_active_state", "label": "Sensor Output Type ", "required": "true", "defaultValue": "Active Low", "options": ["Active Low", "Active High"]}, {"type": "select", "name": "buzzer_enable", "label": "Enable Buzzer ", "required": true, "defaultValue": "Enabled", "options": ["Enabled", "Disabled"]}, {"type": "select", "name": "buzzer_pin", "label": "Buzzer Pin", "required": true, "defaultValue": "32", "options": ["2", "4", "5", "12", "13", "16", "17", "18", "19", "23", "26", "32", "33"]}]
+    [{"name": "DistanceX: Digital Range Finder", "type": "project"}, {"type": "select", "name": "trig_pin", "label": "Trigger pin", "required": "true", "defaultValue": "16", "options": ["2", "4", "5", "12", "13", "16", "17", "18", "19", "23", "26", "32", "33"]}, {"type": "select", "name": "echo_pin", "label": "Trigger pin", "required": "true", "defaultValue": "17", "options": ["2", "4", "5", "12", "13", "16", "17", "18", "19", "23", "26", "32", "33", "34", "35", "36", "39"]}]
 
   </script>
   <script>

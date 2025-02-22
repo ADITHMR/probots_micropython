@@ -1,29 +1,14 @@
-import neopixel
-import machine
-
+import neopixel,machine
 class CustomNeoPixel:
-    def __init__(self, pin, num_pixels, enabled=True):
-        """Initializes the NeoPixel strip."""
-        self.is_enabled = enabled
-        self.num_pixels=num_pixels
-        if self.is_enabled:
-            self.np = neopixel.NeoPixel(machine.Pin(pin,machine.Pin.OUT), self.num_pixels)
-
-    def set_color(self, index, r, g, b):
-        """Sets the color of a specific NeoPixel."""
-        if self.is_enabled:
-            if 0 <= index < len(self.np):
-                self.np[index] = (r, g, b)
-                self.np.write()
-
-    def clear(self):
-        """Turns off all the NeoPixels."""
-        if self.is_enabled:
-            self.np.fill((0, 0, 0))  # More efficient to fill all pixels at once
-            self.np.write()
-
-    def set_color_All(self,r,g,b):
-        """Turns off all the NeoPixels."""
-        if self.is_enabled:
-            for k in range(self.num_pixels):
-                self.set_color(k,r,g,b)
+	def __init__(A,pin,num_pixels,enabled=True):
+		A.is_enabled=enabled;A.num_pixels=num_pixels
+		if A.is_enabled:A.np=neopixel.NeoPixel(machine.Pin(pin,machine.Pin.OUT),A.num_pixels)
+	def set_color(A,index,r,g,b):
+		B=index
+		if A.is_enabled:
+			if 0<=B<len(A.np):A.np[B]=r,g,b;A.np.write()
+	def clear(A):
+		if A.is_enabled:A.np.fill((0,0,0));A.np.write()
+	def set_color_All(A,r,g,b):
+		if A.is_enabled:
+			for B in range(A.num_pixels):A.set_color(B,r,g,b)
