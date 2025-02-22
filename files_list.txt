@@ -76,7 +76,8 @@
      {
         "files": [
             "analog_buzzer.py",
-             "neopixel.py",
+             "api.py",
+             "custom_neopixel.py",
              "pkg_resources.py",
              "servo.py",
              "ssd1306.py",
@@ -88,6 +89,7 @@
      {
         "files": [
             "connect_wifi.py",
+             "credentials.html",
              "error404.html",
              "esp_as_AP.py",
              "get_project_html.py",
@@ -97,7 +99,6 @@
              "project_config_update.py",
              "project_options_JSON.txt",
              "project_page.html",
-             "test_web_page.py",
              "webServer.py",
              "web_page.py",
              "web_page_AP.py"
@@ -127,20 +128,11 @@
     },
      {
         "files": [
-            "Temp_measurement_lm35_file.py",
-             "auto_street_light_file.py",
-             "automatic_door_file.py",
-             "automatic_fire_detection_file.py",
-             "dig_dist_measurement_file.py",
-             "do_not_delete.txt",
-             "funWithLed_file.py",
-             "gas_leak_detection_file.py",
-             "projectList.py",
-             "project_configurations.txt",
-             "project_routing.json",
-             "student_counter_file.py"
+            "projectList.py",
+             "project_description.dat",
+             "project_routing.json"
         ],
-         "folder": "//projects"
+         "folder": "//project"
     },
      {
         "files": [
@@ -154,6 +146,7 @@
         "files": [
             "fetch_project_data_.py",
              "get_project_page_.py",
+             "led_patterns.py",
              "run_activity_.py",
              "save_html_.py",
              "web_server_.py",
@@ -169,9 +162,11 @@
              "machine_id.py",
              "main.py",
              "ota_update.py",
+             "pactivity.py",
              "pin_mapping.py",
              "utils.py",
-             "version.dat"
+             "version.dat",
+             "web_data.html"
         ],
          "folder": "/"
     }

@@ -1,5 +1,5 @@
 import machine
-from  projects.projectList import  *
+from  project.projectList import  *
 from machine_id import get_serial_no
 
 

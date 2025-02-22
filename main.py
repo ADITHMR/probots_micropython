@@ -41,8 +41,8 @@ print(f"project_name-->{proj}")
 
 
 try:
-#     run(proj)
-    _thread.start_new_thread(run, (proj,))
+    run(proj)
+#     _thread.start_new_thread(run, (proj,))
     
 
     
