@@ -1,5 +1,6 @@
 import ssd1306
-from pin_mapping import *
+
+import machine
 # Initialize I2C bus (SCL, SDA pins)
 i2c = machine.I2C(0, scl=machine.Pin(22), sda=machine.Pin(21))
 

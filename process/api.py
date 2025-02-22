@@ -1,7 +1,7 @@
 import urequests
 import json
 from local_host.connect_wifi import  connect_wifi
-from utils import get_jsonvalue_from_file,put_jsonvalue_to_file
+from utils import get_jsonvalue_from_file,put_jsonvalue_to_file,write_file
 
 class Api:
     user_login_url="http://roboninjaz.com:8010/api/user/login"
@@ -72,6 +72,8 @@ class Api:
                 print("Error:", e)
                 return False
     def save_projects(self,projects):
+        projectlist=[]
+        project_routing_json={}
         folders=["activity1","activity2","activity3","activity4","activity5"]
         i=0
         for project in projects:
@@ -90,8 +92,16 @@ class Api:
                     with open(file_path, 'w') as f:
                         f.write(file_content)
                         print(f"{fileid} written to {file_path}")
+            file_path=f"{folders[i]}/config.txt"
+            project_name=get_jsonvalue_from_file(file_path,"project_name")
+            projectlist.append(project_name)
+            project_routing_json[project_name]=folders[i]
+            
                 
             i+=1
+        write_file("project/projectList.py",f"project_topic_list ={projectlist}")
+        with open("project/project_routing.json", "w") as f:
+            json.dump(project_routing_json, f)
     def get_project_file(self,id):
         try:
             # Sending POST request

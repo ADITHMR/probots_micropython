@@ -1,11 +1,11 @@
 # Author: Adith Pillai
 # Language: MicroPython
-# Project Name: Probots
+# Project Name: RoboNinjaz
 
 import machine
 import time
 from local_host.esp_as_AP import *
-from pin_mapping import *
+
 from local_host.webServer import *
 from drivers.display import *
 from drivers.ir_decode import *

@@ -13,7 +13,7 @@ def set_IR_data(data):
         IR_DATA=data
     
 def callback(data, addr, ctrl):
-    proj=get_parameter("PROJECT") 
+
     if data < 0:  # NEC protocol sends repeat codes.
         pass
     else:

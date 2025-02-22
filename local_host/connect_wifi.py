@@ -2,7 +2,7 @@ import network
 from drivers.oled import *
 from drivers.display import *
 from process.file_mgr import *
-
+import time
 # Global variable for WiFi connection status
 wifi_connected = False
 wifi_connection_timeout = 8  # Timeout after 10 seconds

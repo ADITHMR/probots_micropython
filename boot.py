@@ -1,14 +1,16 @@
 import time
+from machine import Pin
 
 
 
-from pin_mapping import TOUCH1,TOUCH2
+
 from local_host.connect_wifi import  connect_wifi
 from drivers.oled import *
 oled_two_data(1,1,"System","Booting")
 # from machine_id import get_update_flag
 # time.sleep(.5)
-
+TOUCH1=Pin(14,Pin.IN)
+TOUCH2=Pin(15,Pin.IN)
 if TOUCH1.value()==True and TOUCH2.value()==True:
     from local_host.esp_as_AP import runAP
     runAP()
@@ -40,7 +42,7 @@ if wifi_connected:
         from ota_update import run_update
         run_update()
 if wifi_connected:
-    import api
+    import process.api as api
     api=api.Api()
     login=api.user_login()
     if login:
@@ -54,12 +56,12 @@ if wifi_connected:
 
 # time.sleep(.5)
 from process.save_html import save_html
-from process.fetch_projects import fetch_projects
+
 
 
 oled_two_data(1,1,"Setting up","Activities")
 # time.sleep(.5)
-fetch_projects()
+# fetch_projects()
 oled_two_data(1,1,"Updating","Pages")
 # time.sleep(.5)
 save_html()

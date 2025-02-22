@@ -3,7 +3,7 @@ from local_host.web_page import web_page
 from machine_id import get_serial_no
 from utils import get_jsonvalue_from_file,read_file,write_file
 import gc
-import traceback
+
 from drivers.oled import oled_log 
 
 def save_html():
@@ -36,7 +36,7 @@ def save_html():
             gc.collect()
         except Exception as e:
             print("Error on 'save_html() on activity1':", e)
-            traceback.print_exc()
+           
         # -----------------------------------------------------------
         try:
 #             with open('activity2/web_data.html', 'r') as f:
@@ -64,7 +64,7 @@ def save_html():
 #                 del response
         except Exception as e:
             print("Error on 'save_html() on activity2':", e)
-            traceback.print_exc()
+         
         # -----------------------------------------------------------
         try:
 #             with open('activity3/web_data.html', 'r') as f:
@@ -92,7 +92,7 @@ def save_html():
 #                 del response
         except Exception as e:
             print("Error on 'save_html() on activity3':", e)
-            traceback.print_exc()
+       
         # -----------------------------------------------------------
         try:
 #             with open('activity4/web_data.html', 'r') as f:
@@ -120,7 +120,7 @@ def save_html():
 #                 del response
         except Exception as e:
             print("Error on 'save_html() on activity4':", e)
-            traceback.print_exc()
+        
         # -----------------------------------------------------------
         try:
 #             with open('activity5/web_data.html', 'r') as f:
@@ -149,7 +149,7 @@ def save_html():
 #                 del response
         except Exception as e:
             print("Error on 'save_html() on activity5':", e)
-            traceback.print_exc()
+           
         # -----------------------------------------------------------
         try:
             indexPage=str(web_page()).replace("{machine_id}",f"S/N: {get_serial_no()}")
@@ -167,5 +167,5 @@ def save_html():
             traceback.print_exc()
     except Exception as e:
         print("Error on 'save_html()':", e)
-        traceback.print_exc()
+     
     

@@ -9,7 +9,7 @@ def get_project_html(project_name):
         
         with open(path, 'r') as f:
             page = f.read()
-    return page
+        return page
        
            
         

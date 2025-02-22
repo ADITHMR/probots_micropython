@@ -1,7 +1,9 @@
-from pin_mapping import *
+# from pin_mapping import *
 from time import sleep
+import drivers.tm1637 as tm1637
+from machine import Pin
 
-
+disp = tm1637.TM1637(clk=Pin(27), dio=Pin(26))
 def disp_seq_num(data,delay):
     for d in data:
         disp.show("    ")
