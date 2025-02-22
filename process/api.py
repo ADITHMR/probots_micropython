@@ -82,7 +82,7 @@ class Api:
             put_jsonvalue_to_file("project/project_description.dat",folders[i],description)
 #             print(files)
             for file in files:
-                file_path=f"{folders[i]}/{file['filename'].split("-")[1]}"
+                file_path=f"{folders[i]}/{file['filename'].split('-')[1]}"
                 fileid=file['id']
                 file_content=self.get_project_file(fileid)
                 
