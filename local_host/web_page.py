@@ -7,14 +7,14 @@ from machine_id import get_serial_no
 # <option value=" ">--Select Project--</option>
 
 # Generate HTML for the dropdown
-html_dropdown =  """
-<select id="mydropdown" name="selectedItem" class="form-select" required>
-<option value="">--Select Project--</option>
-
-"""
-for proj in project_topic_list:
-    html_dropdown += f"<option value=\"{proj}\">{proj}</option>\n"
-html_dropdown+="</select>"    
+# html_dropdown =  """
+# <select id="mydropdown" name="selectedItem" class="form-select" required>
+# <option value="">--Select Project--</option>
+# 
+# """
+# for proj in project_topic_list:
+#     html_dropdown += f"<option value=\"{proj}\">{proj}</option>\n"
+# html_dropdown+="</select>"    
             
 
 
@@ -22,6 +22,15 @@ html_dropdown+="</select>"
 
 # print(html_dropdown)
 def web_page():
+    html_dropdown =  """
+    <select id="mydropdown" name="selectedItem" class="form-select" required>
+    <option value="">--Select Project--</option>
+
+    """
+    
+    for proj in project_topic_list:
+        html_dropdown += f"<option value=\"{proj}\">{proj}</option>\n"
+    html_dropdown+="</select>"
     with open('local_host/index.html', 'r') as f:
                 html_content = f.read()
                 html_content=html_content.replace("{html_dropdown}",html_dropdown)

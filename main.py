@@ -48,4 +48,4 @@ try:
     
     
 except KeyboardInterrupt:
-    ir.close()
+    pass

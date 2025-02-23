@@ -1,32 +1,48 @@
 import json
+import os
 
 
-
-
+def file_exists(file_name):
+    try:
+        os.stat(file_name)
+        return True  # File exists
+    except OSError:
+        return False  # File does not exist
 def get_jsonvalue_from_file(file_path,key):
     try:
-        with open(file_path, 'r') as f:
-                conf_data = json.load(f)
-                return conf_data[key]
+        if file_exists(file_path):
+            with open(file_path, 'r') as f:
+                    conf_data = json.load(f)
+                    return conf_data[key]
+        else:
+            return "error"
     except Exception as e:
+        return "error"
         print("Error on 'get_jsonvalue_from_file()':", e)
+        
 def put_jsonvalue_to_file(file_path,key,value):
     try:
-        with open(file_path, 'r') as f:
-            data = json.load(f)
-        data[key]=value
-        with open(file_path, 'w') as f:
-                json.dump(data, f)
+        if file_exists(file_path):
+            with open(file_path, 'r') as f:
+                data = json.load(f)
+            data[key]=value
+            with open(file_path, 'w') as f:
+                    json.dump(data, f)
+        else:
+            return "error"
     except Exception as e:
+        return "error"
         print("Error on 'put_jsonvalue_to_file()':", e)
 def read_file(file_path):
     try:
-        with open(file_path, 'r') as f:
-            file_data = f.read()
-        return file_data
+        if file_exists(file_path):
+            with open(file_path, 'r') as f:
+                file_data = f.read()
+            return file_data
+    
     except Exception as e:
         print("Error on 'getData_from_file()':", e)
-        return False
+        return "error"
 def write_file(file_path,data):
     try:
         with open(file_path, "w") as f:
@@ -34,7 +50,7 @@ def write_file(file_path,data):
         return True
     except Exception as e:
         print("Error on 'getData_from_file()':", e)
-        return False   
+        return "error" 
     
 
 
