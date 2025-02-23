@@ -50,11 +50,7 @@
     },
      {
         "files": [
-            "activity1.html",
-             "activity2.html",
-             "activity3.html",
-             "activity4.html",
-             "activity5.html"
+            "activity1.html"
         ],
          "folder": "//html"
     },
