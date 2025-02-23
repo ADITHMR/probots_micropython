@@ -1,27 +1,49 @@
 import json
+
+
 def set_parameter(parameter,value):
-	D=value;A=parameter
-	with open('config.txt','r')as B:
-		C=json.load(B)
-		if A in C:
-			try:C[A]=str(D)
-			except:return'Data format error'
-			with open('config.txt','w')as B:json.dump(C,B);print('Data storedf in config.txt')
-			E=get_parameter(A)
-			if E==str(D):return'OK'
-			else:return'Error Saving Data'
-		else:return f"Error 404: No parameter named {A}"
+    with open('config.txt', 'r') as f: 
+        data = json.load(f)
+        if parameter in data:
+            try:
+                data[parameter]=str(value)
+            except :
+                return "Data format error"
+            with open('config.txt', 'w') as f:
+                json.dump(data, f)
+                print("Data storedf in config.txt")
+            read_data=get_parameter(parameter)
+#                 return(f"-{type(read_data)}-{type(value)}")
+            if read_data== str(value):
+                return "OK"
+            else:
+                return "Error Saving Data"
+        else: return f"Error 404: No parameter named {parameter}"
 def get_parameter(parameter):
-	A=parameter
-	with open('config.txt','r')as C:
-		B=json.load(C)
-		if A in B:D=B[A].replace("'",'');return D
-		else:return'Error 404: No Such Parameter Found'
+        with open('config.txt', 'r') as f:
+            data= json.load(f)
+            if parameter in data:
+                result=data[parameter].replace("'","")
+                return  (result)
+                
+            else:
+                return "Error 404: No Such Parameter Found"
+
+
+
 def get_project_config_data(project_name):
-	A=project_name
-	try:
-		with open('projects/project_configurations.txt','r')as C:B=json.load(C)
-	except FileNotFoundError:print('The configuration file does not exist.')
-	except json.JSONDecodeError:print('Error decoding the JSON configuration file.')
-	except Exception as D:print(f"An error occurred: {D}")
-	if A in B:return B[A]
+    try:
+        # Read the current configurations from the file
+        with open('projects/project_configurations.txt', 'r') as f:
+            json_data = json.load(f)
+    except FileNotFoundError:
+        print("The configuration file does not exist.")
+    except json.JSONDecodeError:
+        print("Error decoding the JSON configuration file.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+#     data_str=json.loads(json_data)
+    if project_name in json_data:
+        return json_data[project_name]
+    
+    

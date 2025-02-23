@@ -1,18 +1,53 @@
-from machine import Pin,PWM
+from machine import Pin, PWM
+
 class Servo:
-	__servo_pwm_freq=50;__min_u10_duty=36;__max_u10_duty=123;min_angle=0;max_angle=180;current_angle=.001;is_enabled=True
-	def __init__(A,pin,enOrDi=True):A.is_enabled=enOrDi;A.__initialise(pin)
-	def update_settings(A,servo_pwm_freq,min_u10_duty,max_u10_duty,min_angle,max_angle,pin):
-		if A.is_enabled:A.__servo_pwm_freq=servo_pwm_freq;A.__min_u10_duty=min_u10_duty;A.__max_u10_duty=max_u10_duty;A.min_angle=min_angle;A.max_angle=max_angle;A.__initialise(pin)
-	def move(A,angle):
-		B=angle
-		if A.is_enabled:
-			B=round(B,2)
-			if B<A.min_angle:B=A.min_angle
-			elif B>A.max_angle:B=A.max_angle
-			if abs(B-A.current_angle)<.1:return
-			A.current_angle=B;C=A.__angle_to_u10_duty(B);A.__motor.duty(C)
-	def __angle_to_u10_duty(A,angle):
-		if A.is_enabled:return int((angle-A.min_angle)*A.__angle_conversion_factor)+A.__min_u10_duty
-	def __initialise(A,pin):
-		if A.is_enabled:A.current_angle=-.001;A.__angle_conversion_factor=(A.__max_u10_duty-A.__min_u10_duty)/(A.max_angle-A.min_angle);A.__motor=PWM(Pin(pin));A.__motor.freq(A.__servo_pwm_freq)
+    # these defaults work for the standard TowerPro SG90
+    __servo_pwm_freq = 50
+    __min_u10_duty = 26 + 10  # offset for correction
+    __max_u10_duty = 123 - 0  # offset for correction
+    min_angle = 0
+    max_angle = 180
+    current_angle = 0.001
+    is_enabled = True
+
+    def __init__(self, pin, enOrDi=True):
+        self.is_enabled = enOrDi
+        self.__initialise(pin)
+
+    def update_settings(self, servo_pwm_freq, min_u10_duty, max_u10_duty, min_angle, max_angle, pin):
+        if self.is_enabled:
+            self.__servo_pwm_freq = servo_pwm_freq
+            self.__min_u10_duty = min_u10_duty
+            self.__max_u10_duty = max_u10_duty
+            self.min_angle = min_angle
+            self.max_angle = max_angle
+            self.__initialise(pin)
+
+    def move(self, angle):
+        if self.is_enabled:  # Only move if enabled
+            angle = round(angle, 2)
+            # Ensure the angle is within range
+            if angle < self.min_angle:
+                angle = self.min_angle
+            elif angle > self.max_angle:
+                angle = self.max_angle
+
+            # Allow a small margin to avoid unnecessary movements due to floating-point precision
+            if abs(angle - self.current_angle) < 0.1:
+                return
+
+            self.current_angle = angle
+            # calculate the new duty cycle and move the motor
+            duty_u10 = self.__angle_to_u10_duty(angle)
+            self.__motor.duty(duty_u10)
+
+    def __angle_to_u10_duty(self, angle):
+        if self.is_enabled:
+            return int((angle - self.min_angle) * self.__angle_conversion_factor) + self.__min_u10_duty
+
+    def __initialise(self, pin):
+        if self.is_enabled:
+            self.current_angle = -0.001
+            self.__angle_conversion_factor = (self.__max_u10_duty - self.__min_u10_duty) / (self.max_angle - self.min_angle)
+            self.__motor = PWM(Pin(pin))
+            self.__motor.freq(self.__servo_pwm_freq)

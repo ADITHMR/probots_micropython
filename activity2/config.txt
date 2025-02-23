@@ -1,12 +1,1 @@
-{
-    "project_name": "SentiLume: Intelligent street illumination",
-    "params": {
-        "led_pin": "5",
-        "sensor_active_state": "Active High",
-        "buzzer_enable": "Enabled",
-        "buzzer_pin": "32",
-        "sensor_pin": "39",
-        "led_strip_Enable": "Enabled",
-        "led_num_pixels": "12"
-    }
-}
+{"project_name": "AutoGate: Self opening gate", "params": {"led_strip_pin": "5", "is_buzzer_used": "Enabled", "sensor_in_pin": "39", "sensor_out_active_state": "Active Low", "servo_mtr_pin": "33", "sensor_in_active_state": "Active Low", "is_led_used": "Enabled", "sensor_out_pin": "36", "buzzer_pin": "32", "num_pixels": "5", "close_angle": "0", "open_angle": "90", "timeout_duration": "6"}}

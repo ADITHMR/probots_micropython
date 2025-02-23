@@ -5,6 +5,12 @@ class AnalogBuzzer:
     is_enabled=True
     
     def __init__(self, pin_number,enOrDi=True, frequency=1000, duty=512):
+        """
+        Initialize the buzzer with a specified GPIO pin.
+        pin_number: GPIO pin to which the buzzer is connected.
+        frequency: The frequency (Hz) of the sound. Default is 1000 Hz.
+        duty: The PWM duty cycle. Default is 512 (50%).
+        """
         self.is_enabled=enOrDi
 #         print(f"Is enabled:{self.is_enabled}")
         if  self.is_enabled==True:
@@ -14,6 +20,11 @@ class AnalogBuzzer:
             self.pwm.duty(duty)  # Set the PWM duty cycle (volume)
 
     def play_tone(self, frequency, duration):
+        """
+        Play a specific tone for a given duration.
+        frequency: Frequency of the tone (in Hz).
+        duration: Duration to play the tone (in seconds).
+        """
         if self.is_enabled==True:
             self.pwm.freq(frequency)  # Change the frequency for the desired tone
             self.pwm.duty(512)  # Set a duty cycle for the sound
@@ -21,16 +32,17 @@ class AnalogBuzzer:
             self.stop()  # Stop playing after duration
 
     def stop(self):
+        """Stop the buzzer sound."""
         if self.is_enabled==True:
             self.pwm.duty(0)  # Set duty cycle to 0 to stop the buzzer
 
     def change_frequency(self, frequency):
-
+        """Change the frequency of the buzzer."""
         if self.is_enabled==True:
             self.pwm.freq(frequency)  # Update the frequency
 
     def change_duty(self, duty):
-
+        """Change the volume (duty cycle) of the buzzer."""
         if self.is_enabled==True:
             self.pwm.duty(duty)  # Update the duty cycle (0-1023)
 

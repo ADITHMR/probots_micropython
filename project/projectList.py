@@ -1,1 +1,1 @@
-project_topic_list =['AutoGate: Self opening gate', 'SentiLume: Intelligent street illumination', 'Luminous Play: LED light magic', 'CountMaster: Student headcount Tracker', 'DistanceX: Digital Range Finder']
+project_topic_list =['SentiLume: Intelligent street illumination', 'AutoGate: Self opening gate', 'CountMaster: Student headcount Tracker', 'DistanceX: Digital Range Finder']
