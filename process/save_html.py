@@ -1,157 +1,55 @@
 import  json
 from local_host.web_page import web_page
 from machine_id import get_serial_no
-from utils import get_jsonvalue_from_file,read_file,write_file
+from utils import get_jsonvalue_from_file,read_file,write_file,file_exists,put_jsonvalue_to_file
 import gc
+import re
 
-from drivers.oled import oled_log 
 
+from drivers.oled import oled_log
+
+
+    
+    
 def save_html():
-    gc.collect()
     try:
-       
-        # -----------------------------------------------------------
-        try:
-#             with open('activity1/web_data.html', 'r') as f:
-#                 data = json.load(f)
-#             with open('activity1/config.txt', 'r') as f:
-#                 project_name = json.load(f)
-                
-            description=get_jsonvalue_from_file('project/project_description.dat','activity1')
-            project_name=get_jsonvalue_from_file('activity1/config.txt',"project_name")
-            optons=get_jsonvalue_from_file('activity1/web_data.html',"data")
-            optons=str(optons).replace("'",'"').replace("True",'true')
-            
-            response=read_file('local_host/project_page.html')
-            response = response.replace('{*config_list*}',str(optons))
-            response = response.replace('{*heading*}', project_name)
-            response=response.replace('{Project_description}',description)
-
-            write_file("html/activity1.html",response)
-#             with open("html/activity1.html", "w") as f:
-#                 f.write(response)
-            del response
-            print('Saved activity1.html')
-            oled_log('Saved activity1.html')
-            gc.collect()
-        except Exception as e:
-            print("Error on 'save_html() on activity1':", e)
-           
-        # -----------------------------------------------------------
-        try:
-#             with open('activity2/web_data.html', 'r') as f:
-#                 data = json.load(f)
-#             
-#             with open('activity2/config.txt', 'r') as f:
-#                 project_name = json.load(f)
-            description=get_jsonvalue_from_file('project/project_description.dat','activity2')                   
-            project_name=get_jsonvalue_from_file('activity2/config.txt',"project_name")
-            optons=get_jsonvalue_from_file('activity2/web_data.html',"data")
-            optons=str(optons).replace("'",'"').replace("True",'true')
-            
-            response=read_file('local_host/project_page.html')
-            response = response.replace('{*config_list*}',str(optons))
-            response = response.replace('{*heading*}', project_name)
-            response=response.replace('{Project_description}',description)
-            
-            write_file("html/activity2.html",response)
-            del response
-            print('Saved activity2.html')
-            oled_log('Saved activity2.html')
-            gc.collect()
-#             with open("html/activity2.html", "w") as f:
-#                 f.write(response)
-#                 del response
-        except Exception as e:
-            print("Error on 'save_html() on activity2':", e)
-         
-        # -----------------------------------------------------------
-        try:
-#             with open('activity3/web_data.html', 'r') as f:
-#                 data = json.load(f)
-#             with open('activity3/config.txt', 'r') as f:
-#                 project_name = json.load(f)
-            description=get_jsonvalue_from_file('project/project_description.dat','activity3')                    
-            project_name=get_jsonvalue_from_file('activity3/config.txt',"project_name")
-            optons=get_jsonvalue_from_file('activity3/web_data.html',"data")
-            optons=str(optons).replace("'",'"').replace("True",'true')
-            
-            response=read_file('local_host/project_page.html')
-            response = response.replace('{*config_list*}',str(optons))
-            response = response.replace('{*heading*}', project_name)
-            response=response.replace('{Project_description}',description)
-            
-            write_file("html/activity3.html",response)
-            del response
-            print('Saved activity3.html')
-            oled_log('Saved activity3.html')
-            gc.collect()
-
-#             with open("html/activity3.html", "w") as f:
-#                 f.write(response)
-#                 del response
-        except Exception as e:
-            print("Error on 'save_html() on activity3':", e)
-       
-        # -----------------------------------------------------------
-        try:
-#             with open('activity4/web_data.html', 'r') as f:
-#                 data = json.load(f)
-#             with open('activity4/config.txt', 'r') as f:
-#                 project_name = json.load(f)
-            description=get_jsonvalue_from_file('project/project_description.dat','activity4')                    
-            project_name=get_jsonvalue_from_file('activity4/config.txt',"project_name")
-            optons=get_jsonvalue_from_file('activity4/web_data.html',"data")
-            optons=str(optons).replace("'",'"').replace("True",'true')
-            
-            response=read_file('local_host/project_page.html')
-            response = response.replace('{*config_list*}',str(optons))
-            response = response.replace('{*heading*}', project_name)
-            response=response.replace('{Project_description}',description)
-            
-            write_file("html/activity4.html",response)
-            del response
-            print('Saved activity4.html')
-            oled_log('Saved activity4.html')
-            gc.collect()
-
-#             with open("html/activity4.html", "w") as f:
-#                 f.write(response)
-#                 del response
-        except Exception as e:
-            print("Error on 'save_html() on activity4':", e)
+        print(0)
+        gc.collect()
+        folders=["activity1","activity2","activity3","activity4","activity5"]
         
-        # -----------------------------------------------------------
-        try:
-#             with open('activity5/web_data.html', 'r') as f:
-#                 data = json.load(f)
-#             with open('activity5/config.txt', 'r') as f:
-#                 project_name = json.load(f)
-            description=get_jsonvalue_from_file('project/project_description.dat','activity5')                    
-            project_name=get_jsonvalue_from_file('activity5/config.txt',"project_name")
-            optons=get_jsonvalue_from_file('activity5/web_data.html',"data")
-            optons=str(optons).replace("'",'"').replace("True",'true')
-            
-            response=read_file('local_host/project_page.html')
-            response = response.replace('{*config_list*}',str(optons))
-            response = response.replace('{*heading*}', project_name)
-            response=response.replace('{Project_description}',description)
-            
-            write_file("html/activity5.html",response)
-            del response
-            print('Saved activity5.html')
-            oled_log('Saved activity5.html')
-            gc.collect()
-
-
-#             with open("html/activity5.html", "w") as f:
-#                 f.write(response)
-#                 del response
-        except Exception as e:
-            print("Error on 'save_html() on activity5':", e)
+#         project_list=[]
+        
+        for folder in folders:
+            web_items_path=f"{folder}/web_data.html"
+            config_items_path=f"{folder}/config.txt"
            
-        # -----------------------------------------------------------
-        try:
+            if file_exists(web_items_path) and file_exists(config_items_path):
+                web_items_list=get_jsonvalue_from_file(web_items_path,"data")
+                project_name=get_jsonvalue_from_file(config_items_path,"project_name")
+                output_path=f"html/{folder}.html"
+                project_page=read_file('local_host/project_page.html')
+                if web_items_list != "error" and project_name!= "error" and project_page!="error":
+                    web_items_list_modified=str(web_items_list).replace("'",'"').replace("True",'true')
+                    del web_items_list
+                    gc.collect()
+                    description=get_jsonvalue_from_file('project/project_description.dat',folder)
+                    response=project_page
+                    del project_page
+                    gc.collect()
+                    write_file(output_path,response)
+                    del response
+                    gc.collect()
+                    print(1)
+                    replace_item(output_path,'{*config_list*}',str(web_items_list_modified))
+                    print(2)
+                    replace_item(output_path,"{*heading*}",str(project_name))
+                    print(3)
+                    replace_item(output_path,"{description}",str(description))
+                    print(4)
+                    
+    except Exception as e:
+        print("Error in save_html():", e)
+    try:
             indexPage=str(web_page()).replace("{machine_id}",f"S/N: {get_serial_no()}")
             write_file("local_host/index_page.html",indexPage)
             del indexPage
@@ -162,10 +60,14 @@ def save_html():
             oled_log('Saved index.html')
             oled_log('Saved all html files')
             print("Successfully saved HTML files...")
-        except Exception as e:
-            print("Error on 'save_html() on indexpage':", e)
-            traceback.print_exc()
     except Exception as e:
-        print("Error on 'save_html()':", e)
-     
+        print("Error on 'save_html() on indexpage':", e)
+        traceback.print_exc()
+        
+# save_html()                
+def replace_item(path,ref,text):
+    data=read_file(path)
+    write_file(path,data.replace(ref,text))
     
+           
+                

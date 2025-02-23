@@ -73,6 +73,7 @@ oled_two_data(1,1,"Setting up","Activities")
 # fetch_projects()
 oled_two_data(1,1,"Updating","Pages")
 # time.sleep(.5)
-save_html()
+if wifi_connected:
+    save_html()
 oled_two_data(1,1,"Starting","Activities")
 # time.sleep(.5)

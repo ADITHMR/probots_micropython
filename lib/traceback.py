@@ -25,6 +25,3 @@ def print_exc(limit=None, file=None, chain=True):
 
 def format_exc(limit=None, chain=True):
     return "".join(format_exception(*sys.exc_info(), limit=limit, chain=chain))
-
-
-__version__ = '0.3.0'
