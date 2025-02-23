@@ -1,7 +1,7 @@
 import urequests
 import json
 from local_host.connect_wifi import  connect_wifi
-from utils import get_jsonvalue_from_file,put_jsonvalue_to_file,write_file
+from utils import get_jsonvalue_from_file,put_jsonvalue_to_file,write_file,read_file
 
 class Api:
     user_login_url="http://roboninjaz.com:8010/api/user/login"
@@ -102,6 +102,12 @@ class Api:
         write_file("project/projectList.py",f"project_topic_list ={projectlist}")
         with open("project/project_routing.json", "w") as f:
             json.dump(project_routing_json, f)
+        proj_list=read_file("project/projectList.py")
+        sel_proj=get_jsonvalue_from_file("config.txt","PROJECT")
+        if sel_proj in proj_list:
+            pass
+        else:
+            put_jsonvalue_to_file("config.txt","PROJECT",proj_list[1])
     def get_project_file(self,id):
         try:
             # Sending POST request
@@ -114,7 +120,7 @@ class Api:
 
         except Exception as e:
             print("Error:", e)
-            return "0"
+            return "0" 
         
             
             
