@@ -1,7 +1,24 @@
+
+is_AP=False
+is_Server=False
+
+
 try:
     from drivers.oled import *
-    oled_two_data(1,1,"System","Booting")
+    from machine import Pin
     import time
+    TOUCH1=Pin(14,Pin.IN)
+    TOUCH2=Pin(15,Pin.IN)
+    if TOUCH1.value()==True and TOUCH2.value()==True:
+        is_AP=True
+        oled_two_data(1,2,"Starting","Server")
+        time.sleep(1)
+    elif  TOUCH1.value()==True and TOUCH2.value()==False:
+        is_Server=True
+        oled_two_data(1,2,"Starting","Access Point")
+        time.sleep(1)
+    oled_two_data(1,1,"System","Booting")
+    
     from machine import Pin
     from local_host.connect_wifi import  connect_wifi
     import process.api as api
@@ -16,14 +33,13 @@ except Exception as e:
 
 # from machine_id import get_update_flag
 # time.sleep(.5)
-TOUCH1=Pin(14,Pin.IN)
-TOUCH2=Pin(15,Pin.IN)
-if TOUCH1.value()==True and TOUCH2.value()==True:
+
+if is_AP:
     try:
         runAP()
     except Exception as e:
         print("Error Boot() RunAP:",e, e.args)
-elif  TOUCH1.value()==True and TOUCH2.value()==False:
+elif  is_Server:
     oled_two_data(1,1,"Web server","Mode")
     wifi_connected=connect_wifi()
     if wifi_connected:
