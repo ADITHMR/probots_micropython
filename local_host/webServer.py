@@ -5,7 +5,7 @@ import json
 import urequests
 import machine
 
-from local_host.connect_wifi import  connect_wifi
+
 from local_host.web_page import web_page, successProjectPage,message_page,errorPage
 from local_host.get_project_html import get_project_html
 
@@ -141,8 +141,11 @@ def submit(req, resp):
 
 
 def runWebServer():
+    try:
    
-    app.run(debug=True, host="0.0.0.0", port=80)
+        app.run(debug=True, host="0.0.0.0", port=80)
+    except Exception as e:
+        print("Error runWebServer() :",e, e.args)
 
 
 

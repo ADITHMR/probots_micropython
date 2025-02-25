@@ -42,9 +42,10 @@ if is_AP:
         runAP()
     except Exception as e:
         print("Error Boot() RunAP:",e, e.args)
-elif  is_Server:
+wifi_connected=connect_wifi()
+if  is_Server:
     oled_two_data(1,1,"Web server","Mode")
-    wifi_connected=connect_wifi()
+    
     if wifi_connected:
         oled_log("Web Server")
         
@@ -52,7 +53,7 @@ elif  is_Server:
         time.sleep(1)
         runWebServer()
 
-wifi_connected=connect_wifi()
+
 gc.collect()
 if wifi_connected:
     with open('schema.dat', 'r') as f:

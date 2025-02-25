@@ -5,7 +5,7 @@ from process.file_mgr import *
 import time
 # Global variable for WiFi connection status
 wifi_connected = False
-wifi_connection_timeout = 8  # Timeout after 10 seconds
+wifi_connection_timeout = 10  # Timeout after 10 seconds
 wifi_conn_start_time = time.time()
 
 def connect_wifi(ssid=0,password=0):
@@ -24,7 +24,8 @@ def connect_wifi(ssid=0,password=0):
     print('Connecting to WiFi...')
     oled_log("Conn to WiFi...")
     disp_scroll_str("CONNecting")
-    
+    wifi_conn_start_time = time.time()
+
     while not wlan.isconnected():
         oled_two_data(1, 2, "Conn to WiFi", str(wifi_connection_timeout - (time.time() - wifi_conn_start_time)))
         if (time.time() - wifi_conn_start_time) > wifi_connection_timeout:
