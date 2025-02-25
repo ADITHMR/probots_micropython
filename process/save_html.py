@@ -62,12 +62,12 @@ def save_html():
             print("Successfully saved HTML files...")
     except Exception as e:
         print("Error on 'save_html() on indexpage':", e)
-        traceback.print_exc()
+#         traceback.print_exc()
         
-# save_html()                
+               
 def replace_item(path,ref,text):
     data=read_file(path)
     write_file(path,data.replace(ref,text))
     
-           
+# save_html()            
                 
