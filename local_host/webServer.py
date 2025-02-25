@@ -7,7 +7,6 @@ import machine
 
 
 
-from local_host.web_page import web_page, successProjectPage,message_page,errorPage
 from local_host.get_project_html import get_project_html
 
 from utils import url_decode
@@ -45,6 +44,8 @@ app = picoweb.WebApp(__name__)
 @app.route("/")
 def index(req, resp):
     if req.method=="GET":
+        
+
         with open("local_host/index_page.html", 'r') as f:
             response= f.read()
         yield from picoweb.start_response(resp)

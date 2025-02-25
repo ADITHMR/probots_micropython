@@ -1,12 +1,9 @@
 {
-    "project_name": "SentiLume: Intelligent street illumination",
+    "project_name": "Luminous Play: LED light magic",
     "params": {
-        "led_pin": "5",
-        "sensor_active_state": "Active High",
-        "buzzer_enable": "Enabled",
-        "buzzer_pin": "32",
-        "sensor_pin": "39",
-        "led_strip_Enable": "Enabled",
-        "led_num_pixels": "12"
+        "remote_enabled": "Enabled",
+        "remote_pin":"25",
+        "led_num": "12",
+        "strip_led_pin": "5"
     }
 }

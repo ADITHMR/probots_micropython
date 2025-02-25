@@ -90,9 +90,7 @@ gc.collect()
 
 
 
-oled_two_data(1,1,"Setting up","Activities")
-# time.sleep(.5)
-# fetch_projects()
+
 oled_two_data(1,1,"Updating","Pages")
 # time.sleep(.5)
 if wifi_connected:

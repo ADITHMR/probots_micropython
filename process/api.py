@@ -4,6 +4,8 @@ from local_host.connect_wifi import  connect_wifi
 from utils import get_jsonvalue_from_file,put_jsonvalue_to_file,write_file,read_file
 from project.projectList import project_topic_list
 from drivers.oled import oled_three_data
+from local_host.web_page import web_page
+import gc
 class Api:
     user_login_url="http://roboninjaz.com:8010/api/user/login"
     get_projects_url="http://roboninjaz.com:8010/api/projects/getAllacquired-projects"
@@ -114,9 +116,14 @@ class Api:
         print(f"proj list____{projectlist}")
         
         proj_list=f"project_topic_list ={projectlist}"
+        gc.collect()
+        
         write_file("project/projectList.py",proj_list)
+        web_page(projectlist)
+        gc.collect()
         
         selected_proj=get_jsonvalue_from_file("schema.dat","PROJECT")
+        gc.collect()
         
         if selected_proj in projectlist:
             pass

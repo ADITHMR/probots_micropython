@@ -1,1 +1,1 @@
-project_topic_list =['SentiLume: Intelligent street illumination']
+project_topic_list =['Luminous Play: LED light magic']

@@ -45,23 +45,29 @@ def save_html():
                     oled_three_data(1,1,2,"Saving","Pages",f"{progress}%")
                     replace_item(output_path,'{*config_list*}',str(web_items_list_modified))
                     progress+=5
+                    gc.collect()
+                    
                     print(progress)
                     oled_three_data(1,1,2,"Saving","Pages",f"{progress}%")
                     replace_item(output_path,"{*heading*}",str(project_name))
                     progress+=5
+                    gc.collect()
+                    
                     print(progress)
                     oled_three_data(1,1,2,"Saving","Pages",f"{progress}%")
                     replace_item(output_path,"{description}",str(description))
                     progress+=5
+                    gc.collect()
+                    
                     print(progress)
                     oled_three_data(1,1,2,"Saving","Pages",f"{progress}%")
                     
     except Exception as e:
         print("Error in save_html():", e)
     try:
-            indexPage=str(web_page()).replace("{machine_id}",f"S/N: {get_serial_no()}")
-            write_file("local_host/index_page.html",indexPage)
-            del indexPage
+#             indexPage=str(web_page()).replace("{machine_id}",f"S/N: {get_serial_no()}")
+#             write_file("local_host/index_page.html",indexPage)
+#             del indexPage
             gc.collect()
 #             with open("local_host/index_page.html", "w") as f:
 #                 f.write(indexPage)
