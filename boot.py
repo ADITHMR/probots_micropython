@@ -80,6 +80,7 @@ if wifi_connected:
         time.sleep(.5)
         oled_two_data(1,1,"Aquiring","Projects")
         api.get_projects()
+        time.sleep(.5)
         oled_two_data(1,1,"Aquire","Completed")
     else:
         oled_two_data(1,1,"Login","Failed")

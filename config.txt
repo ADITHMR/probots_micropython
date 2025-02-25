@@ -1,1 +1,0 @@
-{"SSID": "Ponnus", "PROJECT": "Luminous Play: LED light magic", "PASSWORD": "Ariyilla"}

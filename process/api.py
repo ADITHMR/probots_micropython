@@ -94,9 +94,10 @@ class Api:
                 if file_content!="0":
                     with open(file_path, 'w') as f:
                         f.write(file_content)
-                        print(f"{fileid} written to {file_path}  {round(progress)}%")
                         progress+=inc
+                        print(f"{fileid} written to {file_path}  {round(progress)}%")
                         oled_three_data(1,1,2,"Aquiring","Projects",f"{round(progress)}%")
+                    
             file_path=f"{folders[i]}/config.txt"
             project_name=get_jsonvalue_from_file(file_path,"project_name")
             projectlist.append(project_name)
@@ -115,12 +116,12 @@ class Api:
         proj_list=f"project_topic_list ={projectlist}"
         write_file("project/projectList.py",proj_list)
         
-        selected_proj=get_jsonvalue_from_file("config.txt","PROJECT")
+        selected_proj=get_jsonvalue_from_file("schema.dat","PROJECT")
         
         if selected_proj in projectlist:
             pass
         else:
-            put_jsonvalue_to_file("config.txt","PROJECT",projectlist[0])
+            put_jsonvalue_to_file("schema.dat","PROJECT",projectlist[0])
             
     def get_project_file(self,id):
         try:

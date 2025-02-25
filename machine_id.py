@@ -14,7 +14,7 @@ def write_serial_no(number_str,prefix="PB"):
     b=  last_24bits_str
     serialnumber=a+b+c
 
-    x = bytearray(14)
+    
     # print(f"b'{serialnumber}'")
     s_no = esp32.NVS('serial_number')
     s_no.set_blob('s_num', serialnumber)

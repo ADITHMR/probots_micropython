@@ -1,7 +1,46 @@
 import json
 import os
+import esp32
 
+def set_wifi_credentials(SSID,PASSWORD):
+    try:
+        ssid=SSID
+        password=PASSWORD
+        
+        ssid_len=len(ssid)
+        password_len=len(password)
 
+        wifi = esp32.NVS('WIFI')
+        
+        wifi.set_blob('ssid', ssid)
+        wifi.set_i32('ssid_len', ssid_len)
+        
+        wifi.set_blob('password', password)
+        wifi.set_i32('password_len', password_len)
+        wifi.commit()
+        return True
+    except Exception as e:
+        print("Error: on set_wifi_credentials()", e)
+        return False
+        
+# set_wifi_credentials("RoboNinjaz","Ariyilla")
+def get_wifi_credentials():
+    try:
+        wifi = esp32.NVS('WIFI')
+        
+        ssid = bytearray(wifi.get_i32('ssid_len'))
+        wifi.get_blob('ssid', ssid)
+        
+        password = bytearray(wifi.get_i32('password_len'))
+        wifi.get_blob('password', password)
+        print(f"{ssid.decode()}   {password.decode()}")
+        return ssid.decode(),password.decode()
+    except Exception as e:
+        print("Error: on get_wifi_credentials()", e)
+        return False
+    
+
+    
 def file_exists(file_name):
     try:
         os.stat(file_name)
