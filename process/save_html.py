@@ -10,7 +10,7 @@ from drivers.oled import oled_log,oled_two_data,oled_three_data
 
 
     
-    
+@micropython.native    
 def save_html():
     
     try:
@@ -79,7 +79,7 @@ def save_html():
         print("Error on 'save_html() on indexpage':", e)
 #         traceback.print_exc()
         
-               
+@micropython.native                
 def replace_item(path,ref,text):
     data=read_file(path)
     write_file(path,data.replace(ref,text))

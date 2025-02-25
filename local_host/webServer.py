@@ -13,7 +13,6 @@ from utils import url_decode
 
 from local_host.project_config_update import update_project_config
 
-from local_host.web_page import web_page, successProjectPage,message_page,errorPage
 
 
 
@@ -142,7 +141,7 @@ def submit(req, resp):
 
 # Start web server
 
-
+@micropython.native 
 def runWebServer():
     try:
    

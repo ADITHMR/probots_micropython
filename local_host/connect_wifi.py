@@ -11,6 +11,7 @@ wifi_connected = False
 wifi_connection_timeout = 10  # Timeout after 10 seconds
 wifi_conn_start_time = time.time()
 
+@micropython.native 
 def connect_wifi(ssid=0,password=0):
     global wifi_connected  # Ensure we're using the global variable
     flag=1

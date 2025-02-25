@@ -23,6 +23,7 @@ import gc
 
 
 # print(html_dropdown)
+@micropython.native 
 def web_page(project_topic_list):
 #     from  project.projectList import  project_topic_list
     html_dropdown =  """

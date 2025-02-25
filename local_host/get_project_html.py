@@ -1,5 +1,6 @@
 import json
 #        01 Fun with LED Lights
+@micropython.native 
 def get_project_html(project_name):
     
     with open('project/project_routing.json', 'r') as f:
