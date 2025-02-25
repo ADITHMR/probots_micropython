@@ -3,6 +3,7 @@ import json
 from local_host.connect_wifi import  connect_wifi
 from utils import get_jsonvalue_from_file,put_jsonvalue_to_file,write_file,read_file
 from project.projectList import project_topic_list
+from drivers.oled import oled_three_data
 class Api:
     user_login_url="http://roboninjaz.com:8010/api/user/login"
     get_projects_url="http://roboninjaz.com:8010/api/projects/getAllacquired-projects"
@@ -76,6 +77,8 @@ class Api:
         project_routing_json={}
         folders=["activity1","activity2","activity3","activity4","activity5"]
         i=0
+        progress=0
+        inc=100/(len(projects)*3)
         for project in projects:
             files=project["files"]
             description=project['description']
@@ -91,7 +94,9 @@ class Api:
                 if file_content!="0":
                     with open(file_path, 'w') as f:
                         f.write(file_content)
-                        print(f"{fileid} written to {file_path}")
+                        print(f"{fileid} written to {file_path}  {round(progress)}%")
+                        progress+=inc
+                        oled_three_data(1,1,2,"Aquiring","Projects",f"{round(progress)}%")
             file_path=f"{folders[i]}/config.txt"
             project_name=get_jsonvalue_from_file(file_path,"project_name")
             projectlist.append(project_name)

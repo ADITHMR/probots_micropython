@@ -27,6 +27,7 @@ def get_serial_no():
         retrieved = bytearray(s_no.get_i32('s_num_len'))
         data=s_no.get_blob('s_num', retrieved)
         print(retrieved.decode())
+        return (retrieved.decode())
         
     except Exception as e:
         print("Error: on get_serial_no()", e)
@@ -51,7 +52,7 @@ def get_update_flag():
         else:
             return "Error"
     except Exception as e:
-        print("Error: on get_serial_no()", e)
+        print("Error: on get_update_flag()", e)
         return("ERROR")
         
   
