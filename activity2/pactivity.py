@@ -1,52 +1,65 @@
-import machine
-import time
-from drivers.oled import oled_three_data
+
+# ******************SentiLume: Intelligent street illumination************************
+
+
 from utils import get_activity_params
+from analog_buzzer import AnalogBuzzer
+from pin_mapping import *
+from custom_neopixel import CustomNeoPixel
+from drivers.display import *
+from drivers.oled import *
 
 
-# Function to measure distance
-def measure_distance(trigger_pin,echo_pin):
-    # Send a 10us pulse to the Trigger pin to start the measurement
-    trigger_pin.on()
-    time.sleep_us(10)  # Delay for 10 microseconds
-    trigger_pin.off()
-    pulse_end=0
-    pulse_start=0
-    # Wait for the Echo pin to go high (start of the pulse)
-    while echo_pin.value() == 0:
-        pulse_start = time.ticks_us()
-    
-    # Wait for the Echo pin to go low (end of the pulse)
-    while echo_pin.value() == 1:
-        pulse_end = time.ticks_us()
 
-    # Calculate the pulse duration in microseconds
-    pulse_duration = time.ticks_diff(pulse_end, pulse_start)
-    
-    # Speed of sound is approximately 34300 cm per second at 20°C
-    # The time it takes for the sound to travel to the object and back is divided by 2
-    distance = (pulse_duration * 0.0343) / 2  # Distance in cm
-    return distance
 
-# Main loop
+
 def run_activity(activity):
-    params = get_activity_params(activity)
-    trigger_pin_no = int(params["trig_pin"])
-    echo_pin_no= int(params["echo_pin"])
-# Pin configuration
-    trigger_pin = machine.Pin(trigger_pin_no, machine.Pin.OUT)  # Trigger pin (GPIO13)
-    echo_pin = machine.Pin(echo_pin_no, machine.Pin.IN)     # Echo pin (GPIO12)
-    while True:
-        dist = int(measure_distance(trigger_pin,echo_pin))  # Measure the distance
-        if dist>100:
-            print(f"Distance: {dist} cm")  # Print the distance in cm
-            oled_three_data(2,2,2,"Distance",">100","cm")
+    params=get_activity_params(activity)
+     
+    sensor=set_pin_in(params["sensor_pin"])
+    sensor_trig=get_trig_state(params["sensor_active_state"])
+    
+    print("starting 'SentiLume: Intelligent street illumination ' activity")
+    
+    buzzer_enable=params["buzzer_enable"]
+    buzzer_pin=int(params["buzzer_pin"])
+    led_strip_Enable= params["led_strip_Enable"]
+    if led_strip_Enable == "Enabled":
+        led_strip_Enable=True
+    else:
+        led_strip_Enable=False
+    
+    led_pin= int(params["led_pin"])
+    led_num_pixels =int(params["led_num_pixels"])
+    
+    Led_strip = CustomNeoPixel(pin=led_pin, num_pixels=led_num_pixels, enabled=led_strip_Enable)
+
+    
+    if buzzer_enable=="Enabled":
+        buzzer_enable=True
+    else:
+        buzzer_enable=False
+    buzzer = AnalogBuzzer(pin_number=buzzer_pin,enOrDi=buzzer_enable)
+    buzzer.play_tone(2000, 1)
+    last=0
+    while True: 
+        if sensor.value() ==sensor_trig:
+            if last==0:
+                Led_strip.set_color_All(255,255,255)
+                disp_seq_str(["MOON"],0)
+#                 oled_log("Street Light ON")
+                oled_three_data(2,2,2,"Street","Light","ON")
+                last=1
+                buzzer.play_tone(2000, .2)
         else:
-            print(f"Distance: {dist} cm")  # Print the distance in cm
-            oled_three_data(2,2,2,"Distance",str(dist),"cm")
-
-#         time.sleep(.5)  # Delay between measurements
-
-# Run the main loop
-# run_activity("activity1")
+            if last==1:
+                Led_strip.set_color_All(0,0,0)
+                disp_seq_str(["SUN"],0)
+#                 oled_log("Street Light OFF")
+                oled_three_data(2,2,2,"Street","Light","OFF")
+                last=0
+                buzzer.play_tone(2000, .2)
+        time.sleep(.1)
+     
+# run_activity("activity2")
 

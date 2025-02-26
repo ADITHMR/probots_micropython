@@ -4,7 +4,7 @@ import time
 import json
 import urequests
 import machine
-
+import gc
 
 
 from local_host.get_project_html import get_project_html
@@ -51,6 +51,8 @@ def index(req, resp):
             response= f.read()
         yield from picoweb.start_response(resp)
         yield from resp.awrite(response)
+        del response
+        gc.collect()
     else:
         yield from req.read_form_data()
         data = req.form
@@ -60,9 +62,13 @@ def index(req, resp):
         else:
             project="no data"
         response=get_project_html(project)
+        
+        
 
         yield from picoweb.start_response(resp)
         yield from resp.awrite(response)
+        del response
+        gc.collect()
         
 
 @app.route("/checkUpdate")
@@ -87,6 +93,8 @@ def check_update(req, resp):
             ''')
         yield from picoweb.start_response(resp)
         yield from resp.awrite(response)
+        del response
+        gc.collect()
     except Exception as e:
         print(f"Error at check_update() route : {e}")
         response=errorPage
@@ -109,6 +117,8 @@ def update_now(req, resp):
     <h2 class="text-danger">Do not interrupt the update process.</h2>''')
     yield from picoweb.start_response(resp)
     yield from resp.awrite(response)
+    del response
+    gc.collect()
     
     
 @app.route("/restart")
@@ -139,6 +149,8 @@ def submit(req, resp):
 
     yield from picoweb.start_response(resp)
     yield from resp.awrite(response)
+    del response
+    gc.collect()
 
 # Start web server
 
@@ -147,8 +159,10 @@ def runWebServer():
     try:
    
         app.run(debug=True, host="0.0.0.0", port=80)
+        gc.collect()
     except Exception as e:
         print("Error runWebServer() :",e, e.args)
+
 
 
 
