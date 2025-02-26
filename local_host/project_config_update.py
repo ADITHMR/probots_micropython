@@ -24,7 +24,7 @@ def update_project_config(conf_list):
            
             if conf == 'project':
                 value = url_decode(value)  # Ensure project name is correctly formatted
-                set_parameter("PROJECT",value)
+#                 set_parameter("PROJECT",value)
                 put_jsonvalue_to_file("schema.dat","PROJECT",value)
                 print("xxxxxxxxxxxxxxxxxxxx")
             else:
