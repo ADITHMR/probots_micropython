@@ -48,6 +48,7 @@ def enable_AP():
 #     oled_log('Connect to "Prosol AP"')
     
     oled_log('IP->192.168.10.1')
+    oled_log(f"SSID- '{ssid}'")
     print('Connection successful')
     print(ap.ifconfig())
 
