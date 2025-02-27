@@ -26,7 +26,7 @@ REPLACE_FOR_SPACE="@@!##"
 def enable_AP():
     oled_log('Access point')
     oled_log('Please wait...')
-    disp_scroll_str('Access point')
+#     disp_scroll_str('Access point')
     print('Access point')
 
     sleep(1)
@@ -39,13 +39,13 @@ def enable_AP():
     ap.config(essid=ssid, password=password)
     ap.ifconfig(('192.168.10.1', '255.255.255.0', '192.168.1.1', '192.168.1.1'))
     
-    disp_scroll_str('IP Address -192-168-10-1')
+#     disp_scroll_str('IP Address -192-168-10-1')
     
     sleep(1)
     while ap.active() == False:
       pass
-    disp_scroll_str('Conn Success')
-    oled_log('Connect to "Prosol AP"')
+#     disp_scroll_str('Conn Success')
+#     oled_log('Connect to "Prosol AP"')
     
     oled_log('IP->192.168.10.1')
     print('Connection successful')
