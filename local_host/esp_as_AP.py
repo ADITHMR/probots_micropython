@@ -2,7 +2,7 @@
 
 from utils import url_decode
 from time import sleep
-from drivers.display import disp_scroll_str
+# from drivers.display import disp_scroll_str
 from machine_id import get_serial_no
 from drivers.oled import *
 from utils import put_jsonvalue_to_file,set_wifi_credentials
