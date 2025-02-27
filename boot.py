@@ -1,6 +1,7 @@
 
 is_AP=False
 is_Server=False
+is_update_proj=False 
 from drivers.oled import oled_log,oled_two_data
 from machine import Pin
 import time
@@ -19,6 +20,10 @@ try:
         is_Server=True
         
         oled_two_data(1,2,"Starting","Server")
+    elif  TOUCH1.value()==False  and TOUCH2.value()==True :
+        is_update_proj=True
+        oled_two_data(1,1,"Project","Update")
+        time.sleep(1)
 #         time.sleep(1)
     oled_two_data(1,1,"System","Booting")
     
@@ -52,7 +57,34 @@ if  is_Server:
         
         time.sleep(1)
         runWebServer()
+if is_update_proj:
+    gc.collect()
+    if wifi_connected:
+        
+        api=api.Api()
+        login=api.user_login()
+        if login:
+            oled_two_data(1,1,"User","Logged in")
+            time.sleep(.5)
+            oled_two_data(1,1,"Aquiring","Projects")
+            api.get_projects()
+            time.sleep(.5)
+            oled_two_data(1,1,"Aquire","Completed")
+        else:
+            oled_two_data(1,1,"Login","Failed")
+    gc.collect()
+    # time.sleep(.5)
 
+
+
+
+
+    oled_two_data(1,1,"Updating","Pages")
+    # time.sleep(.5)
+    if wifi_connected:
+        save_html()
+    gc.collect()
+    
 
 gc.collect()
 if wifi_connected:
@@ -70,31 +102,6 @@ if wifi_connected:
             print("OLED Error:", e)
         
         run_update()
-gc.collect()
-if wifi_connected:
-    
-    api=api.Api()
-    login=api.user_login()
-    if login:
-        oled_two_data(1,1,"User","Logged in")
-        time.sleep(.5)
-        oled_two_data(1,1,"Aquiring","Projects")
-        api.get_projects()
-        time.sleep(.5)
-        oled_two_data(1,1,"Aquire","Completed")
-    else:
-        oled_two_data(1,1,"Login","Failed")
-gc.collect()
-# time.sleep(.5)
 
-
-
-
-
-oled_two_data(1,1,"Updating","Pages")
-# time.sleep(.5)
-if wifi_connected:
-    save_html()
-gc.collect()
 oled_two_data(1,1,"Starting","Activities")
 # time.sleep(.5)
