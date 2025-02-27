@@ -13,6 +13,7 @@ from ir_rx.nec import NEC_8
 from ir_rx.print_error import print_error
 from process.run_activity import run
 import _thread
+from utils import get_jsonvalue_from_file
 
 
 # if TOUCH1.value()==True and TOUCH2.value()==True:
@@ -32,7 +33,8 @@ import _thread
     
 
     
-proj=str(get_parameter("PROJECT"))  #Get selected project name from file
+# proj=str(get_parameter("PROJECT"))  #Get selected project name from file
+proj=get_jsonvalue_from_file("schema.dat","PROJECT")
 print(f"project_name-->{proj}")
 
 

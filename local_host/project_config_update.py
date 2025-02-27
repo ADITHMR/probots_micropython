@@ -2,7 +2,7 @@ import json
 import ujson
 # from imports import *
 from  process.route_activity import route_activity
-from utils import url_decode
+from utils import url_decode, put_jsonvalue_to_file
 from process.file_mgr import set_parameter
 def update_project_config(conf_list):
     try:
@@ -24,7 +24,9 @@ def update_project_config(conf_list):
            
             if conf == 'project':
                 value = url_decode(value)  # Ensure project name is correctly formatted
-                set_parameter("PROJECT",value)
+#                 set_parameter("PROJECT",value)
+                put_jsonvalue_to_file("schema.dat","PROJECT",value)
+                print("xxxxxxxxxxxxxxxxxxxx")
             else:
                 value = url_decode(value)
                 conf_data["params"][conf] = value

@@ -3,6 +3,9 @@ import json
 from local_host.connect_wifi import  connect_wifi
 from utils import get_jsonvalue_from_file,put_jsonvalue_to_file,write_file,read_file
 from project.projectList import project_topic_list
+from drivers.oled import oled_three_data
+from local_host.web_page import web_page
+import gc
 class Api:
     user_login_url="http://roboninjaz.com:8010/api/user/login"
     get_projects_url="http://roboninjaz.com:8010/api/projects/getAllacquired-projects"
@@ -76,6 +79,8 @@ class Api:
         project_routing_json={}
         folders=["activity1","activity2","activity3","activity4","activity5"]
         i=0
+        progress=0
+        inc=100/(len(projects)*3)
         for project in projects:
             files=project["files"]
             description=project['description']
@@ -91,7 +96,10 @@ class Api:
                 if file_content!="0":
                     with open(file_path, 'w') as f:
                         f.write(file_content)
-                        print(f"{fileid} written to {file_path}")
+                        progress+=inc
+                        print(f"{fileid} written to {file_path}  {round(progress)}%")
+                        oled_three_data(1,1,2,"Aquiring","Projects",f"{round(progress)}%")
+                    
             file_path=f"{folders[i]}/config.txt"
             project_name=get_jsonvalue_from_file(file_path,"project_name")
             projectlist.append(project_name)
@@ -108,14 +116,19 @@ class Api:
         print(f"proj list____{projectlist}")
         
         proj_list=f"project_topic_list ={projectlist}"
-        write_file("project/projectList.py",proj_list)
+        gc.collect()
         
-        selected_proj=get_jsonvalue_from_file("config.txt","PROJECT")
+        write_file("project/projectList.py",proj_list)
+        web_page(projectlist)
+        gc.collect()
+        
+        selected_proj=get_jsonvalue_from_file("schema.dat","PROJECT")
+        gc.collect()
         
         if selected_proj in projectlist:
             pass
         else:
-            put_jsonvalue_to_file("config.txt","PROJECT",projectlist[0])
+            put_jsonvalue_to_file("schema.dat","PROJECT",projectlist[0])
             
     def get_project_file(self,id):
         try:

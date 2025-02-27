@@ -133,8 +133,7 @@
              "ota_update.py",
              "pin_mapping.py",
              "utils.py",
-             "version.dat",
-             "web_data.html"
+             "version.dat"
         ],
          "folder": "/"
     }

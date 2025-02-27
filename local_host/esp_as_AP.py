@@ -5,7 +5,7 @@ from time import sleep
 from drivers.display import disp_scroll_str
 from machine_id import get_serial_no
 from drivers.oled import *
-from utils import put_jsonvalue_to_file
+from utils import put_jsonvalue_to_file,set_wifi_credentials
 
 import json
 try:
@@ -73,8 +73,9 @@ def submit(req, resp):
         username=json_data["email"]
         userpassword=json_data["password"]
         
-        put_jsonvalue_to_file("config.txt","SSID",wifi_ssid)
-        put_jsonvalue_to_file("config.txt","PASSWORD",wifi_password)
+        set_wifi_credentials(wifi_ssid,wifi_password)
+#         put_jsonvalue_to_file("config.txt","SSID",wifi_ssid)
+#         put_jsonvalue_to_file("config.txt","PASSWORD",wifi_password)
         
         put_jsonvalue_to_file("schema.dat","username",username)
         put_jsonvalue_to_file("schema.dat","password",userpassword)

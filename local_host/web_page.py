@@ -1,6 +1,8 @@
 import machine
 from  project.projectList import  *
 from machine_id import get_serial_no
+from utils import write_file
+import gc
 
 
 
@@ -21,7 +23,9 @@ from machine_id import get_serial_no
 
 
 # print(html_dropdown)
-def web_page():
+@micropython.native 
+def web_page(project_topic_list):
+#     from  project.projectList import  project_topic_list
     html_dropdown =  """
     <select id="mydropdown" name="selectedItem" class="form-select" required>
     <option value="">--Select Project--</option>
@@ -35,7 +39,12 @@ def web_page():
                 html_content = f.read()
                 html_content=html_content.replace("{html_dropdown}",html_dropdown)
                 html_content=html_content.replace("{*Serial No*}",get_serial_no())
-    return html_content
+                html_content=html_content.replace("{machine_id}",f"S/N: {get_serial_no()}")
+                write_file('local_host/index_page.html',html_content)
+    del html_content
+    del html_dropdown
+    gc.collect()
+#     return html_content
 def successProjectPage(data):
     with open('local_host/project_sel_success.html', 'r') as f:
                 html_content = f.read()

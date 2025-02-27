@@ -5,6 +5,7 @@ import json
 import time
 import os
 import machine
+import gc
 from local_host.connect_wifi import connect_wifi
 try:
     from drivers.oled import *
@@ -115,7 +116,7 @@ def ota_update():
 
             # For each folder, get the list of files from GitHub and download them
         for filename in files:
-            
+            gc.collect()
             print(f"Downloading {filename} from {folder}...")
             url = f"https://raw.githubusercontent.com/ADITHMR/probots_micropython/refs/heads/device_branch/"
             if folder== "/" :
@@ -185,3 +186,4 @@ def run_update():
         from drivers.oled import oled_log
         oled_two_data(1,3,"Update",f"Failed.")
         print("Update Failed")
+
